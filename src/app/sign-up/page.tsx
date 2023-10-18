@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import GithubSignInButton from '../components/GithubSignInButton';
-import AuthenticationButton from '../components/AuthenticationButton';
+import GitHubSignButton from '../components/github-sign-button';
+import AuthenticationButton from '../components/auth-btn';
 
 function SignUp() {
   return (
@@ -27,7 +27,7 @@ function SignUp() {
           <AuthenticationButton />
         </div>
       </form>
-      <GithubSignInButton />
+      <GitHubSignButton />
       <Link className='hover:underline text-sm text-center' href='/sign-up'>
         Already have an account?
       </Link>

@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Providers } from './providers';
-import NavBarWraper from './components/NavBar/NavBarWraper';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import NavBarUI from './components/NavBar';

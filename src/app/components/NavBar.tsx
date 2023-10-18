@@ -5,9 +5,9 @@ import { Navbar } from '@nextui-org/react';
 
 import Logo from './NavBar/Logo';
 import Navigation from './NavBar/Navigation';
-import AuthenticationButtons from './NavBar/AuthenticationButtons';
-import NavigationSmallScreen from './NavBar/NavigationSmallScreen';
-import ProfileButton from './NavBar/ProfileButton';
+import AuthenticationButtons from './NavBar/auth-buttons';
+import NavigationSmallScreen from './NavBar/navigation-sm';
+import ProfileButton from './NavBar/profile-button';
 import type { Session } from '@supabase/supabase-js';
 
 type Props = {
