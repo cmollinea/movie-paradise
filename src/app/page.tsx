@@ -1,38 +1,47 @@
 import { MovieResponse } from '../../types/movie-response-interface';
 import { TvShowsResponse } from '../../types/tvshows-response-interface';
+import MoviesContainer from './components/Home/movies-container';
+import TopRatedTvShows from './components/Home/top-rated-tv-shows';
+import TvShowsOnAir from './components/Home/tv-shows-on-air';
 import {
   AIRING_TODAY_TV_SHOWS_ENDPOINT,
-  POPULAR_MOVIES_ENDPOINT,
   TOP_RATED_MOVIES_ENDPOINT,
-  POPULAR_TV_SHOWS_ENDPOINT
+  TOP_RATED_TV_SHOWS_ENDPOINT,
+  UPCOMING_MOVIES_API
 } from './constants/api-endpoints';
-import { queryTMDB, ApiError } from './services/queryTMDB';
-
-export const dynamic = 'force-dynamic';
+import { queryTMDB } from './services/queryTMDB';
 
 export default async function Home() {
-  const tvShowsOnAir = await queryTMDB<TvShowsResponse>(
+  const tvShowsOnAirResponse = await queryTMDB<TvShowsResponse>(
     AIRING_TODAY_TV_SHOWS_ENDPOINT
   );
-  const popularTvShows = queryTMDB<TvShowsResponse>(POPULAR_TV_SHOWS_ENDPOINT);
-  const mostPopularMovies = queryTMDB<MovieResponse>(POPULAR_MOVIES_ENDPOINT);
-  const topRatedMovies = queryTMDB<MovieResponse>(TOP_RATED_MOVIES_ENDPOINT);
-
-  const queryWentWell =
-    typeof tvShowsOnAir !== 'undefined' &&
-    Boolean((tvShowsOnAir as TvShowsResponse).page);
+  const topRatedTvShowsResponse = queryTMDB<TvShowsResponse>(
+    TOP_RATED_TV_SHOWS_ENDPOINT
+  );
+  const upcomingMoviesResponse = queryTMDB<MovieResponse>(UPCOMING_MOVIES_API);
+  const topRatedMoviesResponse = queryTMDB<MovieResponse>(
+    TOP_RATED_MOVIES_ENDPOINT
+  );
 
   return (
-    <main className=' text-foreground'>
+    <>
       {/* AQUI DEBE IR UN FORM PARA BUSQUEDA */}
-      <section>
+      <section className='overflow-hidden container px-10 relative'>
         <h2>Airing Today</h2>
-        <div>
-          {queryWentWell ? (
-            <div>{(tvShowsOnAir as TvShowsResponse).total_pages}</div>
-          ) : null}
-        </div>
+        <TvShowsOnAir tvShowsOnAirResponse={tvShowsOnAirResponse} />
       </section>
-    </main>
+      <section className='overflow-hidden container px-10 relative'>
+        <h2>Top Rated Tv Shows</h2>
+        <TopRatedTvShows promise={topRatedTvShowsResponse} />
+      </section>
+      <section className='overflow-hidden container px-10 relative'>
+        <h2>Upcoming Movies</h2>
+        <MoviesContainer promise={upcomingMoviesResponse} />
+      </section>
+      <section className='overflow-hidden container px-10 relative'>
+        <h2>Top Rated Movies</h2>
+        <MoviesContainer promise={topRatedMoviesResponse} />
+      </section>
+    </>
   );
 }

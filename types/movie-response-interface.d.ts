@@ -1,11 +1,11 @@
 export interface MovieResponse {
   page: number;
-  results: Result[];
+  results: Movie[];
   total_pages: number;
   total_results: number;
 }
 
-export interface Result {
+export interface Movie {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -27,11 +27,4 @@ export enum OriginalLanguage {
   Es = 'es',
   Ko = 'ko',
   Pt = 'pt'
-}
-
-export interface Movies {
-    page:          number;
-    results:       Result[];
-    total_pages:   number;
-    total_results: number;
 }

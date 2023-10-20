@@ -25,3 +25,8 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+* {
+  scrollbar-base-color: red;
+  scrollbar-track-color: aqua;
+}

@@ -26,10 +26,10 @@ export default async function RootLayout({
     <html lang='en' className='dark'>
       <body className='bg-background'>
         <Providers>
-          <nav className='sticky top-0 bg-default-900/80 backdrop-blur-md'>
+          <nav className='sticky top-0 bg-default-900/80 backdrop-blur-md z-50'>
             <NavBarUI session={session} />{' '}
           </nav>
-          <main className='min-h-screen flex flex-col place-content-center items-center'>
+          <main className='min-h-screen flex flex-col place-content-center items-center overflow-x-hidden'>
             {children}
           </main>
         </Providers>

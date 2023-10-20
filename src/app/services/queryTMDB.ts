@@ -3,11 +3,18 @@ export type ApiError = {
   statusText: string;
 };
 
+const options = {
+  headers: {
+    accept: 'application/json',
+    Authorization: `Bearer ${process.env.TMDB_API_SECRET_TOKEN as string}`
+  }
+};
+
 export const queryTMDB = async <T>(
   url: string
 ): Promise<T | ApiError | undefined> => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, options);
     if (!response.ok) {
       return {
         status: response.status,
