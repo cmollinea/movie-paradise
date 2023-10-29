@@ -23,20 +23,20 @@ function CardLink({ element, type }: Props) {
     >
       <Card
         isPressable
-        className='w-full h-[300px] col-span-12 sm:col-span-7'
+        className='w-full col-span-12 sm:col-span-7'
         radius='none'
       >
         <Image
           removeWrapper
           className='z-0 w-full h-full object-cover'
           alt={`${name} Poster`}
-          height={278}
+          height={231}
           isZoomed
           isBlurred
           sizes='sm'
           radius='none'
-          src={'https://image.tmdb.org/t/p/w185' + poster_path}
-          width={185}
+          src={'https://image.tmdb.org/t/p/w154' + poster_path}
+          width={154}
         />
         <CardFooter className='absolute bg-gradient-to-t from-black to-transparent rounded-none bottom-0 p-0 z-10 translate-y-28 group-hover:translate-y-0 transition-transform ease-in-out'>
           <div className='bg-gradient-to-t from-black to-transparent w-full h-28 p-2 flex flex-col place-content-center'>

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { Providers } from './providers';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import NavBarUI from './components/NavBar';
+import NavBarUI from './components/navbar/navbar-ui';
 // import { Inter } from 'next/font/google'
 
 // const inter = Inter({ subsets: ['latin'] })
@@ -29,7 +29,7 @@ export default async function RootLayout({
           <nav className='sticky top-0 bg-default-900/80 backdrop-blur-md z-50'>
             <NavBarUI session={session} />{' '}
           </nav>
-          <main className='min-h-screen flex flex-col place-content-center items-center overflow-x-hidden'>
+          <main className='flex flex-col place-content-center items-center overflow-hidden h-fit'>
             {children}
           </main>
         </Providers>

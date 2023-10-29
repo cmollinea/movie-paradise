@@ -3,9 +3,9 @@
 import {
   NavbarContent,
   NavbarMenuToggle,
-  NavbarBrand,
-  link
+  NavbarBrand
 } from '@nextui-org/react';
+import Link from 'next/link';
 
 type Props = {
   isMenuOpen: boolean;
@@ -18,9 +18,11 @@ function Logo({ isMenuOpen }: Props) {
         aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         className='sm:hidden'
       />
-      <NavbarBrand>
-        <p className='font-bold text-inherit'>CinemaPool</p>
-      </NavbarBrand>
+      <Link href={'/'}>
+        <NavbarBrand>
+          <p className='font-bold text-inherit'>CinemaPool</p>
+        </NavbarBrand>
+      </Link>
     </NavbarContent>
   );
 }

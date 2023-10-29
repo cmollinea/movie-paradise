@@ -1,5 +1,7 @@
 import { ApiError } from '@/app/services/queryTMDB';
 import { TvShowsResponse } from '../../../../types/tvshows-response-interface';
+import ErrorWithStatus from '../error/api-error';
+import SomethingWentWrong from '../error/error';
 import Card from './card';
 import CardContainer from './card-container';
 
@@ -14,9 +16,7 @@ function TvShowsOnAir({ tvShowsOnAirResponse }: Props) {
   return (
     <>
       {/* ALGO SALIO MAL */}
-      {typeof tvShowsOnAirResponse === 'undefined' && (
-        <div>Something Went Wrong</div>
-      )}
+      {typeof tvShowsOnAirResponse === 'undefined' && <SomethingWentWrong />}
 
       {/* LA PETICION FUE SATISFACTORIA */}
       {tvShowsOnAir?.results !== undefined && (
@@ -35,7 +35,7 @@ function TvShowsOnAir({ tvShowsOnAirResponse }: Props) {
 
       {/* ERROR DE LA API */}
       {error?.status !== undefined && (
-        <div>{`${error.status}: ${error.statusText}`}</div>
+        <ErrorWithStatus status={error.status} statusText={error.statusText} />
       )}
     </>
   );

@@ -31,7 +31,7 @@ const config: Config = {
               800: '#24262a',
               900: '#00100e'
             },
-            background: '#242423',
+            background: '#050505',
             foreground: {
               DEFAULT: '#f2f2f2',
               50: '#f2f2f2',

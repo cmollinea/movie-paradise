@@ -1,6 +1,6 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import NavBarUI from '../navbar';
+import NavBarUI from './navbar-ui';
 
 async function NavBarServer() {
   const supabase = createServerComponentClient({ cookies });
