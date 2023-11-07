@@ -1,9 +1,7 @@
 import { ApiError } from '@/app/services/queryTMDB';
 import { TvShowsResponse } from '../../../../types/tvshows-response-interface';
-import ErrorWithStatus from '../error/api-error';
-import SomethingWentWrong from '../error/error';
-import Card from './card';
-import CardContainer from './card-container';
+import { SomethingWentWrong, ErrorWithStatus } from '../error';
+import { CardContainer, CardLink } from '.';
 
 type Props = {
   tvShowsOnAirResponse: TvShowsResponse | ApiError | undefined;
@@ -28,7 +26,7 @@ function TvShowsOnAir({ tvShowsOnAirResponse }: Props) {
               rating: item.vote_average,
               poster_path: item.poster_path
             };
-            return <Card type='tv' element={element} key={item.id} />;
+            return <CardLink type='tv' element={element} key={item.id} />;
           })}
         </CardContainer>
       )}

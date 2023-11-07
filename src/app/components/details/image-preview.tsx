@@ -1,7 +1,6 @@
 'use client';
 import { BASE_URL } from '@/app/constants/image-url';
-import { Card, Image } from '@nextui-org/react';
-import Progress from './votes';
+import { Image } from '@nextui-org/react';
 
 type Props = {
   image: string;

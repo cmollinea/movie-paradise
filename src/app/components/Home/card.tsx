@@ -28,7 +28,7 @@ function CardLink({ element, type }: Props) {
       >
         <Image
           removeWrapper
-          className='z-0 w-full h-full object-cover'
+          className='z-0 w-full object-cover'
           alt={`${name} Poster`}
           height={231}
           isZoomed

@@ -10,7 +10,7 @@ function Progress({ value }: Props) {
     <CircularProgress
       size='lg'
       value={value * 10}
-      valueLabel={value.toFixed(1)}
+      valueLabel={value?.toFixed(1)}
       color='primary'
       showValueLabel={true}
       className='mt-2'

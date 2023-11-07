@@ -1,9 +1,7 @@
 import { ApiError } from '@/app/services/queryTMDB';
-import { MovieImages } from '../../../../types/movie-images';
-import { MovieVideos } from '../../../../types/movie-videos';
-import ErrorWithStatus from '../error/api-error';
-import SomethingWentWrong from '../error/error';
-import MediaTabs from './media-tabs';
+import { MovieImages, MovieVideos } from 'root/types';
+import { SomethingWentWrong, ErrorWithStatus } from '../error';
+import { MediaTabs } from '.';
 
 type Props = {
   videosPromise: Promise<MovieVideos | ApiError | undefined>;

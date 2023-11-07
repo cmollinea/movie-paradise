@@ -5,8 +5,11 @@ import NavBarUI from './navbar-ui';
 async function NavBarServer() {
   const supabase = createServerComponentClient({ cookies });
   const {
-    data: { session }
+    data: { session },
+    error
   } = await supabase.auth.getSession();
+
+  console.log(error);
 
   return <NavBarUI session={session} />;
 }

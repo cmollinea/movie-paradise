@@ -1,21 +1,36 @@
 import { ApiError } from '@/app/services/queryTMDB';
-import { TvShowsResponse } from '../../../../types/tvshows-response-interface';
-import Card from './card';
-import CardContainer from './card-container';
+import { TvShowsResponse } from 'root/types';
+import { SomethingWentWrong, ErrorWithStatus } from '../error';
+import { CardContainer, CardLink } from '.';
 
 type Props = {
-  promise: Promise<TvShowsResponse | ApiError | undefined>;
+  promise:
+    | Promise<TvShowsResponse | ApiError | undefined>
+    | TvShowsResponse
+    | ApiError
+    | undefined;
 };
 
-async function TopRatedTvShows({ promise }: Props) {
-  const tvShows = await promise;
+async function TvShowsContainer({ promise }: Props) {
+  let tvShows;
 
-  if (tvShows === undefined) {
-    return <p>Something went wrong</p>;
+  if (promise !== undefined && 'results' in promise) {
+    tvShows = promise;
+  } else {
+    tvShows = await promise;
   }
 
-  if ('status' in tvShows) {
-    return <p>{`${tvShows.status}: ${tvShows.statusText}`}</p>;
+  if (tvShows === undefined) {
+    return <SomethingWentWrong />;
+  }
+
+  if ('statusText' in tvShows) {
+    return (
+      <ErrorWithStatus
+        status={tvShows.status}
+        statusText={tvShows.statusText}
+      />
+    );
   }
 
   return (
@@ -27,9 +42,9 @@ async function TopRatedTvShows({ promise }: Props) {
           rating: show.vote_average,
           poster_path: show.poster_path
         };
-        return <Card element={element} type='tv' key={show.id} />;
+        return <CardLink element={element} type='tv' key={show.id} />;
       })}
     </CardContainer>
   );
 }
-export default TopRatedTvShows;
+export default TvShowsContainer;

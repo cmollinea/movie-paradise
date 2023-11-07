@@ -1,12 +1,10 @@
 'use client';
+import { ImagePreview, VideoPlayer } from '.';
 import { Tabs, Tab } from '@nextui-org/react';
-import { useEffect, useRef, useState } from 'react';
-import { MovieImages } from '../../../../types/movie-images';
-import { MovieVideos } from '../../../../types/movie-videos';
+import { useState } from 'react';
 import CardContainer from '../home/card-container';
-import ImagePreview from './image-preview';
-import VideoPlayer from './video-player';
-import { BASE_URL } from '@/app/constants/image-url';
+
+import type { MovieImages, MovieVideos } from 'root/types';
 
 type Props = {
   images: MovieImages;
@@ -14,14 +12,8 @@ type Props = {
 };
 
 function MediaTabs({ images, videos }: Props) {
-  const [selected, setSelected] = useState('videos');
-  const [showVideos, setShowVideos] = useState<'yes' | 'no'>('no');
+  const [selected, setSelected] = useState('images');
 
-  useEffect(() => {
-    if (showVideos === 'no') {
-      setShowVideos('yes');
-    }
-  }, [showVideos]);
   return (
     <div>
       <Tabs
@@ -32,20 +24,6 @@ function MediaTabs({ images, videos }: Props) {
         onSelectionChange={setSelected}
         className='relative'
       >
-        <Tab key='videos' title='Videos' className=''>
-          <div className='container overflow-hidden'>
-            <CardContainer>
-              {showVideos === 'yes' ? (
-                videos.results.map((video) => {
-                  const url = 'https://www.youtube.com/watch?v=' + video.key;
-                  return <VideoPlayer key={video.id} url={url} />;
-                })
-              ) : (
-                <p>Loading Spinner</p>
-              )}
-            </CardContainer>
-          </div>
-        </Tab>
         <Tab key='images' title='Images'>
           <CardContainer>
             {images.backdrops.map((image) => (
@@ -70,7 +48,17 @@ function MediaTabs({ images, videos }: Props) {
             ))}
           </CardContainer>
         </Tab>
-      </Tabs>{' '}
+        <Tab key='videos' title='Videos' className=''>
+          <div className='container overflow-hidden'>
+            <CardContainer>
+              {videos.results.map((video) => {
+                const url = 'https://www.youtube.com/watch?v=' + video.key;
+                return <VideoPlayer key={video.id} url={url} />;
+              })}
+            </CardContainer>
+          </div>
+        </Tab>
+      </Tabs>
     </div>
   );
 }

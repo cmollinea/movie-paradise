@@ -1,10 +1,9 @@
+import { ActorCard } from '.';
 import { ApiError } from '@/app/services/queryTMDB';
-import { log } from 'console';
-import { Credits } from '../../../../types/movie-credits';
-import ErrorWithStatus from '../error/api-error';
-import SomethingWentWrong from '../error/error';
-import CardContainer from '../home/card-container';
-import ActorCard from './actor-card';
+import { CardContainer } from '../home';
+import { SomethingWentWrong, ErrorWithStatus } from '../error';
+
+import type { Credits } from 'root/types';
 
 type Props = {
   promise: Promise<Credits | ApiError | undefined>;

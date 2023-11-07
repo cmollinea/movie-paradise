@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { Navbar } from '@nextui-org/react';
 
-import Logo from './Logo';
-import Navigation from './Navigation';
+import Logo from './logo';
+import Navigation from './navigation';
 import AuthenticationButtons from './auth-buttons';
 import NavigationSmallScreen from './navigation-sm';
 import ProfileButton from './profile-button';

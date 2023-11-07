@@ -1,8 +1,7 @@
+import { Suspense } from 'react';
 import { MovieResponse } from '../../types/movie-response-interface';
 import { TvShowsResponse } from '../../types/tvshows-response-interface';
-import MoviesContainer from './components/home/movies-container';
-import TopRatedTvShows from './components/home/top-rated-tv-shows';
-import TvShowsOnAir from './components/home/tv-shows-on-air';
+import { MoviesContainer, TvShowsContainer } from './components/home';
 import { MOVIES_ENPOINTS, TV_SHOWS_ENDPOINTS } from './constants/api-endpoints';
 import { queryTMDB } from './services/queryTMDB';
 
@@ -23,21 +22,29 @@ export default async function Home() {
   return (
     <>
       {/* AQUI DEBE IR UN FORM PARA BUSQUEDA */}
-      <section className='overflow-hidden container px-20 py-10 relative'>
+      <section className='overflow-hidden container px-4 lg:px-20 py-10 relative'>
         <h2>Airing Today</h2>
-        <TvShowsOnAir tvShowsOnAirResponse={tvShowsOnAirResponse} />
+        <TvShowsContainer promise={tvShowsOnAirResponse} />
       </section>
-      <section className='overflow-hidden container px-20 py-10 relative'>
+      <section className='overflow-hidden container px-4 lg:px-20 py-10 relative'>
         <h2>Top Rated Tv Shows</h2>
-        <TopRatedTvShows promise={topRatedTvShowsResponse} />
+        <Suspense fallback={<p>Loadig...</p>}>
+          <TvShowsContainer promise={topRatedTvShowsResponse} />
+        </Suspense>
       </section>
-      <section className='overflow-hidden container px-20 py-10 relative'>
+      <section className='overflow-hidden container px-4 lg:px-20 py-10 relative'>
         <h2>Upcoming Movies</h2>
-        <MoviesContainer promise={upcomingMoviesResponse} />
+        <Suspense fallback={<p>Loadig...</p>}>
+          {' '}
+          <MoviesContainer promise={upcomingMoviesResponse} />
+        </Suspense>
       </section>
-      <section className='overflow-hidden container px-20 py-10 relative'>
+      <section className='overflow-hidden container px-4 lg:px-20 py-10 relative'>
         <h2>Top Rated Movies</h2>
-        <MoviesContainer promise={topRatedMoviesResponse} />
+        <Suspense fallback={<p>Loadig...</p>}>
+          {' '}
+          <MoviesContainer promise={topRatedMoviesResponse} />
+        </Suspense>
       </section>
     </>
   );

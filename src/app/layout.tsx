@@ -22,6 +22,9 @@ export default async function RootLayout({
   const {
     data: { session }
   } = await supabase.auth.getSession();
+
+  console.log('iam rendering');
+
   return (
     <html lang='en' className='dark'>
       <body className='bg-background'>

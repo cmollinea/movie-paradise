@@ -1,7 +1,7 @@
 import { ApiError } from '@/app/services/queryTMDB';
 import { MovieResponse } from '../../../../types/movie-response-interface';
-import Card from './card';
-import CardContainer from './card-container';
+import { CardContainer, CardLink } from '.';
+import { SomethingWentWrong, ErrorWithStatus } from '../error';
 
 type Props = {
   promise: Promise<ApiError | MovieResponse | undefined>;
@@ -11,11 +11,13 @@ async function MoviesContainer({ promise }: Props) {
   const movies = await promise;
 
   if (movies === undefined) {
-    return <p>Something went wrong</p>;
+    return <SomethingWentWrong />;
   }
 
   if ('status' in movies) {
-    return <p>{`${movies.status}: ${movies.statusText}`}</p>;
+    return (
+      <ErrorWithStatus status={movies.status} statusText={movies.statusText} />
+    );
   }
 
   return (
@@ -27,7 +29,7 @@ async function MoviesContainer({ promise }: Props) {
           rating: movie.vote_average,
           poster_path: movie.poster_path
         };
-        return <Card element={element} type='movies' key={movie.id} />;
+        return <CardLink element={element} type='movies' key={movie.id} />;
       })}
     </CardContainer>
   );

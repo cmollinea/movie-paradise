@@ -31,6 +31,7 @@
     "react": "^18",
     "react-day-picker": "^8.9.0",
     "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
     "react-photo-view": "^1.2.3",
     "react-player": "^2.13.0",
     "tailwind-merge": "^1.14.0",
