@@ -1,7 +1,7 @@
 import { Genre, ProductionCountry } from 'root/types/movie-details';
 
 export interface MediaItem {
-  id: number;
+  id: string;
   overview: string;
   poster: string;
   title: string;
@@ -14,4 +14,4 @@ export interface Info extends MediaItem {
   tagline: string;
 }
 
-export type MediaType = 'tvSHow' | 'movie';
+export type MediaType = 'tv' | 'movies';

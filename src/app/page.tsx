@@ -4,14 +4,17 @@ import { TvShowsResponse } from '../../types/tvshows-response-interface';
 import { MoviesContainer, TvShowsContainer } from './components/home';
 import { MOVIES_ENPOINTS, TV_SHOWS_ENDPOINTS } from './constants/api-endpoints';
 import { queryTMDB } from './services/queryTMDB';
+import { Title } from './components/global-ui';
 
 export default async function Home() {
-  const tvShowsOnAirResponse = await queryTMDB<TvShowsResponse>(
-    TV_SHOWS_ENDPOINTS.AIRING_TODAY
-  );
-  const topRatedTvShowsResponse = queryTMDB<TvShowsResponse>(
+  const topRatedTvShowsResponse = await queryTMDB<TvShowsResponse>(
     TV_SHOWS_ENDPOINTS.TOP_RATED
   );
+
+  const tvShowsOnAirResponse = queryTMDB<TvShowsResponse>(
+    TV_SHOWS_ENDPOINTS.AIRING_TODAY
+  );
+
   const upcomingMoviesResponse = queryTMDB<MovieResponse>(
     MOVIES_ENPOINTS.UPCOMING
   );
@@ -22,25 +25,25 @@ export default async function Home() {
   return (
     <>
       {/* AQUI DEBE IR UN FORM PARA BUSQUEDA */}
-      <section className='overflow-hidden container px-4 lg:px-20 py-10 relative'>
-        <h2>Airing Today</h2>
-        <TvShowsContainer promise={tvShowsOnAirResponse} />
+      <section className='overflow-hidden container px-4 lg:px-20 py-10 relative space-y-5'>
+        <Title>Top Rated Tv Shows</Title>
+        <TvShowsContainer promise={topRatedTvShowsResponse} />
       </section>
       <section className='overflow-hidden container px-4 lg:px-20 py-10 relative'>
-        <h2>Top Rated Tv Shows</h2>
+        <Title>Airing Today</Title>
         <Suspense fallback={<p>Loadig...</p>}>
-          <TvShowsContainer promise={topRatedTvShowsResponse} />
+          <TvShowsContainer promise={tvShowsOnAirResponse} />
         </Suspense>
       </section>
-      <section className='overflow-hidden container px-4 lg:px-20 py-10 relative'>
-        <h2>Upcoming Movies</h2>
+      <section className='overflow-hidden container px-4 lg:px-20 py-10 relative space-y-5'>
+        <Title>Upcoming Movies</Title>
         <Suspense fallback={<p>Loadig...</p>}>
           {' '}
           <MoviesContainer promise={upcomingMoviesResponse} />
         </Suspense>
       </section>
-      <section className='overflow-hidden container px-4 lg:px-20 py-10 relative'>
-        <h2>Top Rated Movies</h2>
+      <section className='overflow-hidden container px-4 lg:px-20 py-10 relative space-y-5'>
+        <Title>Top Rated Movies</Title>
         <Suspense fallback={<p>Loadig...</p>}>
           {' '}
           <MoviesContainer promise={topRatedMoviesResponse} />

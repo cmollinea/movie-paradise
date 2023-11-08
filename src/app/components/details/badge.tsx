@@ -11,7 +11,7 @@ function GenreBadge({ children }: Props) {
       variant='shadow'
       color='primary'
       size='sm'
-      className='mt-4 text-black'
+      className='mt-4 text-black text-xs h-fit py-0.5'
     >
       {children}
     </Chip>

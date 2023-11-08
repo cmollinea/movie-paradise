@@ -1,4 +1,10 @@
-import { Backdrop, Details, Cast, Media } from '@/app/components/details';
+import {
+  Backdrop,
+  Details,
+  Cast,
+  Media,
+  ServerSimilar
+} from '@/app/components/details';
 import { queryTMDB } from '@/app/services/queryTMDB';
 import {
   MOVIES_ENPOINTS,
@@ -9,11 +15,13 @@ import type {
   MovieImages,
   MovieVideos,
   Credits,
-  MovieDetails
+  MovieDetails,
+  MovieSimilars
 } from 'root/types';
 import InfoContextProvider from '@/app/context/info-context-provider';
 import SomethingWentWrong from '@/app/components/error/error';
 import ErrorWithStatus from '@/app/components/error/api-error';
+import { Title } from '@/app/components/global-ui';
 
 type Props = {
   params: {
@@ -26,13 +34,13 @@ async function MovieDetails({ params }: Props) {
 
   const DETAILS_URL = MOVIES_ENPOINTS.DETAILS + id.toString();
 
-  const { CAST, IMAGES, VIDEOS } = MOVIE_DETAILS_SLUGS;
+  const { CAST, IMAGES, VIDEOS, SIMILAR } = MOVIE_DETAILS_SLUGS;
 
   const movieDetails = await queryTMDB<MovieDetails>(DETAILS_URL);
   const credits = queryTMDB<Credits>(DETAILS_URL + '/' + CAST);
   const images = queryTMDB<MovieImages>(DETAILS_URL + IMAGES);
   // const providers = queryTMDB<Providers>(DETAILS_URL + PROVIDERS);
-  // const similar = queryTMDB<TvShowSimilar>(DETAILS_URL + SIMILAR);
+  const similar = queryTMDB<MovieSimilars>(DETAILS_URL + SIMILAR);
   const videos = queryTMDB<MovieVideos>(DETAILS_URL + VIDEOS);
 
   if (movieDetails === undefined) {
@@ -50,7 +58,7 @@ async function MovieDetails({ params }: Props) {
 
   const info = {
     title: movieDetails.title,
-    id: parseInt(id),
+    id: id,
     overview: movieDetails.overview,
     poster: movieDetails.poster_path,
     country: movieDetails.production_countries,
@@ -62,21 +70,21 @@ async function MovieDetails({ params }: Props) {
   return (
     <section className='w-full flex flex-col items-center'>
       <Backdrop src={movieDetails.backdrop_path} alt={movieDetails.title}>
-        <InfoContextProvider info={info} mediaType='movie'>
+        <InfoContextProvider info={info} mediaType='movies'>
           <Details />
         </InfoContextProvider>
       </Backdrop>
       <section className='relative container py-10 px-20'>
-        <h2 className='text-4xl py-4'>Actors</h2>
+        <Title>Actors</Title>
         <Cast promise={credits} />
       </section>
       <section className='relative container py-10 px-20'>
-        <h2 className='text-4xl py-4'>Media</h2>
+        <Title>Media</Title>
         <Media videosPromise={videos} imagesPromise={images} />
       </section>
       <section className='relative container py-10 px-20'>
-        <h2 className='text-4xl py-4'>Similar</h2>
-        {/* <Similar /> */}
+        <Title>Similar</Title>
+        <ServerSimilar promise={similar} type='movies' />
       </section>
     </section>
   );

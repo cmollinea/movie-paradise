@@ -5,6 +5,7 @@ import { useState } from 'react';
 import CardContainer from '../home/card-container';
 
 import type { MovieImages, MovieVideos } from 'root/types';
+import { ImageContainer } from '../home';
 
 type Props = {
   images: MovieImages;
@@ -25,31 +26,33 @@ function MediaTabs({ images, videos }: Props) {
         className='relative'
       >
         <Tab key='images' title='Images'>
-          <CardContainer>
-            {images.backdrops.map((image) => (
-              <ImagePreview
-                key={image.file_path}
-                image={image.file_path}
-                votes={image.vote_average}
-                type='backdrop'
-              />
-            ))}
-          </CardContainer>
+          <div className='min-h-[280px]'>
+            <CardContainer>
+              {images.backdrops.map((image) => (
+                <ImageContainer
+                  image={image.file_path}
+                  imageSizes='backdrop'
+                  key={image.file_path}
+                />
+              ))}
+            </CardContainer>
+          </div>
         </Tab>
         <Tab key='posters' title='Posters'>
-          <CardContainer>
-            {images.posters.map((image) => (
-              <ImagePreview
-                key={image.file_path}
-                image={image.file_path}
-                votes={image.vote_average}
-                type='poster'
-              />
-            ))}
-          </CardContainer>
+          <div className='min-h-[280px]'>
+            <CardContainer>
+              {images.posters.map((image) => (
+                <ImageContainer
+                  image={image.file_path}
+                  imageSizes='poster'
+                  key={image.file_path}
+                />
+              ))}
+            </CardContainer>
+          </div>
         </Tab>
         <Tab key='videos' title='Videos' className=''>
-          <div className='container overflow-hidden'>
+          <div className='min-h-[280px]'>
             <CardContainer>
               {videos.results.map((video) => {
                 const url = 'https://www.youtube.com/watch?v=' + video.key;

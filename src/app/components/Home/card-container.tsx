@@ -32,7 +32,7 @@ function CardContainer({ children }: Props) {
   return (
     <div
       ref={containerRef}
-      className='w-full p-1 inline-flex gap-10 overflow-x-scroll max-sm:snap-x scroll-smooth scrollbar-hide fancy-scrollbar'
+      className='w-full p-1 py-4 inline-flex gap-10 overflow-x-auto max-sm:snap-x scroll-smooth horizontal-scrollbar'
     >
       <button
         className={`absolute active:scale-95 transition-all ease-in hover:bg-neutral-200/20 bg-neutral-200/10 rounded-full flex items-center place-content-center top-1/2 p-1 left-4 ${

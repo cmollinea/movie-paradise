@@ -4,6 +4,7 @@ import GenreBadge from './badge';
 import Cast from './cast';
 import ImagePreview from './image-preview';
 import Media from './media';
+import ServerSimilar from './similar-server';
 import MediaTabs from './media-tabs';
 import Details from './ppal-info';
 import VideoPlayer from './video-player';
@@ -19,5 +20,6 @@ export {
   Media,
   MediaTabs,
   Progress,
+  ServerSimilar,
   VideoPlayer
 };

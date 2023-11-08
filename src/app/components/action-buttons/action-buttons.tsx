@@ -13,7 +13,7 @@ function ActionButtons({ session }: Props) {
   const { addToWatchList, addToFavorites } = useActionButtons(session);
 
   return (
-    <div className='flex space-x-2'>
+    <div className='flex space-x-2 mt-6'>
       <Button color='primary' onClick={addToWatchList}>
         <PlusCircle size={16} />
         Add to watch List

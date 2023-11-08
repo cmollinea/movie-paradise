@@ -2,7 +2,13 @@ import {
   TV_SHOWS_ENDPOINTS,
   TV_SHOWS_DETAILS_SLUGS
 } from '@/app/constants/api-endpoints';
-import { Backdrop, Cast, Details, Media } from '@/app/components/details';
+import {
+  Backdrop,
+  Cast,
+  Details,
+  Media,
+  ServerSimilar
+} from '@/app/components/details';
 import { queryTMDB } from '@/app/services/queryTMDB';
 import { Suspense } from 'react';
 import InfoContextProvider from '@/app/context/info-context-provider';
@@ -11,10 +17,12 @@ import type {
   Credits,
   MovieImages,
   MovieVideos,
-  TvSHowDetail
+  TvSHowDetail,
+  TvShowSimilar
 } from 'root/types';
 import SomethingWentWrong from '@/app/components/error/error';
 import ErrorWithStatus from '@/app/components/error/api-error';
+import { Title } from '@/app/components/global-ui';
 
 type Props = {
   params: {
@@ -25,13 +33,13 @@ type Props = {
 async function TvShowDetails({ params }: Props) {
   const id = params.id;
   const DETAILS_URL = TV_SHOWS_ENDPOINTS.DETAILS + id;
-  const { CAST, IMAGES, VIDEOS } = TV_SHOWS_DETAILS_SLUGS;
+  const { CAST, IMAGES, VIDEOS, SIMILAR } = TV_SHOWS_DETAILS_SLUGS;
 
   const showDetails = await queryTMDB<TvSHowDetail>(DETAILS_URL);
   const credits = queryTMDB<Credits>(DETAILS_URL + '/' + CAST);
   const images = queryTMDB<MovieImages>(DETAILS_URL + IMAGES);
   // const providers = queryTMDB<Providers>(DETAILS_URL + PROVIDERS);
-  // const similar = queryTMDB<TvShowSimilar>(DETAILS_URL + SIMILAR);
+  const similar = queryTMDB<TvShowSimilar>(DETAILS_URL + SIMILAR);
   const videos = queryTMDB<MovieVideos>(DETAILS_URL + VIDEOS);
 
   if (showDetails === undefined) {
@@ -49,7 +57,7 @@ async function TvShowDetails({ params }: Props) {
 
   const info = {
     title: showDetails.name,
-    id: parseInt(id),
+    id: id,
     overview: showDetails.overview,
     poster: showDetails.poster_path,
     country: showDetails.production_countries,
@@ -61,7 +69,7 @@ async function TvShowDetails({ params }: Props) {
   return (
     <section className='w-full flex flex-col items-center space-y-16'>
       <Backdrop src={showDetails.backdrop_path} alt={showDetails.name}>
-        <InfoContextProvider info={info} mediaType='tvSHow'>
+        <InfoContextProvider info={info} mediaType='tv'>
           <Details />
         </InfoContextProvider>
       </Backdrop>
@@ -80,6 +88,12 @@ async function TvShowDetails({ params }: Props) {
         <Suspense fallback={<p>Loading...</p>}>
           <Media videosPromise={videos} imagesPromise={images} />
         </Suspense>{' '}
+      </section>
+      <section className='relative container py-10 px-20'>
+        <Title>Similar</Title>
+        <Suspense fallback={<p>Loading...</p>}>
+          <ServerSimilar promise={similar} type='movies' />
+        </Suspense>
       </section>
     </section>
   );
