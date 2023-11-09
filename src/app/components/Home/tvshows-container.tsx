@@ -42,7 +42,14 @@ async function TvShowsContainer({ promise }: Props) {
           rating: show.vote_average,
           poster_path: show.poster_path
         };
-        return <CardLink element={element} type='tv' key={show.id} />;
+        return (
+          <CardLink
+            imageSizes='poster'
+            element={element}
+            type='tv'
+            key={show.id}
+          />
+        );
       })}
     </CardContainer>
   );

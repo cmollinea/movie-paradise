@@ -6,6 +6,8 @@ import { MOVIES_ENPOINTS, TV_SHOWS_ENDPOINTS } from './constants/api-endpoints';
 import { queryTMDB } from './services/queryTMDB';
 import { Title } from './components/global-ui';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const topRatedTvShowsResponse = await queryTMDB<TvShowsResponse>(
     TV_SHOWS_ENDPOINTS.TOP_RATED

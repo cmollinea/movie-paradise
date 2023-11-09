@@ -29,7 +29,14 @@ async function MoviesContainer({ promise }: Props) {
           rating: movie.vote_average,
           poster_path: movie.poster_path
         };
-        return <CardLink element={element} type='movies' key={movie.id} />;
+        return (
+          <CardLink
+            imageSizes='poster'
+            element={element}
+            type='movies'
+            key={movie.id}
+          />
+        );
       })}
     </CardContainer>
   );
