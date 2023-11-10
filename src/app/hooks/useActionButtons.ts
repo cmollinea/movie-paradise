@@ -5,7 +5,7 @@ import { useInfoContext } from './useInfoContext';
 
 type Tables = 'watch_list' | 'favs';
 
-function useActionButtons(session: Session | null) {
+export function useActionButtons(session: Session | null) {
   const supabase = createClientComponentClient();
   const router = useRouter();
   const {
@@ -72,4 +72,3 @@ function useActionButtons(session: Session | null) {
 
   return { addToWatchList, addToFavorites };
 }
-export default useActionButtons;

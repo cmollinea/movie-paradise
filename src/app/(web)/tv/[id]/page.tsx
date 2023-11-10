@@ -11,7 +11,7 @@ import {
 } from '@/app/components/details';
 import { queryTMDB } from '@/app/services/queryTMDB';
 import { Suspense } from 'react';
-import InfoContextProvider from '@/app/context/info-context-provider';
+import { InfoContextProvider } from '@/app/context';
 
 import type {
   Credits,
@@ -20,8 +20,7 @@ import type {
   TvSHowDetail,
   TvShowSimilar
 } from 'root/types';
-import SomethingWentWrong from '@/app/components/error/error';
-import ErrorWithStatus from '@/app/components/error/api-error';
+import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
 import { Title } from '@/app/components/global-ui';
 
 type Props = {
@@ -67,7 +66,7 @@ async function TvShowDetails({ params }: Props) {
   };
 
   return (
-    <section className='w-full flex flex-col items-center space-y-10 md:space-y-16'>
+    <section className='w-full flex flex-col md:items-center space-y-10 md:space-y-16'>
       <Backdrop src={showDetails.backdrop_path} alt={showDetails.name}>
         <InfoContextProvider info={info} mediaType='tv'>
           <Details />

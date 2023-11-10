@@ -18,9 +18,8 @@ import type {
   MovieDetails,
   MovieSimilars
 } from 'root/types';
-import InfoContextProvider from '@/app/context/info-context-provider';
-import SomethingWentWrong from '@/app/components/error/error';
-import ErrorWithStatus from '@/app/components/error/api-error';
+import { InfoContextProvider } from '@/app/context';
+import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
 import { Title } from '@/app/components/global-ui';
 
 type Props = {
@@ -74,15 +73,15 @@ async function MovieDetails({ params }: Props) {
           <Details />
         </InfoContextProvider>
       </Backdrop>
-      <section className='relative container py-10 px-20'>
+      <section className='relative container py-10 px-4 md:px-20'>
         <Title>Actors</Title>
         <Cast promise={credits} />
       </section>
-      <section className='relative container py-10 px-20'>
+      <section className='relative container py-10 px-4 md:px-20'>
         <Title>Media</Title>
         <Media videosPromise={videos} imagesPromise={images} />
       </section>
-      <section className='relative container py-10 px-20'>
+      <section className='relative container py-10 px-4 md:px-20'>
         <Title>Similar</Title>
         <ServerSimilar promise={similar} type='movies' />
       </section>

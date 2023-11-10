@@ -11,7 +11,7 @@ export function Details() {
   } = useInfoContext();
 
   return (
-    <div className='z-20 xl:grid px-6 py-10 md:grid xl:grid-cols-12 xl:place-items-center xl:py-20 max-w-fit mx-h-fit relative'>
+    <div className='z-20 xl:grid py-10 md:grid xl:grid-cols-12 xl:place-items-center xl:py-20 mx-h-fit relative'>
       <Image
         alt={info?.title}
         height={450}
@@ -24,7 +24,7 @@ export function Details() {
         }}
       />
 
-      <div className='xl:col-span-9 xl:col-start-4 px-6'>
+      <div className='xl:col-span-9 xl:col-start-4 max-md:mt-8'>
         <Progress value={info?.rating} />
         <h1 className='mt-2 text-3xl md:text-5xl font-black'>{info?.title}</h1>
         <small>
@@ -42,9 +42,7 @@ export function Details() {
             </span>
           ))}
         </div>
-        <p className='tect-2xl mt-6 max-w-[300px] md:max-w-2xl'>
-          {info?.overview}{' '}
-        </p>
+        <p className='mt-6 w-full md:max-w-2xl'>{info?.overview} </p>
         <ServerButtonsWraper />{' '}
       </div>
     </div>
