@@ -1,3 +1,1 @@
-import Title from './title';
-
-export { Title };
+export * from './title';

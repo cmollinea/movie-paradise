@@ -9,7 +9,7 @@ type Props = {
   children?: React.ReactNode;
 };
 
-function ImageContainer({ image, imageSizes, children }: Props) {
+export function ImageContainer({ image, imageSizes, children }: Props) {
   const src = BASE_URL + (imageSizes === 'backdrop' ? 'w300' : 'w154') + image;
 
   return (
@@ -24,10 +24,13 @@ function ImageContainer({ image, imageSizes, children }: Props) {
         src={src}
         width={imageSizes === 'backdrop' ? 300 : 154}
         height={imageSizes === 'backdrop' ? 169 : 231}
-        className='h-full object-cover border border-neutral-100/20'
+        className={`h-full object-cover border border-neutral-100/20 ${
+          imageSizes === 'backdrop'
+            ? 'max-md:max-w-[200px]'
+            : 'max-md:max-w-[120px]'
+        }`}
       />
       {children}
     </Card>
   );
 }
-export default ImageContainer;

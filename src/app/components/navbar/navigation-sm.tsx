@@ -15,7 +15,7 @@ const menuItems = [
   'Log Out'
 ];
 
-function NavigationSmallScreen() {
+export function NavigationSmallScreen() {
   return (
     <NavbarMenu>
       {menuItems.map((item, index) => (
@@ -39,4 +39,3 @@ function NavigationSmallScreen() {
     </NavbarMenu>
   );
 }
-export default NavigationSmallScreen;

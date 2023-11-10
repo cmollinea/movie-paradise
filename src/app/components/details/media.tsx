@@ -8,7 +8,7 @@ type Props = {
   imagesPromise: Promise<MovieImages | ApiError | undefined>;
 };
 
-async function Media({ videosPromise, imagesPromise }: Props) {
+export async function Media({ videosPromise, imagesPromise }: Props) {
   const [videos, images] = await Promise.all([videosPromise, imagesPromise]);
 
   if (videos === undefined || images === undefined) {
@@ -35,4 +35,3 @@ async function Media({ videosPromise, imagesPromise }: Props) {
 
   return <MediaTabs videos={videos} images={images} />;
 }
-export default Media;

@@ -1,4 +1,2 @@
-import useActionButtons from './useActionButtons';
-import useInfoContext from './useInfoContext';
-
-export { useActionButtons, useInfoContext };
+export * from './useActionButtons';
+export * from './useInfoContext';

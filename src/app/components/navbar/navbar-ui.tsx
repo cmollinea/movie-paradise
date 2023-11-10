@@ -2,19 +2,20 @@
 
 import { useState } from 'react';
 import { Navbar } from '@nextui-org/react';
-
-import Logo from './logo';
-import Navigation from './navigation';
-import AuthenticationButtons from './auth-buttons';
-import NavigationSmallScreen from './navigation-sm';
-import ProfileButton from './profile-button';
 import type { Session } from '@supabase/supabase-js';
+import {
+  Logo,
+  Navigation,
+  AuthenticationButtons,
+  NavigationSmallScreen,
+  ProfileButton
+} from './';
 
 type Props = {
   session: Session | null;
 };
 
-export default function NavBarUI({ session }: Props) {
+export function NavBarUI({ session }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   return (

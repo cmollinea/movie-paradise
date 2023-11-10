@@ -1,25 +1,12 @@
-import ActorCard from './actor-card';
-import Backdrop from './backdrop';
-import GenreBadge from './badge';
-import Cast from './cast';
-import ImagePreview from './image-preview';
-import Media from './media';
-import ServerSimilar from './similar-server';
-import MediaTabs from './media-tabs';
-import Details from './ppal-info';
-import VideoPlayer from './video-player';
-import Progress from './votes';
-
-export {
-  ActorCard,
-  Backdrop,
-  Cast,
-  Details,
-  GenreBadge,
-  ImagePreview,
-  Media,
-  MediaTabs,
-  Progress,
-  ServerSimilar,
-  VideoPlayer
-};
+export * from './actor-card';
+export * from './backdrop';
+export * from './badge';
+export * from './cast';
+export * from './image-preview';
+export * from './media-tabs';
+export * from './media';
+export * from './ppal-info';
+export * from './similar-client';
+export * from './similar-server';
+export * from './video-player';
+export * from './votes';

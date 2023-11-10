@@ -9,7 +9,7 @@ type Props = {
   session: Session | null;
 };
 
-function ActionButtons({ session }: Props) {
+export function ActionButtons({ session }: Props) {
   const { addToWatchList, addToFavorites } = useActionButtons(session);
 
   return (
@@ -25,4 +25,3 @@ function ActionButtons({ session }: Props) {
     </div>
   );
 }
-export default ActionButtons;

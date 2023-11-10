@@ -3,7 +3,7 @@
 import { NavbarContent, NavbarItem, Button } from '@nextui-org/react';
 import Link from 'next/link';
 
-function AuthenticationButtons() {
+export function AuthenticationButtons() {
   return (
     <NavbarContent justify='end'>
       <NavbarItem className='hidden lg:flex'>
@@ -19,4 +19,3 @@ function AuthenticationButtons() {
     </NavbarContent>
   );
 }
-export default AuthenticationButtons;

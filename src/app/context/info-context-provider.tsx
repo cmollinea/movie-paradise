@@ -16,7 +16,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-function InfoContextProvider({ children, info, mediaType }: Props) {
+export function InfoContextProvider({ children, info, mediaType }: Props) {
   const mediaItem: MediaItem = {
     id: info.id,
     overview: info.overview,
@@ -30,4 +30,3 @@ function InfoContextProvider({ children, info, mediaType }: Props) {
     </infoContext.Provider>
   );
 }
-export default InfoContextProvider;

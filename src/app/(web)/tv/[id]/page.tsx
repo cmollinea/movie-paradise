@@ -67,7 +67,7 @@ async function TvShowDetails({ params }: Props) {
   };
 
   return (
-    <section className='w-full flex flex-col items-center space-y-16'>
+    <section className='w-full flex flex-col items-center space-y-10 md:space-y-16'>
       <Backdrop src={showDetails.backdrop_path} alt={showDetails.name}>
         <InfoContextProvider info={info} mediaType='tv'>
           <Details />
@@ -89,7 +89,7 @@ async function TvShowDetails({ params }: Props) {
           <Media videosPromise={videos} imagesPromise={images} />
         </Suspense>{' '}
       </section>
-      <section className='relative container py-10 px-20'>
+      <section className='relative container px-4 md:px-20'>
         <Title>Similar</Title>
         <Suspense fallback={<p>Loading...</p>}>
           <ServerSimilar promise={similar} type='movies' />

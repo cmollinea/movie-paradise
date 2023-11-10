@@ -5,7 +5,7 @@ import { Image } from '@nextui-org/react';
 import { ServerButtonsWraper } from '../action-buttons';
 import { useInfoContext } from '@/app/hooks';
 
-function Details() {
+export function Details() {
   const {
     info: { info }
   } = useInfoContext();
@@ -50,4 +50,3 @@ function Details() {
     </div>
   );
 }
-export default Details;

@@ -1,18 +1,17 @@
 'use client';
-import { ImagePreview, VideoPlayer } from '.';
+import { VideoPlayer } from '.';
 import { Tabs, Tab } from '@nextui-org/react';
 import { useState } from 'react';
-import CardContainer from '../home/card-container';
+import { CardContainer, ImageContainer } from '../home';
 
 import type { MovieImages, MovieVideos } from 'root/types';
-import { ImageContainer } from '../home';
 
 type Props = {
   images: MovieImages;
   videos: MovieVideos;
 };
 
-function MediaTabs({ images, videos }: Props) {
+export function MediaTabs({ images, videos }: Props) {
   const [selected, setSelected] = useState('images');
 
   return (
@@ -26,7 +25,7 @@ function MediaTabs({ images, videos }: Props) {
         className='relative'
       >
         <Tab key='images' title='Images'>
-          <div className='min-h-[280px]'>
+          <div className=''>
             <CardContainer>
               {images.backdrops.map((image) => (
                 <ImageContainer
@@ -65,4 +64,3 @@ function MediaTabs({ images, videos }: Props) {
     </div>
   );
 }
-export default MediaTabs;

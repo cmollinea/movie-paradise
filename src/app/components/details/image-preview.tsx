@@ -7,13 +7,13 @@ type Props = {
   type: 'poster' | 'backdrop';
 };
 
-function ImagePreview({ image, type }: Props) {
+export function ImagePreview({ image, type }: Props) {
   const src = BASE_URL + (type === 'backdrop' ? 'w300' : 'w154') + image;
 
   return (
     <Card
       isPressable
-      className='w-fit h-fit overflow-hidden flex flex-none max-sm:snap-center max-sm:snap-always'
+      className='w-fit h-fit overflow-hidden flex flex-none max-sm:snap-center max-sm:snap-always max-md:max-w-[200px]'
       radius='md'
     >
       <Image
@@ -27,4 +27,3 @@ function ImagePreview({ image, type }: Props) {
     </Card>
   );
 }
-export default ImagePreview;

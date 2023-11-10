@@ -7,14 +7,15 @@ type Props = {
   src: string | null;
 };
 
-function ActorCard({ src, name }: Props) {
+export function ActorCard({ src, name }: Props) {
   return (
-    <Card className='min-w-[154px]'>
+    <Card className='flex-none max-sm:max-w-[120px]'>
       <Image
         src={BASE_URL + 'w154' + src}
         alt={name}
         height={231}
         width={154}
+        className='max-sm:max-w-[120px] max-sm:max-h-[150px]'
       />
       <CardFooter>
         <p className='w-full truncate'>{name}</p>
@@ -22,4 +23,3 @@ function ActorCard({ src, name }: Props) {
     </Card>
   );
 }
-export default ActorCard;

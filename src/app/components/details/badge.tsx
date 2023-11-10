@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-function GenreBadge({ children }: Props) {
+export function GenreBadge({ children }: Props) {
   return (
     <Chip
       variant='shadow'
@@ -17,4 +17,3 @@ function GenreBadge({ children }: Props) {
     </Chip>
   );
 }
-export default GenreBadge;

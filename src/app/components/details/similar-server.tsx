@@ -8,7 +8,7 @@ type Props = {
   type: MediaType;
 };
 
-async function ServerSimilar({ promise, type }: Props) {
+export async function ServerSimilar({ promise, type }: Props) {
   const similars = await promise;
 
   if (similars === undefined) {
@@ -45,4 +45,3 @@ async function ServerSimilar({ promise, type }: Props) {
     </CardContainer>
   );
 }
-export default ServerSimilar;

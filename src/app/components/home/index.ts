@@ -1,13 +1,6 @@
-import CardContainer from './card-container';
-import CardLink from './card';
-import ImageContainer from './image-container';
-import MoviesContainer from './movies-container';
-import TvShowsContainer from './tvshows-container';
-
-export {
-  CardContainer,
-  CardLink,
-  ImageContainer,
-  MoviesContainer,
-  TvShowsContainer
-};
+export * from './card-container';
+export * from './card';
+export * from './image-container';
+export * from './movies-container';
+export * from './search-form';
+export * from './tvshows-container';

@@ -16,7 +16,7 @@ type Props = {
   userAvatar: string;
 };
 
-function ProfileButton({ user, userAvatar }: Props) {
+export function ProfileButton({ user, userAvatar }: Props) {
   const router = useRouter();
   const supabase = createClientComponentClient();
   const handleSignOut = async () => {
@@ -52,4 +52,3 @@ function ProfileButton({ user, userAvatar }: Props) {
     </NavbarContent>
   );
 }
-export default ProfileButton;

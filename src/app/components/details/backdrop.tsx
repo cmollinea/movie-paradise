@@ -7,7 +7,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-function Backdrop({ src, alt, children }: Props) {
+export function Backdrop({ src, alt, children }: Props) {
   return (
     <section
       className='w-full relative grid overflow-hidden justify-center bg-cover bg-top xl:h-[600px] max-md:min-h-screen'
@@ -19,4 +19,3 @@ function Backdrop({ src, alt, children }: Props) {
     </section>
   );
 }
-export default Backdrop;

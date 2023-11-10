@@ -11,7 +11,7 @@ type Props = {
     | undefined;
 };
 
-async function TvShowsContainer({ promise }: Props) {
+export async function TvShowsContainer({ promise }: Props) {
   let tvShows;
 
   if (promise !== undefined && 'results' in promise) {
@@ -54,4 +54,3 @@ async function TvShowsContainer({ promise }: Props) {
     </CardContainer>
   );
 }
-export default TvShowsContainer;

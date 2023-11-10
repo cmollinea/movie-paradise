@@ -9,7 +9,7 @@ type Props = {
   promise: Promise<Credits | ApiError | undefined>;
 };
 
-async function Cast({ promise }: Props) {
+export async function Cast({ promise }: Props) {
   const credits = await promise;
 
   if (credits === undefined) {
@@ -44,4 +44,3 @@ async function Cast({ promise }: Props) {
     </section>
   );
 }
-export default Cast;

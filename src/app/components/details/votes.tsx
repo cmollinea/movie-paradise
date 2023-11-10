@@ -5,7 +5,7 @@ type Props = {
   value: number;
 };
 
-function Progress({ value }: Props) {
+export function Progress({ value }: Props) {
   return (
     <CircularProgress
       size='lg'
@@ -20,5 +20,3 @@ function Progress({ value }: Props) {
     />
   );
 }
-
-export default Progress;

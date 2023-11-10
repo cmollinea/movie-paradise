@@ -33,7 +33,7 @@ const icons = {
   user: <User className='text-danger' fill='currentColor' size={30} />
 };
 
-function Navigation() {
+export function Navigation() {
   return (
     <NavbarContent className='hidden sm:flex gap-4' justify='center'>
       <Dropdown>
@@ -141,4 +141,3 @@ function Navigation() {
     </NavbarContent>
   );
 }
-export default Navigation;

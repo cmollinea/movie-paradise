@@ -12,7 +12,7 @@ type Props = {
   };
 };
 
-function ClientSimilar({ similar }: Props) {
+export function ClientSimilar({ similar }: Props) {
   return (
     <Card
       radius='md'
@@ -31,4 +31,3 @@ function ClientSimilar({ similar }: Props) {
     </Card>
   );
 }
-export default ClientSimilar;

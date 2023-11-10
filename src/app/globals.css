@@ -6,20 +6,18 @@
 
 /* Ancho de la barra de desplazamiento */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-/* Fondo de la barra de desplazamiento */
-::-webkit-scrollbar-track {
-  background-color: rgba(128, 128, 128, 0.286);
-  border-radius: 20px;
   width: 5px;
   height: 5px;
 }
 
+/* Fondo de la barra de desplazamiento */
+::-webkit-scrollbar-track {
+  background-color: transparent
+
+}
+
 /* Color del scroll */
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(249, 249, 249, 0.544);
+  background-color: rgba(202, 198, 198, 0.5);
   border-radius: 20px;
 }

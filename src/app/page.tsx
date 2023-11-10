@@ -5,6 +5,7 @@ import { MoviesContainer, TvShowsContainer } from './components/home';
 import { MOVIES_ENPOINTS, TV_SHOWS_ENDPOINTS } from './constants/api-endpoints';
 import { queryTMDB } from './services/queryTMDB';
 import { Title } from './components/global-ui';
+import { SearchForm } from './components/home/search-form';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,6 +27,7 @@ export default async function Home() {
 
   return (
     <>
+      <SearchForm backgroundPath='' />
       {/* AQUI DEBE IR UN FORM PARA BUSQUEDA */}
       <section className='overflow-hidden container px-4 lg:px-20 py-10 relative space-y-5'>
         <Title>Top Rated Tv Shows</Title>

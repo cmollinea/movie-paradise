@@ -7,7 +7,7 @@ type Props = {
   promise: Promise<ApiError | MovieResponse | undefined>;
 };
 
-async function MoviesContainer({ promise }: Props) {
+export async function MoviesContainer({ promise }: Props) {
   const movies = await promise;
 
   if (movies === undefined) {
@@ -41,4 +41,3 @@ async function MoviesContainer({ promise }: Props) {
     </CardContainer>
   );
 }
-export default MoviesContainer;

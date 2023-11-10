@@ -1,7 +1,7 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Session } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
-import useInfoContext from './useInfoContext';
+import { useInfoContext } from './useInfoContext';
 
 type Tables = 'watch_list' | 'favs';
 

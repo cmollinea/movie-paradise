@@ -1,7 +1,7 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import ActionButtons from './action-buttons';
+import { ActionButtons } from './';
 
-async function ServerButtonsWraper() {
+export async function ServerButtonsWraper() {
   const supabase = createClientComponentClient();
   const {
     data: { session }
@@ -9,4 +9,3 @@ async function ServerButtonsWraper() {
 
   return <ActionButtons session={session} />;
 }
-export default ServerButtonsWraper;

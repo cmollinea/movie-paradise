@@ -17,7 +17,7 @@ type Props = {
   imageSizes: ImageSizes;
 };
 
-function CardLink({ element, type, imageSizes }: Props) {
+export function CardLink({ element, type, imageSizes }: Props) {
   const { id, name, rating, poster_path } = element;
   return (
     <Link
@@ -40,4 +40,3 @@ function CardLink({ element, type, imageSizes }: Props) {
     </Link>
   );
 }
-export default CardLink;

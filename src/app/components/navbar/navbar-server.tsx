@@ -1,8 +1,8 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import NavBarUI from './navbar-ui';
+import { NavBarUI } from './';
 
-async function NavBarServer() {
+export async function NavBarServer() {
   const supabase = createServerComponentClient({ cookies });
   const {
     data: { session },
@@ -13,4 +13,3 @@ async function NavBarServer() {
 
   return <NavBarUI session={session} />;
 }
-export default NavBarServer;

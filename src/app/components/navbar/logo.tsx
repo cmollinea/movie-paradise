@@ -11,7 +11,7 @@ type Props = {
   isMenuOpen: boolean;
 };
 
-function Logo({ isMenuOpen }: Props) {
+export function Logo({ isMenuOpen }: Props) {
   return (
     <NavbarContent>
       <NavbarMenuToggle
@@ -26,4 +26,3 @@ function Logo({ isMenuOpen }: Props) {
     </NavbarContent>
   );
 }
-export default Logo;

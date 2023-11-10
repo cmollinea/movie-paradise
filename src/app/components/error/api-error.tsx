@@ -3,7 +3,6 @@ type Props = {
   statusText: string;
 };
 
-function ErrorWithStatus({ status, statusText }: Props) {
+export function ErrorWithStatus({ status, statusText }: Props) {
   return <p>{`${status}: ${statusText}`}</p>;
 }
-export default ErrorWithStatus;

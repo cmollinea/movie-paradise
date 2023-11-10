@@ -1,4 +1,2 @@
-import ActionButtons from './action-buttons';
-import ServerButtonsWraper from './server-buttons-wrapper';
-
-export { ActionButtons, ServerButtonsWraper };
+export * from './action-buttons';
+export * from './server-buttons-wrapper';
