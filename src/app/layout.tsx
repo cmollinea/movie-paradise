@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { Providers } from './providers';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import NavBarUI from './components/navbar/navbar-ui';
+import { NavBarUI } from './components/navbar/navbar-ui';
 // import { Inter } from 'next/font/google'
 
 // const inter = Inter({ subsets: ['latin'] })
