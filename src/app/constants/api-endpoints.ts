@@ -44,3 +44,13 @@ export const TV_SHOWS_DETAILS_SLUGS = {
   ...MOVIE_DETAILS_SLUGS,
   SEASONS: '/seasons'
 };
+
+export const SEARCH_ENDPOINTS = {
+  MOVIES: 'https://api.themoviedb.org/3/search/movie',
+  COLLECTIONS: 'https://api.themoviedb.org/3/search/collection',
+  TV: 'https://api.themoviedb.org/3/search/tv',
+  PEOPLE: 'https://api.themoviedb.org/3/search/person'
+};
+
+const trending = 'https://api.themoviedb.org/3/trending/all/{time_window}';
+const person = 'https://api.themoviedb.org/3/person/{person_id}';

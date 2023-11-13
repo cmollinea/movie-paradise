@@ -1,15 +1,23 @@
 'use client';
 
 import { Input, Button } from '@nextui-org/react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FormEvent } from 'react';
 
 export function SearchForm() {
+  const router = useRouter();
+  const searchParams = useSearchParams()!;
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    alert(
-      'yeah iam a bad coder, put an id in the url if you want a result thug life!'
-    );
+    const data = new FormData(e.target as HTMLFormElement);
+    const query = data.get('query')?.toString();
+    if (query) {
+      const newUrlSearchParams = new URLSearchParams(searchParams);
+      newUrlSearchParams.set('q', query);
+      router.push('/search' + '?' + newUrlSearchParams.toString());
+    }
   };
+
   return (
     <form
       onSubmit={(e) => handleSubmit(e)}
