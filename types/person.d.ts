@@ -15,7 +15,7 @@ export interface Person {
   profilePath: string;
 }
 
-export interface PersonImage {
+interface PersonImage {
   id: number;
   profiles: Image[];
 }
@@ -30,7 +30,7 @@ interface Image {
   width: number;
 }
 
-export interface PersonMovieCredits {
+interface PersonMovieCredits {
   cast: Cast[];
   crew: Cast[];
   id: number;
@@ -67,7 +67,7 @@ type Department =
   | 'Sound'
   | 'Writing';
 
-export interface PersonTVCredits {
+interface PersonTVCredits {
   cast: TVCast[];
   crew: TVCast[];
   id: number;

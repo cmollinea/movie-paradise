@@ -4,6 +4,10 @@ import { Providers } from './providers';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { NavBarUI } from './components/navbar/navbar-ui';
+import NextTopLoader from 'nextjs-toploader';
+import { NavigationEvents } from './components/navigation-event/navigation-event';
+import { Suspense } from 'react';
+import { Toaster } from 'react-hot-toast';
 // import { Inter } from 'next/font/google'
 
 // const inter = Inter({ subsets: ['latin'] })
@@ -29,6 +33,8 @@ export default async function RootLayout({
   return (
     <html lang='en' className='dark'>
       <body className='bg-background'>
+        <NextTopLoader />
+        <Toaster />
         <Providers>
           <nav className='sticky top-0 bg-default-900/80 backdrop-blur-md z-50'>
             <NavBarUI session={session} />{' '}

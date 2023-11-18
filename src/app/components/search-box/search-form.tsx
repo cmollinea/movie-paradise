@@ -13,7 +13,7 @@ export function SearchForm() {
     const query = data.get('query')?.toString();
     if (query) {
       const newUrlSearchParams = new URLSearchParams(searchParams);
-      newUrlSearchParams.set('q', query);
+      newUrlSearchParams.set('query', query);
       router.push('/search' + '?' + newUrlSearchParams.toString());
     }
   };

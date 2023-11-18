@@ -36,7 +36,7 @@ export async function ServerSimilar({ promise, type }: Props) {
         return (
           <CardLink
             key={item.id}
-            type='movies'
+            type={type}
             element={similar}
             imageSizes='backdrop'
           />

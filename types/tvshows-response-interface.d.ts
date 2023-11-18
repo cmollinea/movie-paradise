@@ -6,7 +6,7 @@ export interface TvShowsResponse {
 }
 
 export interface TvShow {
-  backdrop_path: string;
+  backdrop_path: string | null;
   first_air_date: Date;
   genre_ids: number[];
   id: number;

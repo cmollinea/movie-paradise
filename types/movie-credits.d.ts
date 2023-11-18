@@ -4,7 +4,7 @@ export interface Credits {
   crew: Cast[];
 }
 
-export interface Cast {
+interface Cast {
   adult: boolean;
   gender: number;
   id: number;
@@ -21,7 +21,7 @@ export interface Cast {
   job?: string;
 }
 
-export type Department =
+type Department =
   | 'Acting'
   | 'Crew'
   | 'Production'

@@ -3,7 +3,7 @@ export interface Providers {
   results: Results;
 }
 
-export interface Results {
+interface Results {
   AD: Ad;
   AE: AE;
   AL: AE;
@@ -98,19 +98,19 @@ export interface Results {
   ZA: AE;
 }
 
-export interface Ad {
+interface Ad {
   link: string;
   flatrate: Flatrate[];
 }
 
-export interface Flatrate {
+interface Flatrate {
   logo_path: string;
   provider_id: number;
   provider_name: string;
   display_priority: number;
 }
 
-export interface AE {
+interface AE {
   link: string;
   buy: Flatrate[];
   rent?: Flatrate[];

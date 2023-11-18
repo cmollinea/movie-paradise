@@ -91,7 +91,7 @@ async function TvShowDetails({ params }: Props) {
       <section className='relative container px-4 md:px-20'>
         <Title>Similar</Title>
         <Suspense fallback={<p>Loading...</p>}>
-          <ServerSimilar promise={similar} type='movies' />
+          <ServerSimilar promise={similar} type='tv' />
         </Suspense>
       </section>
     </section>

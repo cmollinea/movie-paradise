@@ -10,10 +10,10 @@ type Props = {
   element: {
     id: number;
     name: string;
-    rating: number;
+    rating?: number;
     poster_path: string | null;
   };
-  type: 'tv' | 'movies';
+  type: 'tv' | 'movies' | 'collections';
   imageSizes: ImageSizes;
 };
 
@@ -21,8 +21,9 @@ export function CardLink({ element, type, imageSizes }: Props) {
   const { id, name, rating, poster_path } = element;
   return (
     <Link
+      prefetch={false}
       href={`/${type}/${id}`}
-      className='flex flex-none max-sm:snap-center max-sm:snap-always overflow-hidden rounded-xl relative border border-neutral-100/20 hover:border-primary-400 transition-colors ease-in-out group'
+      className='flex-none max-sm:max-w-[120px] transition-colors ease-in-out group w-fit h-fit'
     >
       <ImageContainer image={poster_path || ''} imageSizes={imageSizes}>
         <CardFooter className='absolute bg-gradient-to-t from-black to-transparent rounded-none bottom-0 p-0 z-10 md:opacity-0 group-hover:opacity-100 transition-opacity ease-in-out'>
@@ -32,7 +33,7 @@ export function CardLink({ element, type, imageSizes }: Props) {
             </p>
             <p className='flex space-x-0.5 items-center md:text-2xl font-extrabold'>
               <Star className=' fill-primary-400 stroke-primary-400 h-4 w-4 md:h-6 md:w-6' />
-              <span>{rating.toFixed(1)}</span>{' '}
+              {rating && <span>{rating.toFixed(1)}</span>}
             </p>
           </div>
         </CardFooter>

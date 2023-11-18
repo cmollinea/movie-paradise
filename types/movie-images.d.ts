@@ -5,7 +5,7 @@ export interface MovieImages {
   posters: Image[];
 }
 
-export interface Image {
+interface Image {
   aspect_ratio: number;
   height: number;
   iso_639_1: null | string;

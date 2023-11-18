@@ -2,6 +2,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Session } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
 import { useInfoContext } from './useInfoContext';
+import toast from 'react-hot-toast';
 
 type Tables = 'watch_list' | 'favs';
 
@@ -26,10 +27,9 @@ export function useActionButtons(session: Session | null) {
 
     if (mediaError) {
       console.error(mediaError);
-      //TODO  Make a error toast
+      toast.error('Somthing just broke');
     }
-
-    //TODO  Make a success toast
+    toast.success('Media added to your list');
   };
 
   // Esta funcion me inserta un nuevo record en la tabla que reciba como argumento

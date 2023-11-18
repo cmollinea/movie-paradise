@@ -24,7 +24,7 @@ export function ImageContainer({ image, imageSizes, children }: Props) {
         src={src}
         width={imageSizes === 'backdrop' ? 300 : 154}
         height={imageSizes === 'backdrop' ? 169 : 231}
-        className={`h-full object-cover border border-neutral-100/20 ${
+        className={`${
           imageSizes === 'backdrop'
             ? 'max-md:max-w-[200px]'
             : 'max-md:max-w-[120px]'

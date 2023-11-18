@@ -33,7 +33,7 @@ export interface TvSHowDetail {
   vote_count: number;
 }
 
-export interface CreatedBy {
+interface CreatedBy {
   id: number;
   credit_id: string;
   name: string;
@@ -41,12 +41,12 @@ export interface CreatedBy {
   profile_path: string;
 }
 
-export interface Genre {
+interface Genre {
   id: number;
   name: string;
 }
 
-export interface LastEpisodeToAir {
+interface LastEpisodeToAir {
   id: number;
   name: string;
   overview: string;
@@ -62,19 +62,19 @@ export interface LastEpisodeToAir {
   still_path: string;
 }
 
-export interface Network {
+interface Network {
   id: number;
   logo_path: null | string;
   name: string;
   origin_country: string;
 }
 
-export interface ProductionCountry {
+interface ProductionCountry {
   iso_3166_1: string;
   name: string;
 }
 
-export interface Season {
+interface Season {
   air_date: Date;
   episode_count: number;
   id: number;
@@ -85,7 +85,7 @@ export interface Season {
   vote_average: number;
 }
 
-export interface SpokenLanguage {
+interface SpokenLanguage {
   english_name: string;
   iso_639_1: string;
   name: string;

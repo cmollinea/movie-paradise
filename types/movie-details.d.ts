@@ -26,24 +26,24 @@ export interface MovieDetails {
   vote_count: number;
 }
 
-export interface Genre {
+interface Genre {
   id: number;
   name: string;
 }
 
-export interface ProductionCompany {
+interface ProductionCompany {
   id: number;
   logo_path: null;
   name: string;
   origin_country: string;
 }
 
-export interface ProductionCountry {
+interface ProductionCountry {
   iso_3166_1: string;
   name: string;
 }
 
-export interface SpokenLanguage {
+interface SpokenLanguage {
   english_name: string;
   iso_639_1: string;
   name: string;
