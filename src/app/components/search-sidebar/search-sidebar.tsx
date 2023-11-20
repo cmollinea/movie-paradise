@@ -20,9 +20,6 @@ type Props = {
 };
 
 export const SideBar = ({ totalResults }: Props) => {
-  const searchParams = useSearchParams();
-  const target = searchParams.get('target') || 'movies';
-
   return (
     <nav className='flex items-center place-content-center'>
       <ul className='flex flex-col space-y-4'>

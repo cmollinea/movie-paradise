@@ -25,7 +25,7 @@ export const TargetButtonLink = ({ resultsCount, target, children }: Props) => {
   const handleSelectNewTarget = (target: string) => {
     const _searchParams = new URLSearchParams(searchParams);
     _searchParams.set('target', target);
-    _searchParams.delete('page');
+    _searchParams.set('page', '1');
     router.push(path + '?' + _searchParams.toString());
   };
 

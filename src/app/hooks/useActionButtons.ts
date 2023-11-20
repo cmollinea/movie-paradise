@@ -6,6 +6,17 @@ import toast from 'react-hot-toast';
 
 type Tables = 'watch_list' | 'favs';
 
+/**
+ * Custom hook for managing user action buttons.
+ *
+ * @param {Session | null} session - The current user session.
+ * @returns {Object} - An object with a function `addMedia` for adding media to a specified table.
+ *
+ * @example
+ * const { addMedia } = useActionButtons(session);
+ * addMedia('watch_list');
+ */
+
 export function useActionButtons(session: Session | null) {
   const supabase = createClientComponentClient();
   const router = useRouter();
@@ -18,57 +29,62 @@ export function useActionButtons(session: Session | null) {
 
   // Esta funcion me crea un record del elemento en la tabla media
   const upsertToMedia = async () => {
-    const { error: mediaError } = await supabase
-      .from('media')
-      .upsert(
-        { id, title, overview, poster, media_type: mediaType },
-        { onConflict: 'id', ignoreDuplicates: true }
-      );
+    try {
+      const { error: mediaError } = await supabase
+        .from('media')
+        .upsert(
+          { id, title, overview, poster, media_type: mediaType },
+          { onConflict: 'id', ignoreDuplicates: true }
+        );
 
-    if (mediaError) {
-      console.error(mediaError);
-      toast.error('Somthing just broke');
+      if (mediaError) {
+        throw new Error('There was an error while we were working');
+      }
+    } catch (err: any) {
+      return { error: err.message };
     }
-    toast.success('Media added to your list');
   };
 
   // Esta funcion me inserta un nuevo record en la tabla que reciba como argumento
   const insertToTable = async (table: Tables) => {
-    const mediaItem = {
-      user_id: session?.user.id,
-      movie_id: id.toString()
-    };
+    try {
+      const mediaItem = {
+        user_id: session?.user.id,
+        movie_id: id.toString()
+      };
 
-    const { error: watchListError } = await supabase
-      .from(table)
-      .insert(mediaItem);
+      const { error: watchListError } = await supabase
+        .from(table)
+        .insert(mediaItem);
 
-    if (watchListError) {
-      console.error(watchListError);
-      //TODO  Make a error toast
+      if (watchListError) {
+        throw new Error('There was an error while we were working');
+      }
+    } catch (err: any) {
+      return { error: err.message };
     }
-
-    //TODO  Make a success toast
   };
 
-  const addToWatchList = () => {
+  // Esta funcion es la que cada boton usara para manejar ;adir items a las listas de usuario
+  const addMedia = async (table: Tables) => {
     if (!session) {
       router.push('/sign-in');
       return;
     }
-
-    upsertToMedia();
-    insertToTable('watch_list');
-  };
-
-  const addToFavorites = () => {
-    if (!session) {
-      router.push('/sign-in');
+    try {
+      const upsertErr = await upsertToMedia();
+      if (upsertErr !== undefined) {
+        throw new Error(upsertErr.error);
+      }
+      const insertError = await insertToTable(table);
+      if (insertError !== undefined) {
+        throw new Error(insertError.error);
+      }
+      toast.success('Item was added');
+    } catch (err) {
+      toast.error('There was an error while we were working');
     }
-
-    upsertToMedia();
-    insertToTable('favs');
   };
 
-  return { addToWatchList, addToFavorites };
+  return { addMedia };
 }

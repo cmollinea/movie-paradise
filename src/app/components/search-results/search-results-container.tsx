@@ -14,6 +14,7 @@ import { ApiError } from '@/app/services';
 import { ErrorWithStatus, SomethingWentWrong } from '../error';
 import { Target } from '../search-sidebar/target-button';
 import { Pagination } from '../global-ui/pagination';
+import { useSearchParams } from 'next/navigation';
 
 type Props = {
   data:
@@ -28,6 +29,8 @@ type Props = {
 
 export const SearchResultsContainer = ({ data, type }: Props) => {
   let node: React.ReactNode;
+  const searchParams = useSearchParams();
+  const currentPage = searchParams.get('page') || '1';
 
   if (data === undefined) {
     node = <SomethingWentWrong />;
@@ -69,7 +72,9 @@ export const SearchResultsContainer = ({ data, type }: Props) => {
 
   return (
     <>
-      <Pagination total={data.total_pages} />
+      {data.total_pages > 1 && (
+        <Pagination total={data.total_pages} currentPage={currentPage} />
+      )}
       <ul className='w-full flex flex-wrap gap-6 container'>{node}</ul>
     </>
   );

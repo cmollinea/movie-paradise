@@ -4,9 +4,9 @@ import { Pagination as NextPagination } from '@nextui-org/react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
-type Props = { total: number };
+type Props = { total: number; currentPage: string };
 
-export function Pagination({ total }: Props) {
+export function Pagination({ total, currentPage }: Props) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const path = usePathname();
@@ -19,6 +19,7 @@ export function Pagination({ total }: Props) {
 
   return (
     <NextPagination
+      page={parseInt(currentPage)}
       variant='bordered'
       total={total}
       initialPage={1}

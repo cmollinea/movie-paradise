@@ -37,13 +37,11 @@ export const getSearchPromises = (
     const movieSearch = queryTMDB<MovieResponse>(
       SEARCH_ENDPOINTS.MOVIES + searchParams
     );
-
     return movieSearch;
   }
 
   if (target === 'tv') {
     const tv = queryTMDB<TvShowsResponse>(SEARCH_ENDPOINTS.TV + searchParams);
-
     return tv;
   }
 

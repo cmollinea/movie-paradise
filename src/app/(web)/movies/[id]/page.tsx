@@ -21,6 +21,7 @@ import type {
 import { InfoContextProvider } from '@/app/context';
 import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
 import { Title } from '@/app/components/global-ui';
+import { CommentSection } from '@/app/components/comments/comments-section';
 
 type Props = {
   params: {
@@ -84,6 +85,16 @@ async function MovieDetails({ params }: Props) {
       <section className='relative container py-10 px-4 md:px-20'>
         <Title>Similar</Title>
         <ServerSimilar promise={similar} type='movies' />
+      </section>
+      <section className='relative container py-10 px-4 md:px-20'>
+        <CommentSection
+          mediaItem={{
+            id: info.id,
+            title: info.title,
+            overview: info.overview,
+            poster: info.poster
+          }}
+        />
       </section>
     </section>
   );
