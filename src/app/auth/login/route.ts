@@ -1,27 +1,25 @@
-import { cookies } from 'next/headers';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { createRouteSupabaseCli } from '@/app/helpers/create-route-supabse-cli';
+import { type EmailOtpType } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
-  const requestUrl = new URL(request.url);
-  const formData = await request.formData();
-  const email = String(formData.get('email'));
-  const password = String(formData.get('password'));
-  const cookieStore = cookies();
-  const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const token_hash = searchParams.get('token_hash');
+  const type = searchParams.get('type') as EmailOtpType | null;
+  const next = searchParams.get('next') ?? '/';
 
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-  });
+  if (token_hash && type) {
+    const supabase = createRouteSupabaseCli();
 
-  if (error) {
-    console.log('error');
-
-    return NextResponse.json('hola', { status: 500 });
+    const { error } = await supabase.auth.verifyOtp({
+      type,
+      token_hash
+    });
+    if (!error) {
+      return NextResponse.redirect(next);
+    }
   }
 
-  return NextResponse.redirect(requestUrl.origin, {
-    status: 301
-  });
+  // return the user to an error page with some instructions
+  return NextResponse.redirect('/auth/auth-code-error');
 }

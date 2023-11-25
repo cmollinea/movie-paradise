@@ -1,8 +1,8 @@
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Session } from '@supabase/supabase-js';
-import { useRouter } from 'next/navigation';
 import { useInfoContext } from './useInfoContext';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { createClienSupabaseCli } from '../helpers/create-client-supabase-cli';
 
 type Tables = 'watch_list' | 'favs';
 
@@ -18,7 +18,7 @@ type Tables = 'watch_list' | 'favs';
  */
 
 export function useActionButtons(session: Session | null) {
-  const supabase = createClientComponentClient();
+  const supabase = createClienSupabaseCli();
   const router = useRouter();
   const {
     info: {

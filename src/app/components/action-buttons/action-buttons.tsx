@@ -2,8 +2,8 @@
 
 import { useActionButtons } from '@/app/hooks';
 import { Button } from '@nextui-org/react';
-import { Session } from '@supabase/auth-helpers-nextjs';
 import { HeartIcon, PlusCircle } from 'lucide-react';
+import type { Session } from '@supabase/supabase-js';
 
 type Props = {
   session: Session | null;

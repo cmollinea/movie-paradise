@@ -1,15 +1,12 @@
 import './globals.css';
-import type { Metadata } from 'next';
-import { Providers } from './providers';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
 import { NavBarUI } from './components/navbar/navbar-ui';
-import NextTopLoader from 'nextjs-toploader';
-import { NavigationEvents } from './components/navigation-event/navigation-event';
-import { Suspense } from 'react';
+import { Providers } from './providers';
 import { Toaster } from 'react-hot-toast';
-// import { Inter } from 'next/font/google'
+import NextTopLoader from 'nextjs-toploader';
+import type { Metadata } from 'next';
+import { createServerSupabaseCli } from './helpers/create-server-supabase-cli';
 
+// import { Inter } from 'next/font/google'
 // const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -22,8 +19,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
-  const supabase = createServerComponentClient({ cookies: () => cookieStore });
+  const supabase = createServerSupabaseCli();
+
   const {
     data: { session }
   } = await supabase.auth.getSession();

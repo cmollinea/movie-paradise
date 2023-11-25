@@ -1,17 +1,11 @@
 'use client';
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { Github } from 'lucide-react';
+import { createClienSupabaseCli } from '@/app/helpers/create-client-supabase-cli';
 import { Button } from '@nextui-org/react';
-
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+import { Github } from 'lucide-react';
 
 export function GitHubSignButton() {
-  const supabase = createClientComponentClient({
-    supabaseUrl: SUPABASE_URL,
-    supabaseKey: SUPABASE_ANON_KEY
-  });
+  const supabase = createClienSupabaseCli();
 
   const handleGitHubSignIn = async () => {
     await supabase.auth.signInWithOAuth({

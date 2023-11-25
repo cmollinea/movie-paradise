@@ -1,15 +1,13 @@
-import { SupabaseClient } from '@supabase/supabase-js';
 import { MediaItem } from 'root/types';
-import { Target } from '../components/search-sidebar';
-
-type Supabase = SupabaseClient<any, 'public', any>;
+import { createServerSupabaseCli } from './create-server-supabase-cli';
 
 export const supabaseUpsertToMedia = async (
-  supabase: Supabase,
   media: MediaItem,
   mediaType: 'tv' | 'movies'
 ) => {
   const { id, title, overview, poster } = media;
+  const supabase = createServerSupabaseCli();
+
   try {
     const { error: mediaError } = await supabase
       .from('media')

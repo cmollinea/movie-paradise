@@ -1,8 +1,8 @@
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClienSupabaseCli } from '@/app/helpers/create-client-supabase-cli';
 import { ActionButtons } from './';
 
 export async function ServerButtonsWraper() {
-  const supabase = createClientComponentClient();
+  const supabase = createClienSupabaseCli();
   const {
     data: { session }
   } = await supabase.auth.getSession();

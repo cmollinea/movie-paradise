@@ -1,5 +1,6 @@
 'use client';
 
+import { createClienSupabaseCli } from '@/app/helpers/create-client-supabase-cli';
 import {
   NavbarContent,
   Dropdown,
@@ -8,7 +9,6 @@ import {
   DropdownTrigger,
   DropdownMenu
 } from '@nextui-org/react';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
 
 export function ProfileButton({ user, userAvatar }: Props) {
   const router = useRouter();
-  const supabase = createClientComponentClient();
+  const supabase = createClienSupabaseCli();
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     router.refresh();
