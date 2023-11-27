@@ -54,3 +54,5 @@ export const SEARCH_ENDPOINTS = {
 
 const trending = 'https://api.themoviedb.org/3/trending/all/{time_window}';
 const person = 'https://api.themoviedb.org/3/person/{person_id}';
+const season =
+  'https://api.themoviedb.org/3/tv/{series_id}/season/{season_number}';

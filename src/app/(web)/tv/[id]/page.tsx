@@ -98,7 +98,7 @@ async function TvShowDetails({ params }: Props) {
           </Section>
           <Section>
             <Title>Stay up to date!</Title>
-            <ul className='grid gap-4 w-full'>
+            <ul className='grid gap-4 w-full max-md:max-w-sm'>
               {showDetails.seasons.map((season) => {
                 if (season.season_number > 0) {
                   return (
