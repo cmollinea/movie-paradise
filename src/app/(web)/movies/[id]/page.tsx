@@ -68,34 +68,40 @@ async function MovieDetails({ params }: Props) {
   };
 
   return (
-    <section className='w-full flex flex-col items-center'>
+    <section className='w-full'>
       <Backdrop src={movieDetails.backdrop_path} alt={movieDetails.title}>
         <InfoContextProvider info={info} mediaType='movies'>
           <Details />
         </InfoContextProvider>
       </Backdrop>
-      <section className='relative container py-10 px-4 md:px-20'>
-        <Title>Actors</Title>
-        <Cast promise={credits} />
-      </section>
-      <section className='relative container py-10 px-4 md:px-20'>
-        <Title>Media</Title>
-        <Media videosPromise={videos} imagesPromise={images} />
-      </section>
-      <section className='relative container py-10 px-4 md:px-20'>
-        <Title>Similar</Title>
-        <ServerSimilar promise={similar} type='movies' />
-      </section>
-      <section className='relative container py-10 px-4 md:px-20'>
-        <CommentSection
-          mediaItem={{
-            id: info.id,
-            title: info.title,
-            overview: info.overview,
-            poster: info.poster
-          }}
-        />
-      </section>
+      <div className=' grid xl:grid-cols-12'>
+        <div className='xl:col-span-8'>
+          <section className='relative container py-10 px-4 md:px-20'>
+            <Title>Meet the crew</Title>
+            <Cast promise={credits} />
+          </section>
+          <section className='relative container py-10 px-4 md:px-20'>
+            <Title>Related Media</Title>
+            <Media videosPromise={videos} imagesPromise={images} />
+          </section>
+          <section className='relative container py-10 px-4 md:px-20'>
+            <Title>Similar</Title>
+            <ServerSimilar promise={similar} type='movies' />
+          </section>
+        </div>
+        <div className='xl:col-span-4'>
+          <section className='relative container py-10 px-4 md:px-20'>
+            <CommentSection
+              mediaItem={{
+                id: info.id,
+                title: info.title,
+                overview: info.overview,
+                poster: info.poster
+              }}
+            />
+          </section>
+        </div>
+      </div>
     </section>
   );
 }

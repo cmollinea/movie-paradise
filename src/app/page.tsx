@@ -7,6 +7,8 @@ import { queryTMDB } from './services/queryTMDB';
 import { Title } from './components/global-ui';
 import { ServerFormWrapper } from './components/search-box';
 
+//todo Cambiar on air por trending y ademas ponerlo de principal
+
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
@@ -28,7 +30,6 @@ export default async function Home() {
   return (
     <>
       <ServerFormWrapper backgroundPath='' />
-      {/* AQUI DEBE IR UN FORM PARA BUSQUEDA */}
       <section className='overflow-hidden container px-4 lg:px-20 py-10 relative space-y-5'>
         <Title>Top Rated Tv Shows</Title>
         <TvShowsContainer promise={topRatedTvShowsResponse} />

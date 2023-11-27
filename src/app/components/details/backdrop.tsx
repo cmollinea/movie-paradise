@@ -13,7 +13,7 @@ export function Backdrop({ src, alt, children }: Props) {
       className='w-full relative grid overflow-hidden px-4 md:justify-center bg-cover bg-top xl:h-[600px] max-md:min-h-screen'
       style={{ backgroundImage: `url(${BASE_URL + 'original' + src})` }}
     >
-      <span className='absolute inset-0 z-10 bg-black/80 backdrop-blur-[1px]'></span>
+      <div className='absolute top-0 left-0 bottom-0 right-0 z-10 bg-black/80 backdrop-blur-[1px]'></div>
 
       {children}
     </section>

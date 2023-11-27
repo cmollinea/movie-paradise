@@ -4,12 +4,18 @@ import { MediaItem } from 'root/types';
 import { redirect } from 'next/navigation';
 import { supabaseUpsertToMedia } from './supabaseUpsertToMedia';
 import { createServerSupabaseCli } from './create-server-supabase-cli';
+import toast from 'react-hot-toast';
+
+type FormState = {
+  message: string | null;
+  type: 'error' | 'success' | null;
+};
 
 export const createReview = async (
   mediaItem: MediaItem,
-  prevState: any,
+  prevState: FormState,
   formdata: FormData
-) => {
+): Promise<FormState> => {
   'use server';
   const supabase = createServerSupabaseCli();
 
@@ -28,6 +34,8 @@ export const createReview = async (
       throw new Error('Something went wrong');
     }
 
+    console.log(upsertError);
+
     const review = {
       user_id: session?.user.id,
       media_id: mediaItem.id,
@@ -38,11 +46,14 @@ export const createReview = async (
       .from('reviews')
       .insert(review);
 
+    console.log(reviewError);
+
     if (reviewError) {
       throw new Error('Something went wrong');
     }
+    return { message: 'Comment was added', type: 'success' };
   } catch (err) {
     console.log(err);
-    return { message: 'Failed to create' };
+    return { message: 'Failed to create', type: 'error' };
   }
 };

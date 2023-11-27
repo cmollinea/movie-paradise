@@ -14,7 +14,6 @@ export function ImageContainer({ image, imageSizes, children }: Props) {
 
   return (
     <Card
-      isPressable
       className='w-fit h-fit overflow-hidden flex flex-none max-sm:snap-center max-sm:snap-always'
       radius='md'
     >

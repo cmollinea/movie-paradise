@@ -15,6 +15,7 @@ import { ErrorWithStatus, SomethingWentWrong } from '../error';
 import { Target } from '../search-sidebar/target-button';
 import { Pagination } from '../global-ui/pagination';
 import { useSearchParams } from 'next/navigation';
+import CardLinkWithDescription from '../global-ui/card-link-with-description';
 
 type Props = {
   data:
@@ -55,19 +56,33 @@ export const SearchResultsContainer = ({ data, type }: Props) => {
       data as MovieResponse | TvShowsResponse | CollectionResponse
     ).results;
 
-    node = results.map((item) => (
-      <CardLink
-        type={type}
-        imageSizes='poster'
-        element={{
-          id: item.id,
-          name: 'name' in item ? item.name : item.title,
-          poster_path: item.poster_path,
-          rating: 'vote_average' in item ? item.vote_average : undefined
-        }}
-        key={item.id}
-      />
-    ));
+    // node = results.map((item) => (
+    //   <CardLink
+    //     type={type}
+    //     imageSizes='poster'
+    //     element={{
+    //       id: item.id,
+    //       name: 'name' in item ? item.name : item.title,
+    //       poster_path: item.poster_path,
+    //       rating: 'vote_average' in item ? item.vote_average : undefined
+    //     }}
+    //     key={item.id}
+    //   />
+    // ));
+
+    node = results.map((item) => {
+      const media = {
+        backdrop: item.backdrop_path,
+        description: item.overview,
+        id: item.id,
+        mediaType: type,
+        poster: item.poster_path,
+        rating: 'vote_average' in item ? item.vote_average : 0,
+        title: 'name' in item ? item.name : item.title
+      };
+
+      return <CardLinkWithDescription media={media} key={item.id} />;
+    });
   }
 
   return (
@@ -75,7 +90,12 @@ export const SearchResultsContainer = ({ data, type }: Props) => {
       {data.total_pages > 1 && (
         <Pagination total={data.total_pages} currentPage={currentPage} />
       )}
-      <ul className='w-full flex flex-wrap gap-6 container'>{node}</ul>
+      <ul className='w-full flex flex-wrap gap-6 container max-lg:px-4'>
+        {node}
+      </ul>
+      {data.total_pages > 1 && (
+        <Pagination total={data.total_pages} currentPage={currentPage} />
+      )}
     </>
   );
 };

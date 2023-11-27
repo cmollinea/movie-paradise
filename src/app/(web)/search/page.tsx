@@ -21,14 +21,14 @@ async function SearchResults({ searchParams }: Props) {
   const data = await getSearchPromises(query, page, target);
 
   return (
-    <section className='grid grid-cols-12 w-full py-16'>
+    <section className='grid lg:grid-cols-12 w-full py-16 place-content-center min-[2400px]:w-fit'>
       <SearchContextProvider>
-        <aside className='col-span-3'>
+        <aside className='lg:col-span-3'>
           <Suspense fallback={<p>Loading...</p>}>
             <SideBarServerWrapper query={query} />
           </Suspense>{' '}
         </aside>
-        <main className=' col-span-9'>
+        <main className='lg:col-span-9 flex flex-col items-center max-w-4xl space-y-4'>
           <SearchResultsContainer data={data} type={target} />
         </main>
       </SearchContextProvider>

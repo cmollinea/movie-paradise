@@ -1,7 +1,5 @@
-'use client';
-
 import Link from 'next/link';
-import { Image, Card, CardFooter } from '@nextui-org/react';
+import { CardFooter } from '@nextui-org/react';
 import { Star } from 'lucide-react';
 import { ImageContainer } from '.';
 import { ImageSizes } from 'root/types';

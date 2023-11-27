@@ -10,10 +10,11 @@ export function SubmitButton() {
     <Button
       type='submit'
       aria-disabled={pending}
+      disabled={pending}
       variant='flat'
       color='primary'
     >
-      Post Review
+      {pending ? 'Sending review' : 'Post Review'}
     </Button>
   );
 }

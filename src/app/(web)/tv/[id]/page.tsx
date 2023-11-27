@@ -22,6 +22,10 @@ import type {
 } from 'root/types';
 import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
 import { Title } from '@/app/components/global-ui';
+import { CommentSection } from '@/app/components/comments';
+import { Section } from '@/app/components/global-ui/section';
+import Link from 'next/link';
+import { Divider } from '@nextui-org/react';
 
 type Props = {
   params: {
@@ -66,34 +70,73 @@ async function TvShowDetails({ params }: Props) {
   };
 
   return (
-    <section className='w-full flex flex-col md:items-center space-y-10 md:space-y-16'>
+    <section className='w-full'>
       <Backdrop src={showDetails.backdrop_path} alt={showDetails.name}>
         <InfoContextProvider info={info} mediaType='tv'>
           <Details />
         </InfoContextProvider>
       </Backdrop>
-      <section className='relative container px-4 md:px-20'>
-        <h2 className='text-4xl py-4 font-bold text-primary-400'>
-          Meet the crew
-        </h2>
-        <Suspense fallback={<p>Loading...</p>}>
-          <Cast promise={credits} />
-        </Suspense>
-      </section>
-      <section className='relative container px-4 md:px-20'>
-        <h2 className='text-4xl font-bold py-4 text-primary-400'>
-          Related Media
-        </h2>
-        <Suspense fallback={<p>Loading...</p>}>
-          <Media videosPromise={videos} imagesPromise={images} />
-        </Suspense>{' '}
-      </section>
-      <section className='relative container px-4 md:px-20'>
-        <Title>Similar</Title>
-        <Suspense fallback={<p>Loading...</p>}>
-          <ServerSimilar promise={similar} type='tv' />
-        </Suspense>
-      </section>
+      <div className='grid xl:grid-cols-12'>
+        <div className='xl:col-span-8'>
+          <Section>
+            <Title>Meet the crew</Title>
+            <Suspense fallback={<p>Loading...</p>}>
+              <Cast promise={credits} />
+            </Suspense>
+          </Section>
+          <Section>
+            <Title>Related Media</Title>
+            <Suspense fallback={<p>Loading...</p>}>
+              <Media videosPromise={videos} imagesPromise={images} />
+            </Suspense>
+          </Section>
+          <Section>
+            <Title>Similar</Title>
+            <Suspense fallback={<p>Loading...</p>}>
+              <ServerSimilar promise={similar} type='tv' />
+            </Suspense>
+          </Section>
+          <Section>
+            <Title>Stay up to date!</Title>
+            <ul className='grid gap-4 w-full'>
+              {showDetails.seasons.map((season) => {
+                if (season.season_number > 0) {
+                  return (
+                    <Link
+                      href={`/tv/${id}/season?number=${season.season_number}`}
+                      key={season.id}
+                      className='p-6 border border-foreground-500/80 rounded-md hover:border-primary transition-all ease-in-out hover:-translate-y-0.5 grid gap-2'
+                    >
+                      <p className='text-2xl font-bold w-fit'>
+                        Season {season.season_number} |{' '}
+                        <span>{season.episode_count} episodes</span>
+                      </p>
+                      <p className='w-fit text-medium'>
+                        <b>{season.name}</b>
+                      </p>
+                      <p>
+                        <i>{season.overview}</i>
+                      </p>
+                    </Link>
+                  );
+                }
+              })}
+            </ul>
+          </Section>
+        </div>
+        <div className='xl:col-span-4'>
+          <Section>
+            <CommentSection
+              mediaItem={{
+                id: info.id,
+                title: info.title,
+                overview: info.overview,
+                poster: info.poster
+              }}
+            />
+          </Section>
+        </div>
+      </div>
     </section>
   );
 }
