@@ -11,7 +11,10 @@ export function GitHubSignButton() {
     await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: 'http://localhost:3000/auth/callback'
+        redirectTo:
+          process.env.NODE_ENV === 'development'
+            ? 'http://localhost:3000/auth/callback'
+            : 'https://movie-paradise-seven.vercel.app/auth/callback'
       }
     });
   };

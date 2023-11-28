@@ -25,14 +25,15 @@ const CardLinkWithDescription = ({ media }: Props) => {
       className='relative w-full max-w-4xl bg-cover bg-center group border border-background max-lg:border-foreground-800 overflow-hidden rounded-md hover:border-primary-400 lg:hover:-translate-y-0.5 transition-all active:scale-95 ease-in-out'
       style={{ backgroundImage: `url(${BASE_URL}w780${backdrop})` }}
     >
-      <div className='absolute top-0 bottom-0 left-o right-0 bg-black transition-opacity ease-in-out z-10 w-full h-full group-hover:opacity-50'></div>
+      <div className='absolute top-0 bottom-0 left-o right-0 bg-background transition-opacity ease-in-out z-10 w-full h-full group-hover:opacity-60'></div>
       <div className='relative grid grid-cols-12 gap-4 z-20 p-4'>
-        <div className='col-span-3 flex place-content-center'>
+        <div className='col-span-3 flex place-content-center h-fit'>
           <Image
             alt={title}
             src={BASE_URL + 'w154' + poster}
             width={154}
             height={231}
+            className=''
           />
         </div>
         <div className='col-span-9 grid gap-2 h-fit'>
