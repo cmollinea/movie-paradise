@@ -2,7 +2,7 @@ import './globals.css';
 import { NavBarUI } from './components/navbar/navbar-ui';
 import { Providers } from './providers';
 import { Toaster } from 'react-hot-toast';
-// import NextTopLoader from 'nextjs-toploader';
+import NextTopLoader from 'nextjs-toploader';
 import type { Metadata } from 'next';
 import { createServerSupabaseCli } from './helpers/create-server-supabase-cli';
 
@@ -30,7 +30,7 @@ export default async function RootLayout({
   return (
     <html lang='en' className='dark'>
       <body className='bg-background'>
-        {/* <NextTopLoader /> */}
+         <NextTopLoader /> 
         <Toaster />
         <Providers>
           <nav className='sticky top-0 bg-default-900/80 backdrop-blur-md z-50'>
