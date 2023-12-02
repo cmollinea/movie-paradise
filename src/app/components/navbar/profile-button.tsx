@@ -23,6 +23,7 @@ export function ProfileButton({ user, userAvatar }: Props) {
     await supabase.auth.signOut();
     router.refresh();
   };
+
   return (
     <NavbarContent as='div' justify='end'>
       <Dropdown placement='bottom-end'>

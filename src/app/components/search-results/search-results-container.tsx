@@ -1,21 +1,18 @@
 'use client';
+import { ActorCard } from '../details';
+import { ApiError } from '@/app/services';
+import { ErrorWithStatus, SomethingWentWrong } from '../error';
+import { Pagination } from '../global-ui/pagination';
+import { Target } from '../search-sidebar/target-button';
+import { useSearchParams } from 'next/navigation';
+import CardLinkWithDescription from '../global-ui/card-link-with-description';
 
-import { useSearchContext } from '@/app/hooks/useSearchContext';
-
-import {
+import type {
   CollectionResponse,
   MovieResponse,
   PeopleResponse,
   TvShowsResponse
 } from 'root/types';
-import { CardLink } from '../home';
-import { ActorCard } from '../details';
-import { ApiError } from '@/app/services';
-import { ErrorWithStatus, SomethingWentWrong } from '../error';
-import { Target } from '../search-sidebar/target-button';
-import { Pagination } from '../global-ui/pagination';
-import { useSearchParams } from 'next/navigation';
-import CardLinkWithDescription from '../global-ui/card-link-with-description';
 
 type Props = {
   data:
@@ -55,20 +52,6 @@ export const SearchResultsContainer = ({ data, type }: Props) => {
     const results = (
       data as MovieResponse | TvShowsResponse | CollectionResponse
     ).results;
-
-    // node = results.map((item) => (
-    //   <CardLink
-    //     type={type}
-    //     imageSizes='poster'
-    //     element={{
-    //       id: item.id,
-    //       name: 'name' in item ? item.name : item.title,
-    //       poster_path: item.poster_path,
-    //       rating: 'vote_average' in item ? item.vote_average : undefined
-    //     }}
-    //     key={item.id}
-    //   />
-    // ));
 
     node = results.map((item) => {
       const media = {

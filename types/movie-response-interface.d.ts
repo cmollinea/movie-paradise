@@ -10,7 +10,7 @@ export interface Movie {
   backdrop_path: string;
   genre_ids: number[];
   id: number;
-  original_language: OriginalLanguage;
+  original_language: string;
   original_title: string;
   overview: string;
   popularity: number;
@@ -20,11 +20,4 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   vote_count: number;
-}
-
-enum OriginalLanguage {
-  En = 'en',
-  Es = 'es',
-  Ko = 'ko',
-  Pt = 'pt'
 }

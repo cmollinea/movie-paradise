@@ -1,11 +1,4 @@
-export interface MovieImages {
-  backdrops: Image[];
-  id: number;
-  logos: Image[];
-  posters: Image[];
-}
-
-interface Image {
+export interface Image {
   aspect_ratio: number;
   height: number;
   iso_639_1: null | string;

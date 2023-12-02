@@ -1,33 +1,15 @@
-import { CollectionResponse } from './collection-response';
-import { Credits } from './movie-credits';
-import { ImageSizes } from './image-sizes';
-import { Info, MediaItem, MediaType } from './info';
-import { MovieDetails } from './movie-details';
-import { MovieImages } from './movie-images';
-import { MovieSimilars } from './movie-similar';
-import { MovieVideos } from './movie-videos';
-import { PeopleResponse } from './people-response';
-import { Providers } from './providers';
-import { TvSHowDetail } from './tv-show-details';
-import { TvShowSimilar } from './tv-shows-similar';
-import { TvShowsResponse } from './tvshows-response-interface';
-import { MovieResponse } from './movie-response-interface';
-
-export type {
-  Credits,
-  CollectionResponse,
-  Info,
-  ImageSizes,
-  MediaItem,
-  MediaType,
-  MovieDetails,
-  MovieImages,
-  MovieSimilars,
-  MovieVideos,
-  MovieResponse,
-  Providers,
-  PeopleResponse,
-  TvSHowDetail,
-  TvShowsResponse,
-  TvShowSimilar
-};
+export * from './collection-response.d';
+export * from './image-sizes.d';
+export * from './image.d';
+export * from './info.d';
+export * from './movie-response-full.d';
+export * from './movie-response-interface.d';
+export * from './movie-similar.d';
+export * from './movie-videos.d';
+export * from './people-response.d';
+export * from './person.d';
+export * from './providers.d';
+export * from './season-response.d';
+export * from './tv-shows-similar.d';
+export * from './tvshows-response-full.d';
+export * from './tvshows-response-interface.d';

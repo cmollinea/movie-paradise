@@ -6,7 +6,7 @@ import Link from 'next/link';
 export function AuthenticationButtons() {
   return (
     <NavbarContent justify='end'>
-      <NavbarItem className='hidden lg:flex'>
+      <NavbarItem>
         <Link href='/sign-in' className='hover:text-secondary-400'>
           Login
         </Link>

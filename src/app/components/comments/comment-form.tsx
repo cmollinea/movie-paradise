@@ -2,11 +2,11 @@
 import { createReview } from '@/app/helpers/createReview';
 import { MediaItem } from 'root/types';
 import { SubmitButton } from './submit-fotm-button';
-import { useFormState } from 'react-dom';
-import toast, { Toaster } from 'react-hot-toast';
-import { useEffect } from 'react';
 import { Title } from '../global-ui';
+import { useCallback, useEffect } from 'react';
+import { useFormState } from 'react-dom';
 import { useRouter } from 'next/navigation';
+import toast, { Toaster } from 'react-hot-toast';
 
 type Props = {
   mediaItem: MediaItem;
@@ -21,6 +21,7 @@ export const CommentForm = ({ mediaItem }: Props) => {
   const hanldeCreateReview = createReview.bind(null, mediaItem);
   const [state, formAction] = useFormState(hanldeCreateReview, initialState);
   const router = useRouter();
+  console.log('form is rendering iam going to throw a toast');
 
   useEffect(() => {
     if (state?.type === 'success') {
@@ -31,10 +32,7 @@ export const CommentForm = ({ mediaItem }: Props) => {
     if (state?.type === 'error') {
       toast.error(state?.message);
     }
-  }, [state]);
-
-  console.log('form is rendering iam going to throw a toast');
-
+  }, [state, router]);
   return (
     <div>
       <Toaster />

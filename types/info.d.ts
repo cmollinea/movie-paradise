@@ -14,4 +14,4 @@ export interface Info extends MediaItem {
   tagline: string;
 }
 
-export type MediaType = 'tv' | 'movies';
+export type MediaType = 'tv' | 'movies' | 'collections' | 'people' | 'season';

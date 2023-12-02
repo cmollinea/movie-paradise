@@ -4,7 +4,6 @@ export * from './badge';
 export * from './cast';
 export * from './image-preview';
 export * from './media-tabs';
-export * from './media';
 export * from './ppal-info';
 export * from './similar-client';
 export * from './similar-server';

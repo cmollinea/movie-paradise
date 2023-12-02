@@ -1,4 +1,6 @@
-export interface Person {
+import type { Image, Department } from '.';
+
+export interface FullPerson {
   adult: boolean;
   alsoKnownAs: string[];
   biography: string;
@@ -20,23 +22,13 @@ interface PersonImage {
   profiles: Image[];
 }
 
-interface Image {
-  aspectRatio: number;
-  height: number;
-  iso639_1: null;
-  filePath: string;
-  voteAverage: number;
-  voteCount: number;
-  width: number;
-}
-
 interface PersonMovieCredits {
-  cast: Cast[];
-  crew: Cast[];
+  cast: FullCast[];
+  crew: FullCast[];
   id: number;
 }
 
-interface Cast {
+interface FullCast {
   adult: boolean;
   backdropPath: null | string;
   genreIDS: number[];
@@ -55,42 +47,5 @@ interface Cast {
   creditID: string;
   order?: number;
   department?: Department;
-  job?: string;
-}
-
-type Department =
-  | 'Camera'
-  | 'Crew'
-  | 'Directing'
-  | 'Editing'
-  | 'Production'
-  | 'Sound'
-  | 'Writing';
-
-interface PersonTVCredits {
-  cast: TVCast[];
-  crew: TVCast[];
-  id: number;
-}
-
-interface TVCast {
-  adult: boolean;
-  backdropPath: null | string;
-  genreIDS: number[];
-  id: number;
-  originCountry: string[];
-  originalLanguage: string;
-  originalName: string;
-  overview: string;
-  popularity: number;
-  posterPath: null | string;
-  firstAirDate: string;
-  name: string;
-  voteAverage: number;
-  voteCount: number;
-  character?: string;
-  creditID: string;
-  episodeCount: number;
-  department?: string;
   job?: string;
 }

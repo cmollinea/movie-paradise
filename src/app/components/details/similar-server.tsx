@@ -1,7 +1,7 @@
-import { MediaType } from 'root/types';
 import { CardContainer, CardLink } from '../home';
-import { MovieSimilar } from 'root/types/movie-response-full';
-import { TvSimilar } from 'root/types/tvshows-response-full';
+import { MediaType } from 'root/types';
+
+import type { MovieSimilar, TvSimilar } from 'root/types';
 
 type Props = {
   similars: MovieSimilar | TvSimilar;

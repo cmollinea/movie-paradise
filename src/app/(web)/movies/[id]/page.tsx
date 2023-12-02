@@ -5,16 +5,15 @@ import {
   ServerSimilar,
   MediaTabs
 } from '@/app/components/details';
-import { queryTMDB } from '@/app/services/queryTMDB';
-import { InfoContextProvider } from '@/app/context';
-import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
-import { Title } from '@/app/components/global-ui';
-import { CommentSection } from '@/app/components/comments/comments-section';
+import { CommentForm, CommentsContainer } from '@/app/components/comments';
 import { getDetailsUrl } from '@/app/helpers/getDetailsUrl';
+import { InfoContextProvider } from '@/app/context';
 import { MovieFullDetails } from 'root/types/movie-response-full';
-import { Suspense } from 'react';
-import { CommentsContainer } from '@/app/components/comments';
+import { queryTMDB } from '@/app/services/queryTMDB';
 import { Section } from '@/app/components/global-ui/section';
+import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
+import { Suspense } from 'react';
+import { Title } from '@/app/components/global-ui';
 
 type Props = {
   params: {
@@ -81,18 +80,17 @@ async function MovieDetails({ params }: Props) {
         </div>
       </div>
       <div className='xl:col-span-4 px-4 py-10 flex flex-col space-y-10'>
-        <CommentSection
+        <Suspense fallback={<p>Loading...</p>}>
+          <CommentsContainer id={id} />
+        </Suspense>
+        <CommentForm
           mediaItem={{
             id: info.id,
             title: info.title,
             overview: info.overview,
             poster: info.poster
           }}
-        >
-          <Suspense fallback={<p>Loading...</p>}>
-            <CommentsContainer id={id} />
-          </Suspense>
-        </CommentSection>
+        />
       </div>
     </section>
   );

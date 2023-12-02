@@ -1,7 +1,8 @@
 import { ActorCard } from '.';
 import { CardContainer } from '../home';
 import { SomethingWentWrong } from '../error';
-import { Credits } from 'root/types/movie-response-full';
+
+import type { Credits } from 'root/types/movie-response-full';
 
 type Props = {
   credits: Credits;

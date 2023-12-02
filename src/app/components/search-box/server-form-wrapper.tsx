@@ -17,5 +17,3 @@ export function ServerFormWrapper({ backgroundPath }: Props) {
     </section>
   );
 }
-
-//TODO Buscar una peli aleatoria, traer su backdrop y ponerlo de fondo ==> Renderizar el form

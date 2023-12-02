@@ -1,5 +1,4 @@
 'use client';
-import { CardContainer } from '../home';
 import { Card, Image } from '@nextui-org/react';
 import { BASE_URL } from '@/app/constants/image-url';
 

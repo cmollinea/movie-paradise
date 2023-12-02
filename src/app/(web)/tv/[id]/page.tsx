@@ -1,27 +1,21 @@
 import {
-  TV_SHOWS_ENDPOINTS,
-  TV_SHOWS_DETAILS_SLUGS
-} from '@/app/constants/api-endpoints';
-import {
   Backdrop,
   Cast,
   Details,
   MediaTabs,
   ServerSimilar
 } from '@/app/components/details';
-import { queryTMDB } from '@/app/services/queryTMDB';
-import { Suspense } from 'react';
-import { InfoContextProvider } from '@/app/context';
-import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
-import { Title } from '@/app/components/global-ui';
-import { CommentSection, CommentsContainer } from '@/app/components/comments';
-import { Section } from '@/app/components/global-ui/section';
-import Link from 'next/link';
+import { CommentForm, CommentsContainer } from '@/app/components/comments';
 import { getDetailsUrl } from '@/app/helpers/getDetailsUrl';
+import { InfoContextProvider } from '@/app/context';
+import { queryTMDB } from '@/app/services/queryTMDB';
+import { Section } from '@/app/components/global-ui/section';
+import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
+import { Suspense } from 'react';
+import { Title } from '@/app/components/global-ui';
 import { TvShowFullDetails } from 'root/types/tvshows-response-full';
-import { Image } from '@nextui-org/react';
-import { BASE_URL } from '@/app/constants/image-url';
 import CardLinkWithDescription from '@/app/components/global-ui/card-link-with-description';
+import { MediaType } from 'root/types';
 
 type Props = {
   params: {
@@ -94,14 +88,14 @@ async function TvShowDetails({ params }: Props) {
             <ul className='w-fit grid gap-6 max-w-[95vw]'>
               {showDetails.seasons.map((season) => {
                 if (season.season_number > 0) {
-                  const media = Object.freeze({
+                  const media = {
                     description: season.overview,
-                    mediaType: 'season',
+                    mediaType: 'season' as MediaType,
                     poster: season.poster_path,
                     title: season.name,
                     seasonLink: `/tv/${id}/season?number=${season.season_number}`,
                     seasonNumber: `Season: ${season.season_number} | ${season.episode_count} episodes`
-                  });
+                  };
                   return (
                     <CardLinkWithDescription key={season.id} media={media} />
                   );
@@ -111,18 +105,17 @@ async function TvShowDetails({ params }: Props) {
           </Section>
         </div>
         <div className='xl:col-span-4 px-4 py-10 flex flex-col space-y-10'>
-          <CommentSection
+          <Suspense fallback={<p>Loading...</p>}>
+            <CommentsContainer id={id} />
+          </Suspense>
+          <CommentForm
             mediaItem={{
               id: info.id,
               title: info.title,
               overview: info.overview,
               poster: info.poster
             }}
-          >
-            <Suspense fallback={<p>Loading...</p>}>
-              <CommentsContainer id={id} />
-            </Suspense>
-          </CommentSection>
+          />
         </div>
       </div>
     </section>

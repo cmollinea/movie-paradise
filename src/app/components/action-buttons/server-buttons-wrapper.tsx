@@ -1,5 +1,5 @@
-import { createClienSupabaseCli } from '@/app/helpers/create-client-supabase-cli';
 import { ActionButtons } from './';
+import { createClienSupabaseCli } from '@/app/helpers/create-client-supabase-cli';
 
 export async function ServerButtonsWraper() {
   const supabase = createClienSupabaseCli();

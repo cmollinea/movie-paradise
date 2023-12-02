@@ -1,16 +1,10 @@
-import { ErrorWithStatus, SomethingWentWrong } from '@/app/components/error';
-import { Title } from '@/app/components/global-ui';
 import { BASE_URL } from '@/app/constants/image-url';
+import { Card, CardBody, CardHeader, Image } from '@nextui-org/react';
+import { ErrorWithStatus, SomethingWentWrong } from '@/app/components/error';
 import { getSeasonUrl } from '@/app/helpers/getSeasonUrl';
 import { queryTMDB } from '@/app/services';
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Image
-} from '@nextui-org/react';
 import { SeasonResponse } from 'root/types/season-response';
+import { Title } from '@/app/components/global-ui';
 
 type Props = {
   params: {

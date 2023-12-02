@@ -1,3 +1,5 @@
+import type { MediaType } from '.';
+
 export interface PeopleResponse {
   page: number;
   results: Person[];
@@ -22,7 +24,7 @@ interface KnownFor {
   backdrop_path: null | string;
   id: number;
   title?: string;
-  original_language: OriginalLanguage;
+  original_language: string;
   original_title?: string;
   overview: string;
   poster_path: null | string;
@@ -36,13 +38,7 @@ interface KnownFor {
   name?: string;
   original_name?: string;
   first_air_date?: Date;
-  origin_country?: OriginCountry[];
+  origin_country?: string[];
 }
-
-type MediaType = 'movie' | 'tv';
-
-type OriginCountry = 'US' | 'CA';
-
-type OriginalLanguage = 'en';
 
 type KnownForDepartment = 'Acting' | 'Directing' | 'Writing' | 'Production';

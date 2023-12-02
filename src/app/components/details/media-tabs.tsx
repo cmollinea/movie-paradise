@@ -1,9 +1,10 @@
 'use client';
-import { VideoPlayer } from '.';
+import { CardContainer, ImageContainer } from '../home';
 import { Tabs, Tab } from '@nextui-org/react';
 import { useState } from 'react';
-import { CardContainer, ImageContainer } from '../home';
-import { Images, Videos } from 'root/types/movie-response-full';
+import { VideoPlayer } from '.';
+
+import type { Images, Videos } from 'root/types';
 
 type Props = {
   images: Images;

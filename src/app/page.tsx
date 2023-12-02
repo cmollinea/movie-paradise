@@ -9,8 +9,6 @@ import { ServerFormWrapper } from './components/search-box';
 
 //todo Cambiar on air por trending y ademas ponerlo de principal
 
-export const dynamic = 'force-dynamic';
-
 export default async function Home() {
   const topRatedTvShowsResponse = await queryTMDB<TvShowsResponse>(
     TV_SHOWS_ENDPOINTS.TOP_RATED
@@ -27,9 +25,24 @@ export default async function Home() {
     MOVIES_ENPOINTS.TOP_RATED
   );
 
+  let formBackground = [''];
+
+  if (
+    topRatedTvShowsResponse !== undefined &&
+    !('statusText' in topRatedTvShowsResponse)
+  ) {
+    const backdropArray = topRatedTvShowsResponse.results.map(
+      (item) => item.backdrop_path
+    );
+    formBackground = backdropArray.filter((item) => item !== null) as string[];
+  }
+
+  const backdropIndex = Math.floor(Math.random() * (formBackground.length - 1));
+  console.log(backdropIndex, 'Backdrop Index');
+
   return (
     <>
-      <ServerFormWrapper backgroundPath='' />
+      <ServerFormWrapper backgroundPath={formBackground[backdropIndex]} />
       <section className='overflow-hidden container px-4 lg:px-20 py-10 relative space-y-5'>
         <Title>Top Rated Tv Shows</Title>
         <TvShowsContainer promise={topRatedTvShowsResponse} />

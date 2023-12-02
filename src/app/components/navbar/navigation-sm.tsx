@@ -3,16 +3,12 @@
 import { NavbarMenu, NavbarMenuItem, Link } from '@nextui-org/react';
 
 const menuItems = [
-  'Profile',
-  'Dashboard',
-  'Activity',
-  'Analytics',
-  'System',
-  'Deployments',
-  'My Settings',
-  'Team Settings',
-  'Help & Feedback',
-  'Log Out'
+  { label: 'Movies', href: '/movies' },
+  { label: 'Tv', href: '/tv' },
+  { label: 'Collections', href: '/collections' },
+  { label: 'People', href: '/people' },
+  { label: 'Profile', href: '/profile' },
+  { label: 'LogOut', href: '/logout' }
 ];
 
 export function NavigationSmallScreen() {
@@ -29,10 +25,10 @@ export function NavigationSmallScreen() {
                 : 'foreground'
             }
             className='w-full'
-            href='#'
+            href={item.href}
             size='lg'
           >
-            {item}
+            {item.label}
           </Link>
         </NavbarMenuItem>
       ))}

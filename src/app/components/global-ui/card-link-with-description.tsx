@@ -2,13 +2,14 @@ import { BASE_URL } from '@/app/constants/image-url';
 import { Image } from '@nextui-org/react';
 import { Star } from 'lucide-react';
 import Link from 'next/link';
+import type { MediaType } from 'root/types';
 
 type Props = {
   media: {
     backdrop?: string | null;
     description: string;
     id?: number;
-    mediaType: 'tv' | 'movies' | 'collections' | 'season';
+    mediaType: MediaType;
     poster: string;
     rating?: number;
     title: string;
@@ -38,7 +39,11 @@ const CardLinkWithDescription = ({ media }: Props) => {
         backdrop ? { backgroundImage: `url(${BASE_URL}w780${backdrop})` } : {}
       }
     >
-      <div className='absolute top-0 bottom-0 left-o right-0 bg-background transition-opacity ease-in-out z-10 w-full h-full group-hover:opacity-60'></div>
+      <div
+        className={`absolute top-0 bottom-0 left-o right-0 bg-background ${
+          backdrop && 'transition-opacity ease-in-out group-hover:opacity-60'
+        }  z-10 w-full h-full`}
+      ></div>
       <div className='relative grid grid-cols-12 gap-4 z-20 p-4'>
         <div className='col-span-3 flex place-content-center h-fit'>
           <Image

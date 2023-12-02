@@ -1,6 +1,5 @@
-import { createServerSupabaseCli } from '@/app/helpers/create-server-supabase-cli';
 import { CommentCard } from './comment-card';
-import { Title } from '../global-ui';
+import { createServerSupabaseCli } from '@/app/helpers/create-server-supabase-cli';
 import { MessageSquare } from 'lucide-react';
 
 type Props = {
@@ -14,13 +13,8 @@ export const CommentsContainer = async ({ id }: Props) => {
     .select(`id, created_at, content, users (id, user_name, avatar_url)`)
     .eq(`media_id`, parseInt(id));
 
-  if (error) {
-    console.log(error);
-  }
+  //todo handling error and no comments
 
-  if (data) {
-    console.log(data);
-  }
   return (
     <div className='py-10 grid gap-2'>
       <h2 className='flex items-center text-lg gap-2 text-primary-500'>

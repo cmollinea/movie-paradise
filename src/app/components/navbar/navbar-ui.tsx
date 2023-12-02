@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Navbar } from '@nextui-org/react';
-import type { Session } from '@supabase/supabase-js';
 import {
   Logo,
   Navigation,
@@ -10,6 +8,9 @@ import {
   NavigationSmallScreen,
   ProfileButton
 } from './';
+import { Navbar } from '@nextui-org/react';
+
+import type { Session } from '@supabase/supabase-js';
 
 type Props = {
   session: Session | null;

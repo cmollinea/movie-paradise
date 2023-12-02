@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import { CardFooter } from '@nextui-org/react';
-import { Star } from 'lucide-react';
 import { ImageContainer } from '.';
-import { ImageSizes } from 'root/types';
+import { ImageSizes, MediaType } from 'root/types';
+import { Star } from 'lucide-react';
+import Link from 'next/link';
 
 type Props = {
   element: {
@@ -11,7 +11,7 @@ type Props = {
     rating?: number;
     poster_path: string | null;
   };
-  type: 'tv' | 'movies' | 'collections';
+  type: MediaType;
   imageSizes: ImageSizes;
 };
 

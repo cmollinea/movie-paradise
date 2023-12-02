@@ -3,11 +3,10 @@ import { BASE_URL } from '@/app/constants/image-url';
 
 type Props = {
   src: string;
-  alt: string;
   children: React.ReactNode;
 };
 
-export function Backdrop({ src, alt, children }: Props) {
+export function Backdrop({ src, children }: Props) {
   return (
     <section
       className='w-full relative grid overflow-hidden px-4 md:justify-center bg-cover bg-top xl:h-[600px] max-md:min-h-screen'
