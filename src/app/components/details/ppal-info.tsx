@@ -26,7 +26,9 @@ export function Details() {
 
       <div className='xl:col-span-9 xl:col-start-4 max-md:mt-8'>
         <Progress value={info?.rating} />
-        <h1 className='mt-2 text-3xl md:text-5xl font-black'>{info?.title}</h1>
+        <h1 className='mt-2 text-3xl md:text-5xl font-black md:max-w-2xl'>
+          {info?.title}
+        </h1>
         <small>
           <em>{`"${info?.tagline}"`}</em>
         </small>

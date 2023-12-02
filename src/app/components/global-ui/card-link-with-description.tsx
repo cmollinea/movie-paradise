@@ -5,25 +5,38 @@ import Link from 'next/link';
 
 type Props = {
   media: {
-    backdrop: string | null;
+    backdrop?: string | null;
     description: string;
-    id: number;
-    mediaType: 'tv' | 'movies' | 'collections';
+    id?: number;
+    mediaType: 'tv' | 'movies' | 'collections' | 'season';
     poster: string;
-    rating: number;
+    rating?: number;
     title: string;
+    seasonLink?: string;
+    seasonNumber?: string;
   };
 };
 const CardLinkWithDescription = ({ media }: Props) => {
-  const { backdrop, description, id, mediaType, poster, rating, title } = media;
+  const {
+    backdrop,
+    description,
+    id,
+    mediaType,
+    poster,
+    rating,
+    title,
+    seasonLink
+  } = media;
 
   return (
     <Link
       prefetch={false}
       title={title}
-      href={`/${mediaType}/${id}`}
-      className='relative w-full max-w-4xl bg-cover bg-center group border border-background max-lg:border-foreground-800 overflow-hidden rounded-md hover:border-primary-400 lg:hover:-translate-y-0.5 transition-all active:scale-95 ease-in-out'
-      style={{ backgroundImage: `url(${BASE_URL}w780${backdrop})` }}
+      href={seasonLink ? seasonLink : id ? `/${mediaType}/${id}` : '/'}
+      className='relative w-full max-w-4xl bg-cover bg-center group border border-background max-lg:border-foreground-800 overflow-hidden rounded-md hover:border-primary-400 lg:hover:-translate-y-0.5 transition-all active:scale-[0.99] ease-in-out'
+      style={
+        backdrop ? { backgroundImage: `url(${BASE_URL}w780${backdrop})` } : {}
+      }
     >
       <div className='absolute top-0 bottom-0 left-o right-0 bg-background transition-opacity ease-in-out z-10 w-full h-full group-hover:opacity-60'></div>
       <div className='relative grid grid-cols-12 gap-4 z-20 p-4'>
@@ -40,10 +53,12 @@ const CardLinkWithDescription = ({ media }: Props) => {
           <p className='text-xl lg:text-3xl truncate'>
             <b>{title}</b>
           </p>
-          <span className='flex space-x-0.5 items-center md:text-2xl font-extrabold'>
-            <Star className=' fill-primary-400 stroke-primary-400 h-4 w-4 md:h-6 md:w-6' />
-            {rating && <span>{rating.toFixed(1)}</span>}
-          </span>
+          {rating && (
+            <span className='flex space-x-0.5 items-center md:text-2xl font-extrabold'>
+              <Star className=' fill-primary-400 stroke-primary-400 h-4 w-4 md:h-6 md:w-6' />
+              {rating && <span>{rating.toFixed(1)}</span>}
+            </span>
+          )}
           <p className='max-lg:text-xs'>
             <i>{description}</i>
           </p>

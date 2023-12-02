@@ -2,26 +2,19 @@ import {
   Backdrop,
   Details,
   Cast,
-  Media,
-  ServerSimilar
+  ServerSimilar,
+  MediaTabs
 } from '@/app/components/details';
 import { queryTMDB } from '@/app/services/queryTMDB';
-import {
-  MOVIES_ENPOINTS,
-  MOVIE_DETAILS_SLUGS
-} from '@/app/constants/api-endpoints';
-
-import type {
-  MovieImages,
-  MovieVideos,
-  Credits,
-  MovieDetails,
-  MovieSimilars
-} from 'root/types';
 import { InfoContextProvider } from '@/app/context';
 import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
 import { Title } from '@/app/components/global-ui';
 import { CommentSection } from '@/app/components/comments/comments-section';
+import { getDetailsUrl } from '@/app/helpers/getDetailsUrl';
+import { MovieFullDetails } from 'root/types/movie-response-full';
+import { Suspense } from 'react';
+import { CommentsContainer } from '@/app/components/comments';
+import { Section } from '@/app/components/global-ui/section';
 
 type Props = {
   params: {
@@ -31,17 +24,8 @@ type Props = {
 
 async function MovieDetails({ params }: Props) {
   const id = params.id;
-
-  const DETAILS_URL = MOVIES_ENPOINTS.DETAILS + id.toString();
-
-  const { CAST, IMAGES, VIDEOS, SIMILAR } = MOVIE_DETAILS_SLUGS;
-
-  const movieDetails = await queryTMDB<MovieDetails>(DETAILS_URL);
-  const credits = queryTMDB<Credits>(DETAILS_URL + '/' + CAST);
-  const images = queryTMDB<MovieImages>(DETAILS_URL + IMAGES);
-  // const providers = queryTMDB<Providers>(DETAILS_URL + PROVIDERS);
-  const similar = queryTMDB<MovieSimilars>(DETAILS_URL + SIMILAR);
-  const videos = queryTMDB<MovieVideos>(DETAILS_URL + VIDEOS);
+  const DETAILS_URL = getDetailsUrl(id, 'movie');
+  const movieDetails = await queryTMDB<MovieFullDetails>(DETAILS_URL);
 
   if (movieDetails === undefined) {
     return <SomethingWentWrong />;
@@ -74,33 +58,41 @@ async function MovieDetails({ params }: Props) {
           <Details />
         </InfoContextProvider>
       </Backdrop>
-      <div className=' grid xl:grid-cols-12'>
-        <div className='xl:col-span-8'>
-          <section className='relative container py-10 px-4 md:px-20'>
+      <div className=' grid gap-4 xl:grid-cols-12'>
+        <div className='xl:col-span-12'>
+          <Section>
+            {' '}
             <Title>Meet the crew</Title>
-            <Cast promise={credits} />
-          </section>
-          <section className='relative container py-10 px-4 md:px-20'>
+            <Cast credits={movieDetails.credits} />
+          </Section>
+          <Section>
+            {' '}
             <Title>Related Media</Title>
-            <Media videosPromise={videos} imagesPromise={images} />
-          </section>
-          <section className='relative container py-10 px-4 md:px-20'>
-            <Title>Similar</Title>
-            <ServerSimilar promise={similar} type='movies' />
-          </section>
-        </div>
-        <div className='xl:col-span-4'>
-          <section className='relative container py-10 px-4 md:px-20'>
-            <CommentSection
-              mediaItem={{
-                id: info.id,
-                title: info.title,
-                overview: info.overview,
-                poster: info.poster
-              }}
+            <MediaTabs
+              images={movieDetails.images}
+              videos={movieDetails.videos}
             />
-          </section>
+          </Section>
+          <Section>
+            {' '}
+            <Title>Similar</Title>
+            <ServerSimilar similars={movieDetails.similar} type='movies' />
+          </Section>
         </div>
+      </div>
+      <div className='xl:col-span-4 px-4 py-10 flex flex-col space-y-10'>
+        <CommentSection
+          mediaItem={{
+            id: info.id,
+            title: info.title,
+            overview: info.overview,
+            poster: info.poster
+          }}
+        >
+          <Suspense fallback={<p>Loading...</p>}>
+            <CommentsContainer id={id} />
+          </Suspense>
+        </CommentSection>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import { ErrorWithStatus, SomethingWentWrong } from '@/app/components/error';
+import { Title } from '@/app/components/global-ui';
 import { BASE_URL } from '@/app/constants/image-url';
 import { getSeasonUrl } from '@/app/helpers/getSeasonUrl';
 import { queryTMDB } from '@/app/services';
@@ -27,6 +28,7 @@ async function Season({ searchParams, params }: Props) {
   const url = getSeasonUrl(showId, seasonNumber);
 
   const seasonData = await queryTMDB<SeasonResponse>(url);
+  console.log(seasonData);
 
   if (seasonData === undefined) {
     return <SomethingWentWrong />;
@@ -42,22 +44,32 @@ async function Season({ searchParams, params }: Props) {
   }
 
   return (
-    <section className='px-20 py-16'>
+    <section className='px-4 ld:px-20 py-10'>
       <div className='grid gap-1 font-bold mb-10'>
-        <h1 className='text-3xl'>
+        <Title>
           Season {seasonData.season_number}
           {seasonData.name.includes(`Season: ${seasonData.season_number}`)
             ? `: ${seasonData.name}`
             : ''}
-        </h1>
-        <p>Air date: {seasonData.air_date.toLocaleString()}</p>
-        <p>Total Episodes: {seasonData.episodes.length}</p>
+        </Title>
+
+        <p>
+          <span className='opacity-50 font-light'>Air date:</span>{' '}
+          {seasonData.air_date ? seasonData.air_date.toLocaleString() : '-'}
+        </p>
+        <p>
+          <span className='opacity-50 font-light'>Total Episodes:</span>{' '}
+          {seasonData.episodes.length}
+        </p>
       </div>
       <div className='grid lg:grid-cols-2 gap-4 w-full'>
         {seasonData.episodes.map((episode) => (
           // todo crear un componente episode-card
 
-          <Card className='max-w-lg w-full grid grid-cols-6' key={episode.id}>
+          <Card
+            className='max-w-lg w-full grid grid-cols-6 bg-neutral-100/10 backdrop-blur-md'
+            key={episode.id}
+          >
             <CardHeader className='col-span-2'>
               <Image
                 width={185}

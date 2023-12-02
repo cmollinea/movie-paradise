@@ -32,8 +32,9 @@ export function CardContainer({ children }: Props) {
   return (
     <div
       ref={containerRef}
-      className='w-full p-1 py-4 inline-flex gap-10 overflow-x-auto max-sm:snap-x scroll-smooth horizontal-scrollbar'
+      className='w-full p-1 py-4 inline-flex gap-6 overflow-x-auto md:px-4 max-sm:snap-x scroll-smooth horizontal-scrollbar'
     >
+      {children}
       <button
         className={`absolute active:scale-95 transition-all ease-in hover:bg-neutral-200/20 bg-neutral-200/10 rounded-full flex items-center place-content-center top-1/2 max-md:hidden p-1 left-4 ${
           hasOverflow ? '' : 'hidden'
@@ -42,7 +43,6 @@ export function CardContainer({ children }: Props) {
       >
         <ChevronLeftIcon size={24} />
       </button>
-      {children}
       <button
         className={`absolute active:scale-95 transition-all ease-in hover:bg-neutral-200/20 bg-neutral-200/10 rounded-full flex items-center place-content-center top-1/2 max-md:hidden p-1 right-4 ${
           hasOverflow ? '' : 'hidden'

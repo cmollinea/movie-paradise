@@ -1,28 +1,15 @@
 import { ActorCard } from '.';
-import { ApiError } from '@/app/services/queryTMDB';
 import { CardContainer } from '../home';
-import { SomethingWentWrong, ErrorWithStatus } from '../error';
-
-import type { Credits } from 'root/types';
+import { SomethingWentWrong } from '../error';
+import { Credits } from 'root/types/movie-response-full';
 
 type Props = {
-  promise: Promise<Credits | ApiError | undefined>;
+  credits: Credits;
 };
 
-export async function Cast({ promise }: Props) {
-  const credits = await promise;
-
+export async function Cast({ credits }: Props) {
   if (credits === undefined) {
     return <SomethingWentWrong />;
-  }
-
-  if ('statusText' in credits) {
-    return (
-      <ErrorWithStatus
-        status={credits.status}
-        statusText={credits.statusText}
-      />
-    );
   }
 
   return (

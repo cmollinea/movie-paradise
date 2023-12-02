@@ -30,7 +30,7 @@ export default async function RootLayout({
   return (
     <html lang='en' className='dark'>
       <body className='bg-background'>
-         <NextTopLoader /> 
+        {/* <NextTopLoader />  */}
         <Toaster />
         <Providers>
           <nav className='sticky top-0 bg-default-900/80 backdrop-blur-md z-50'>

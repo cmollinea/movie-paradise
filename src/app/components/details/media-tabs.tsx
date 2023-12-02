@@ -3,12 +3,11 @@ import { VideoPlayer } from '.';
 import { Tabs, Tab } from '@nextui-org/react';
 import { useState } from 'react';
 import { CardContainer, ImageContainer } from '../home';
-
-import type { MovieImages, MovieVideos } from 'root/types';
+import { Images, Videos } from 'root/types/movie-response-full';
 
 type Props = {
-  images: MovieImages;
-  videos: MovieVideos;
+  images: Images;
+  videos: Videos;
 };
 
 export function MediaTabs({ images, videos }: Props) {
@@ -17,14 +16,15 @@ export function MediaTabs({ images, videos }: Props) {
   return (
     <div>
       <Tabs
-        variant='underlined'
+        color='primary'
+        variant='light'
         aria-label='Options'
         selectedKey={selected}
         // @ts-expect-error
         onSelectionChange={setSelected}
         className='relative'
       >
-        <Tab key='images' title='Images'>
+        <Tab key='images' title='Images' className=''>
           <div className=''>
             <CardContainer>
               {images.backdrops.map((image) => (

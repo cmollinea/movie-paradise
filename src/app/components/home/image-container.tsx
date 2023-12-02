@@ -27,7 +27,7 @@ export function ImageContainer({ image, imageSizes, children }: Props) {
           imageSizes === 'backdrop'
             ? 'max-md:max-w-[200px]'
             : 'max-md:max-w-[120px]'
-        }`}
+        } h-full`}
       />
       {children}
     </Card>

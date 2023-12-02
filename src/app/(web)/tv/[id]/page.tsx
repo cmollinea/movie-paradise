@@ -6,26 +6,22 @@ import {
   Backdrop,
   Cast,
   Details,
-  Media,
+  MediaTabs,
   ServerSimilar
 } from '@/app/components/details';
 import { queryTMDB } from '@/app/services/queryTMDB';
 import { Suspense } from 'react';
 import { InfoContextProvider } from '@/app/context';
-
-import type {
-  Credits,
-  MovieImages,
-  MovieVideos,
-  TvSHowDetail,
-  TvShowSimilar
-} from 'root/types';
 import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
 import { Title } from '@/app/components/global-ui';
-import { CommentSection } from '@/app/components/comments';
+import { CommentSection, CommentsContainer } from '@/app/components/comments';
 import { Section } from '@/app/components/global-ui/section';
 import Link from 'next/link';
-import { Divider } from '@nextui-org/react';
+import { getDetailsUrl } from '@/app/helpers/getDetailsUrl';
+import { TvShowFullDetails } from 'root/types/tvshows-response-full';
+import { Image } from '@nextui-org/react';
+import { BASE_URL } from '@/app/constants/image-url';
+import CardLinkWithDescription from '@/app/components/global-ui/card-link-with-description';
 
 type Props = {
   params: {
@@ -35,15 +31,8 @@ type Props = {
 
 async function TvShowDetails({ params }: Props) {
   const id = params.id;
-  const DETAILS_URL = TV_SHOWS_ENDPOINTS.DETAILS + id;
-  const { CAST, IMAGES, VIDEOS, SIMILAR } = TV_SHOWS_DETAILS_SLUGS;
-
-  const showDetails = await queryTMDB<TvSHowDetail>(DETAILS_URL);
-  const credits = queryTMDB<Credits>(DETAILS_URL + '/' + CAST);
-  const images = queryTMDB<MovieImages>(DETAILS_URL + IMAGES);
-  // const providers = queryTMDB<Providers>(DETAILS_URL + PROVIDERS);
-  const similar = queryTMDB<TvShowSimilar>(DETAILS_URL + SIMILAR);
-  const videos = queryTMDB<MovieVideos>(DETAILS_URL + VIDEOS);
+  const DETAILS_URL = getDetailsUrl(id, 'tv');
+  const showDetails = await queryTMDB<TvShowFullDetails>(DETAILS_URL);
 
   if (showDetails === undefined) {
     return <SomethingWentWrong />;
@@ -81,60 +70,59 @@ async function TvShowDetails({ params }: Props) {
           <Section>
             <Title>Meet the crew</Title>
             <Suspense fallback={<p>Loading...</p>}>
-              <Cast promise={credits} />
+              <Cast credits={showDetails.credits} />
             </Suspense>
           </Section>
           <Section>
             <Title>Related Media</Title>
             <Suspense fallback={<p>Loading...</p>}>
-              <Media videosPromise={videos} imagesPromise={images} />
+              <MediaTabs
+                videos={showDetails.videos}
+                images={showDetails.images}
+              />
             </Suspense>
           </Section>
           <Section>
             <Title>Similar</Title>
             <Suspense fallback={<p>Loading...</p>}>
-              <ServerSimilar promise={similar} type='tv' />
+              <ServerSimilar similars={showDetails.similar} type='tv' />
             </Suspense>
           </Section>
+
           <Section>
             <Title>Stay up to date!</Title>
-            <ul className='grid gap-4 w-full max-md:max-w-sm'>
+            <ul className='w-fit grid gap-6 max-w-[95vw]'>
               {showDetails.seasons.map((season) => {
                 if (season.season_number > 0) {
+                  const media = Object.freeze({
+                    description: season.overview,
+                    mediaType: 'season',
+                    poster: season.poster_path,
+                    title: season.name,
+                    seasonLink: `/tv/${id}/season?number=${season.season_number}`,
+                    seasonNumber: `Season: ${season.season_number} | ${season.episode_count} episodes`
+                  });
                   return (
-                    <Link
-                      href={`/tv/${id}/season?number=${season.season_number}`}
-                      key={season.id}
-                      className='p-6 border border-foreground-500/80 rounded-md hover:border-primary transition-all ease-in-out hover:-translate-y-0.5 grid gap-2'
-                    >
-                      <p className='text-2xl font-bold w-fit'>
-                        Season {season.season_number} |{' '}
-                        <span>{season.episode_count} episodes</span>
-                      </p>
-                      <p className='w-fit text-medium'>
-                        <b>{season.name}</b>
-                      </p>
-                      <p>
-                        <i>{season.overview}</i>
-                      </p>
-                    </Link>
+                    <CardLinkWithDescription key={season.id} media={media} />
                   );
                 }
               })}
             </ul>
           </Section>
         </div>
-        <div className='xl:col-span-4'>
-          <Section>
-            <CommentSection
-              mediaItem={{
-                id: info.id,
-                title: info.title,
-                overview: info.overview,
-                poster: info.poster
-              }}
-            />
-          </Section>
+        <div className='xl:col-span-4 px-4 py-10 flex flex-col space-y-10'>
+          <CommentSection
+            mediaItem={{
+              id: info.id,
+              title: info.title,
+              overview: info.overview,
+              poster: info.poster
+            }}
+          >
+            <Suspense fallback={<p>Loading...</p>}>
+              <CommentsContainer id={id} />
+            </Suspense>
+          </CommentSection>
         </div>
       </div>
     </section>

@@ -1,29 +1,14 @@
-import { MediaType, MovieSimilars, TvShowSimilar } from 'root/types';
-import { ErrorWithStatus, SomethingWentWrong } from '../error';
-import { ApiError } from '@/app/services/queryTMDB';
+import { MediaType } from 'root/types';
 import { CardContainer, CardLink } from '../home';
+import { MovieSimilar } from 'root/types/movie-response-full';
+import { TvSimilar } from 'root/types/tvshows-response-full';
 
 type Props = {
-  promise: Promise<ApiError | MovieSimilars | TvShowSimilar | undefined>;
+  similars: MovieSimilar | TvSimilar;
   type: MediaType;
 };
 
-export async function ServerSimilar({ promise, type }: Props) {
-  const similars = await promise;
-
-  if (similars === undefined) {
-    return <SomethingWentWrong />;
-  }
-
-  if ('status' in similars) {
-    return (
-      <ErrorWithStatus
-        status={similars.status}
-        statusText={similars.statusText}
-      />
-    );
-  }
-
+export async function ServerSimilar({ similars, type }: Props) {
   return (
     <CardContainer>
       {similars.results.map((item) => {
