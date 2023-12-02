@@ -12,9 +12,7 @@ export function GitHubSignButton() {
       provider: 'github',
       options: {
         redirectTo:
-          process.env.NODE_ENV === 'development'
-            ? 'http://localhost:3000/auth/callback'
-            : 'https://movie-paradise-seven.vercel.app/auth/callback'
+           'https://movie-paradise-seven.vercel.app/auth/callback'
       }
     });
   };
