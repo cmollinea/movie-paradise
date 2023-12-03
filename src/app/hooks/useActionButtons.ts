@@ -1,4 +1,3 @@
-import { Session } from '@supabase/supabase-js';
 import { useInfoContext } from './useInfoContext';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -7,17 +6,12 @@ import { createClienSupabaseCli } from '../helpers/create-client-supabase-cli';
 type Tables = 'watch_list' | 'favs';
 
 /**
- * Custom hook for managing user action buttons.
+ * Custom hook to manage user actions on media items.
+ * Provides functionality to add media items to user's watch list or favorites.
  *
- * @param {Session | null} session - The current user session.
- * @returns {Object} - An object with a function `addMedia` for adding media to a specified table.
- *
- * @example
- * const { addMedia } = useActionButtons(session);
- * addMedia('watch_list');
+ * @returns {Object} - An object containing the addMedia function.
  */
-
-export function useActionButtons(session: Session | null) {
+export function useActionButtons() {
   const supabase = createClienSupabaseCli();
   const router = useRouter();
   const {
@@ -27,9 +21,21 @@ export function useActionButtons(session: Session | null) {
     }
   } = useInfoContext();
 
-  // Esta funcion me crea un record del elemento en la tabla media
+  /**
+   * Function to create a record of the element in the media table.
+   *
+   * @throws Will throw an error if the user is not authenticated or if there's an error in the upsert operation.
+   */
   const upsertToMedia = async () => {
     try {
+      const {
+        data: { session }
+      } = await supabase.auth.getSession();
+
+      if (!session) {
+        router.push('/sign-in');
+        return;
+      }
       const { error: mediaError } = await supabase
         .from('media')
         .upsert(
@@ -38,18 +44,26 @@ export function useActionButtons(session: Session | null) {
         );
 
       if (mediaError) {
-        throw new Error('There was an error while we were working');
+        console.log(mediaError);
+
+        throw new Error(mediaError.details);
       }
     } catch (err: any) {
       return { error: err.message };
     }
   };
 
-  // Esta funcion me inserta un nuevo record en la tabla que reciba como argumento
-  const insertToTable = async (table: Tables) => {
+  /**
+   * Function to insert a new record in the table that it receives as an argument.
+   *
+   * @param {Tables} table - The user table to add the media item to. Can be 'watch_list' or 'favs'.
+   * @param {string} user_id - The ID of the user.
+   * @throws Will throw an error if there's an error in the insert operation.
+   */
+  const insertToTable = async (table: Tables, user_id: string) => {
     try {
       const mediaItem = {
-        user_id: session?.user.id,
+        user_id: user_id,
         movie_id: id.toString()
       };
 
@@ -58,26 +72,44 @@ export function useActionButtons(session: Session | null) {
         .insert(mediaItem);
 
       if (watchListError) {
-        throw new Error('There was an error while we were working');
+        console.log(watchListError);
+
+        throw new Error(watchListError.details);
       }
     } catch (err: any) {
       return { error: err.message };
     }
   };
 
-  // Esta funcion es la que cada boton usara para manejar ;adir items a las listas de usuario
+  /**
+   * Function to add a media item to a specified user table (watch list or favorites).
+   * It first checks if the user is authenticated, then upserts the media item to the media table,
+   * and finally inserts the media item to the specified user table.
+   *
+   * @param {Tables} table - The user table to add the media item to. Can be 'watch_list' or 'favs'.
+   * @throws Will throw an error if the user is not authenticated or if there's an error in the upsert/insert operations.
+   */
   const addMedia = async (table: Tables) => {
-    if (!session) {
-      router.push('/sign-in');
-      return;
-    }
     try {
+      const {
+        data: { session }
+      } = await supabase.auth.getSession();
+
+      if (!session) {
+        router.push('/sign-in');
+        return;
+      }
+
       const upsertErr = await upsertToMedia();
       if (upsertErr !== undefined) {
+        console.log(upsertErr);
+
         throw new Error(upsertErr.error);
       }
-      const insertError = await insertToTable(table);
+      const insertError = await insertToTable(table, session.user.id);
       if (insertError !== undefined) {
+        console.log(insertError);
+
         throw new Error(insertError.error);
       }
       toast.success('Item was added');

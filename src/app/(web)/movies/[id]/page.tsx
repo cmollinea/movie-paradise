@@ -52,7 +52,7 @@ async function MovieDetails({ params }: Props) {
 
   return (
     <section className='w-full'>
-      <Backdrop src={movieDetails.backdrop_path} alt={movieDetails.title}>
+      <Backdrop src={movieDetails.backdrop_path}>
         <InfoContextProvider info={info} mediaType='movies'>
           <Details />
         </InfoContextProvider>

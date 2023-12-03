@@ -2,7 +2,7 @@
 import { BASE_URL } from '@/app/constants/image-url';
 import { GenreBadge, Progress } from '.';
 import { Image } from '@nextui-org/react';
-import { ServerButtonsWraper } from '../action-buttons';
+import { ActionButtons } from '../action-buttons';
 import { useInfoContext } from '@/app/hooks';
 
 export function Details() {
@@ -19,7 +19,7 @@ export function Details() {
         src={BASE_URL + 'w300' + info?.poster}
         classNames={{
           wrapper:
-            'max-sm:w-[185px] max-xl:w-[200px] max-xl:h-[300px] max-sm:h-[250px] col-span-3',
+            'max-sm:w-[185px] max-xl:w-[200px] max-xl:h-[300px] max-sm:h-[250px] col-span-3 w-full h-full max-w-[300px] max-h-[450px]',
           img: ' w-full h-full'
         }}
       />
@@ -45,7 +45,7 @@ export function Details() {
           ))}
         </div>
         <p className='mt-6 w-full md:max-w-2xl'>{info?.overview} </p>
-        <ServerButtonsWraper />{' '}
+        <ActionButtons />
       </div>
     </div>
   );

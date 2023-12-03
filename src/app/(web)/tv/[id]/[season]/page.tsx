@@ -1,28 +1,26 @@
-import { BASE_URL } from '@/app/constants/image-url';
-import { Card, CardBody, CardHeader, Image } from '@nextui-org/react';
 import { ErrorWithStatus, SomethingWentWrong } from '@/app/components/error';
 import { getSeasonUrl } from '@/app/helpers/getSeasonUrl';
 import { queryTMDB } from '@/app/services';
 import { SeasonResponse } from 'root/types/season-response';
 import { Title } from '@/app/components/global-ui';
+import { EpisodeCardLink } from '@/app/components/episode-card-link/episode-card-link';
 
 type Props = {
   params: {
     id: string;
-  };
-  searchParams: {
-    number: string | undefined;
+    season: string;
   };
 };
 
-async function Season({ searchParams, params }: Props) {
-  const seasonNumber = searchParams.number || '1';
-  const showId = params.id;
+async function Season({ params }: Props) {
+  const seasonNumber = params.season.split('-')[1];
+  const id = params.id;
 
-  const url = getSeasonUrl(showId, seasonNumber);
+  console.log(seasonNumber);
+
+  const url = getSeasonUrl(id, seasonNumber);
 
   const seasonData = await queryTMDB<SeasonResponse>(url);
-  console.log(seasonData);
 
   if (seasonData === undefined) {
     return <SomethingWentWrong />;
@@ -58,32 +56,13 @@ async function Season({ searchParams, params }: Props) {
       </div>
       <div className='grid lg:grid-cols-2 gap-4 w-full'>
         {seasonData.episodes.map((episode) => (
-          // todo crear un componente episode-card
-
-          <Card
-            className='max-w-lg w-full grid grid-cols-6 bg-neutral-100/10 backdrop-blur-md'
+          <EpisodeCardLink
             key={episode.id}
-          >
-            <CardHeader className='col-span-2'>
-              <Image
-                width={185}
-                height={104}
-                src={BASE_URL + 'w185' + episode.still_path}
-                alt={episode.name + 'poster'}
-              />
-            </CardHeader>
-            <div className='col-span-4 w-full h-full relative'>
-              {' '}
-              <CardBody>
-                <h6 className='text-lg font-bold'>
-                  Episode {episode.episode_number}
-                </h6>
-                <p className='text-xs md:text-medium font-semibold'>
-                  <i>{episode.name}</i>
-                </p>
-              </CardBody>
-            </div>
-          </Card>
+            episodeNumber={episode.episode_number}
+            name={episode.name}
+            image={episode.still_path}
+            href={`/tv/${id}/season-${seasonNumber}/episode-${episode.episode_number}`}
+          />
         ))}
       </div>
     </section>

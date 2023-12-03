@@ -21,7 +21,7 @@ export function SearchForm() {
   return (
     <form
       onSubmit={(e) => handleSubmit(e)}
-      className='flex max-w-md w-full space-x-4'
+      className='flex z-10 max-w-md w-full space-x-4'
     >
       <Input
         type='text'

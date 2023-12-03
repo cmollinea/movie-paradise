@@ -3,14 +3,9 @@
 import { Button } from '@nextui-org/react';
 import { HeartIcon, PlusCircle } from 'lucide-react';
 import { useActionButtons } from '@/app/hooks';
-import type { Session } from '@supabase/supabase-js';
 
-type Props = {
-  session: Session | null;
-};
-
-export function ActionButtons({ session }: Props) {
-  const { addMedia } = useActionButtons(session);
+export function ActionButtons() {
+  const { addMedia } = useActionButtons();
 
   return (
     <div className='flex space-x-2 mt-6'>

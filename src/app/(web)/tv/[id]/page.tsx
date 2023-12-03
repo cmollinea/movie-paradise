@@ -54,7 +54,7 @@ async function TvShowDetails({ params }: Props) {
 
   return (
     <section className='w-full'>
-      <Backdrop src={showDetails.backdrop_path} alt={showDetails.name}>
+      <Backdrop src={showDetails.backdrop_path}>
         <InfoContextProvider info={info} mediaType='tv'>
           <Details />
         </InfoContextProvider>
@@ -93,7 +93,7 @@ async function TvShowDetails({ params }: Props) {
                     mediaType: 'season' as MediaType,
                     poster: season.poster_path,
                     title: season.name,
-                    seasonLink: `/tv/${id}/season?number=${season.season_number}`,
+                    seasonLink: `/tv/${id}/season-${season.season_number}`,
                     seasonNumber: `Season: ${season.season_number} | ${season.episode_count} episodes`
                   };
                   return (
