@@ -4,7 +4,6 @@ import { MediaItem } from 'root/types';
 import { redirect } from 'next/navigation';
 import { supabaseUpsertToMedia } from './supabaseUpsertToMedia';
 import { createServerSupabaseCli } from './create-server-supabase-cli';
-import toast from 'react-hot-toast';
 
 type FormState = {
   message: string | null;

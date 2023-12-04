@@ -6,7 +6,6 @@ import {
   MediaTabs
 } from '@/app/components/details';
 import { CommentForm, CommentsContainer } from '@/app/components/comments';
-import { getDetailsUrl } from '@/app/helpers/getDetailsUrl';
 import { InfoContextProvider } from '@/app/context';
 import { MovieFullDetails } from 'root/types/movie-response-full';
 import { queryTMDB } from '@/app/services/queryTMDB';
@@ -14,6 +13,7 @@ import { Section } from '@/app/components/global-ui/section';
 import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
 import { Suspense } from 'react';
 import { Title } from '@/app/components/global-ui';
+import { getTMDBEndpoint } from '@/app/helpers/get-tmdb-endpoint';
 
 type Props = {
   params: {
@@ -23,7 +23,7 @@ type Props = {
 
 async function MovieDetails({ params }: Props) {
   const id = params.id;
-  const DETAILS_URL = getDetailsUrl(id, 'movie');
+  const DETAILS_URL = getTMDBEndpoint(id, 'movie');
   const movieDetails = await queryTMDB<MovieFullDetails>(DETAILS_URL);
 
   if (movieDetails === undefined) {

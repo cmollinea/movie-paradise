@@ -6,7 +6,6 @@ import {
   ServerSimilar
 } from '@/app/components/details';
 import { CommentForm, CommentsContainer } from '@/app/components/comments';
-import { getDetailsUrl } from '@/app/helpers/getDetailsUrl';
 import { InfoContextProvider } from '@/app/context';
 import { queryTMDB } from '@/app/services/queryTMDB';
 import { Section } from '@/app/components/global-ui/section';
@@ -16,6 +15,7 @@ import { Title } from '@/app/components/global-ui';
 import { TvShowFullDetails } from 'root/types/tvshows-response-full';
 import CardLinkWithDescription from '@/app/components/global-ui/card-link-with-description';
 import { MediaType } from 'root/types';
+import { getTMDBEndpoint } from '@/app/helpers/get-tmdb-endpoint';
 
 type Props = {
   params: {
@@ -25,7 +25,7 @@ type Props = {
 
 async function TvShowDetails({ params }: Props) {
   const id = params.id;
-  const DETAILS_URL = getDetailsUrl(id, 'tv');
+  const DETAILS_URL = getTMDBEndpoint(id, 'tv');
   const showDetails = await queryTMDB<TvShowFullDetails>(DETAILS_URL);
 
   if (showDetails === undefined) {

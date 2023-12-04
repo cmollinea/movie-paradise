@@ -1,5 +1,4 @@
 import { createRouteSupabaseCli } from '@/app/helpers/create-route-supabse-cli';
-import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 

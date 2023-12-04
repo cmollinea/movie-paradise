@@ -1,26 +1,32 @@
 export const BASE_URL = 'https://image.tmdb.org/t/p/';
 
-// "backdrop_sizes: [
-//     "w300",
-//     "w780",
-//     "w1280",
-//     "original"
-//   ],
-//   "logo_sizes": [
-//     "w45",
-//     "w92",
-//     "w154",
-//     "w185",
-//     "w300",
-//     "w500",
-//     "original"
-//   ],
-//   "poster_sizes": [
-//     "w92",
-//     "w154",
-//     "w185",
-//     "w342",
-//     "w500",
-//     "w780",
-//     "original"
-//   ],
+const original = {
+  original: 'original'
+};
+
+export const BACKDROP_SIZES = {
+  ...original,
+  sm: 'w300',
+  md: 'w780',
+  lg: 'w1280'
+};
+
+export const LOGO_SIZES = {
+  ...original,
+  xxs: 'w45',
+  xs: 'w92',
+  sm: 'w154',
+  md: 'w185',
+  lg: 'w300',
+  xl: 'w500'
+};
+
+export const POSTER_SIZES = {
+  ...original,
+  xxs: 'w92',
+  xs: 'w154',
+  sm: 'w185',
+  md: 'w342',
+  lg: 'w500',
+  xl: 'w780'
+};

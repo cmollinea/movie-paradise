@@ -1,5 +1,5 @@
 import { ErrorWithStatus, SomethingWentWrong } from '@/app/components/error';
-import { getSeasonUrl } from '@/app/helpers/getSeasonUrl';
+import { getTMDBEndpoint } from '@/app/helpers/get-tmdb-endpoint';
 import { queryTMDB } from '@/app/services';
 import { SeasonResponse } from 'root/types/season-response';
 import { Title } from '@/app/components/global-ui';
@@ -15,11 +15,7 @@ type Props = {
 async function Season({ params }: Props) {
   const seasonNumber = params.season.split('-')[1];
   const id = params.id;
-
-  console.log(seasonNumber);
-
-  const url = getSeasonUrl(id, seasonNumber);
-
+  const url = getTMDBEndpoint(id, 'season', seasonNumber);
   const seasonData = await queryTMDB<SeasonResponse>(url);
 
   if (seasonData === undefined) {

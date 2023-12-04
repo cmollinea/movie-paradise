@@ -1,4 +1,3 @@
-// import { getSearchPromises } from '@/app/helpers/get-search-promises';
 import { SideBar } from '.';
 
 // import type {

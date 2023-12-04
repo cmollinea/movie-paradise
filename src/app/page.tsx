@@ -44,24 +44,24 @@ export default async function Home() {
     <>
       <ServerFormWrapper backgroundPath={formBackground[backdropIndex]} />
       <section className='overflow-hidden container px-4 lg:px-20 py-10 relative space-y-5'>
-        <Title>Top Rated Tv Shows</Title>
+        <Title>Discover TV&apos;s finest with our Top Rated Picks.</Title>
         <TvShowsContainer promise={topRatedTvShowsResponse} />
       </section>
       <section className='overflow-hidden container px-4 lg:px-20 py-10 relative'>
-        <Title>Airing Today</Title>
+        <Title>Today&apos;s TV, right at your fingertips.</Title>
         <Suspense fallback={<p>Loadig...</p>}>
           <TvShowsContainer promise={tvShowsOnAirResponse} />
         </Suspense>
       </section>
       <section className='overflow-hidden container px-4 lg:px-20 py-10 relative space-y-5'>
-        <Title>Upcoming Movies</Title>
+        <Title>Sneak peek into future blockbusters.</Title>
         <Suspense fallback={<p>Loadig...</p>}>
           {' '}
           <MoviesContainer promise={upcomingMoviesResponse} />
         </Suspense>
       </section>
       <section className='overflow-hidden container px-4 lg:px-20 py-10 relative space-y-5'>
-        <Title>Top Rated Movies</Title>
+        <Title>Cinema&apos;s best in one place.</Title>
         <Suspense fallback={<p>Loadig...</p>}>
           {' '}
           <MoviesContainer promise={topRatedMoviesResponse} />
