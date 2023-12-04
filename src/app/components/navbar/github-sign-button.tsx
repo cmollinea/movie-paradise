@@ -23,7 +23,7 @@ export function GitHubSignButton() {
     await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: getURL()
+        redirectTo: window.location.origin
       }
     });
   };
