@@ -5,6 +5,7 @@ import {
   NavbarMenuToggle,
   NavbarBrand
 } from '@nextui-org/react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 type Props = {
@@ -20,7 +21,13 @@ export function Logo({ isMenuOpen }: Props) {
       />
       <Link href={'/'}>
         <NavbarBrand>
-          <p className='font-bold text-inherit'>CinemaPool</p>
+          <Image
+            className=''
+            alt='logo'
+            src={`/brand.png`}
+            width={150}
+            height={150}
+          />
         </NavbarBrand>
       </Link>
     </NavbarContent>

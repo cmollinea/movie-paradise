@@ -6,8 +6,43 @@ import { MOVIES_ENPOINTS, TV_SHOWS_ENDPOINTS } from './constants/api-endpoints';
 import { queryTMDB } from './services/queryTMDB';
 import { Title } from './components/global-ui';
 import { ServerFormWrapper } from './components/search-box';
+import { Metadata } from 'next';
 
 //todo Cambiar on air por trending y ademas ponerlo de principal
+
+export const metadata: Metadata = {
+  title: `Welcome to MovieParadise by procastinatorDev`,
+  description: `Discover the finest TV shows and movies, get a sneak peek into future blockbusters, and explore cinema's best all in one place.`,
+  openGraph: {
+    type: 'website',
+    url: `https://movie-paradise-seven.vercel.app`,
+    title: `Welcome to MovieParadise by procastinatorDev`,
+    description: `Discover the finest TV shows and movies, get a sneak peek into future blockbusters, and explore cinema's best all in one place.`,
+    siteName: 'Movie Paradise',
+    images: [
+      {
+        url: `/logo.png`,
+        secureUrl: `https://movie-paradise-seven.vercel.app/logo.png`,
+        width: 240,
+        height: 240,
+        type: 'png',
+        alt: `logo`
+      }
+    ]
+  },
+  twitter: {
+    site: `https://movie-paradise-seven.vercel.app`,
+    title: `Welcome to MovieParadise by procastinatorDev`,
+    description: `Discover the finest TV shows and movies, get a sneak peek into future blockbusters, and explore cinema's best all in one place.`,
+    images: [
+      {
+        url: `/logo.png`,
+        width: 240,
+        height: 240
+      }
+    ]
+  }
+};
 
 export default async function Home() {
   const topRatedTvShowsResponse = await queryTMDB<TvShowsResponse>(
