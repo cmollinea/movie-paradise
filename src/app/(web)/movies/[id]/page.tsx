@@ -14,12 +14,61 @@ import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
 import { Suspense } from 'react';
 import { Title } from '@/app/components/global-ui';
 import { getTMDBEndpoint } from '@/app/helpers/get-tmdb-endpoint';
+import { Metadata } from 'next';
+import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
 
 type Props = {
   params: {
     id: string;
   };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const id = params.id;
+  const DETAILS_URL = getTMDBEndpoint(id, 'movie');
+
+  // fetch data
+
+  const movieDetails = await queryTMDB<MovieFullDetails>(DETAILS_URL);
+
+  if (movieDetails && !('statusText' in movieDetails)) {
+    return {
+      title: movieDetails.title + ' • Movie Paradise',
+      description: movieDetails.overview,
+      openGraph: {
+        type: 'website',
+        url: `https://movie-paradise-seven.vercel.app/movies/${id}`,
+        title: movieDetails.title + ' • Movie Paradise',
+        description: movieDetails.overview,
+        siteName: 'Movie Paradise',
+        images: [
+          {
+            url: `${BASE_URL + POSTER_SIZES.xxs + movieDetails.poster_path}`,
+            width: 92,
+            height: 138
+          }
+        ]
+      },
+      twitter: {
+        site: `https://movie-paradise-seven.vercel.app/movies/${id}`,
+        title: movieDetails.title + ' • Movie Paradise',
+        description: movieDetails.overview,
+        images: [
+          {
+            url: `${BASE_URL + POSTER_SIZES.xxs + movieDetails.poster_path}`,
+            width: 92,
+            height: 138
+          }
+        ]
+      }
+    };
+  }
+  return {
+    title: 'Error geting metadata • Movie Paradise',
+    description: 'No description'
+  };
+}
 
 async function MovieDetails({ params }: Props) {
   const id = params.id;

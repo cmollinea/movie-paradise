@@ -16,12 +16,61 @@ import { Title } from '@/app/components/global-ui';
 import { TvShowFullDetails } from 'root/types/tvshows-response-full';
 import { Info } from 'root/types';
 import { SeasonContainer } from '@/app/components/season-container/season-container-';
+import { Metadata } from 'next';
+import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
 
 type Props = {
   params: {
     id: string;
   };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const id = params.id;
+  const DETAILS_URL = getTMDBEndpoint(id, 'tv');
+
+  // fetch data
+
+  const showDetails = await queryTMDB<TvShowFullDetails>(DETAILS_URL);
+
+  if (showDetails && !('statusText' in showDetails)) {
+    return {
+      title: showDetails.name + ' • Movie Paradise',
+      description: showDetails.overview,
+      openGraph: {
+        type: 'website',
+        url: `https://movie-paradise-seven.vercel.app/movies/${id}`,
+        title: showDetails.name + ' • Movie Paradise',
+        description: showDetails.overview,
+        siteName: 'Movie Paradise',
+        images: [
+          {
+            url: `${BASE_URL + POSTER_SIZES.xxs + showDetails.poster_path}`,
+            width: 92,
+            height: 138
+          }
+        ]
+      },
+      twitter: {
+        site: `https://movie-paradise-seven.vercel.app/movies/${id}`,
+        title: showDetails.name + ' • Movie Paradise',
+        description: showDetails.overview,
+        images: [
+          {
+            url: `${BASE_URL + POSTER_SIZES.xxs + showDetails.poster_path}`,
+            width: 92,
+            height: 138
+          }
+        ]
+      }
+    };
+  }
+  return {
+    title: 'Error geting metadata • Movie Paradise',
+    description: 'No description'
+  };
+}
 
 async function TvShowDetails({ params }: Props) {
   const id = params.id;
