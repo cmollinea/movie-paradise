@@ -4,6 +4,8 @@ import { queryTMDB } from '@/app/services';
 import { SeasonResponse } from 'root/types/season-response';
 import { Title } from '@/app/components/global-ui';
 import { EpisodeCardLink } from '@/app/components/episode-card-link/episode-card-link';
+import { GenreBadge } from '@/app/components/details';
+import { Star } from 'lucide-react';
 
 type Props = {
   params: {
@@ -54,11 +56,32 @@ async function Season({ params }: Props) {
         {seasonData.episodes.map((episode) => (
           <EpisodeCardLink
             key={episode.id}
-            episodeNumber={episode.episode_number}
-            name={episode.name}
             image={episode.still_path}
             href={`/tv/${id}/season-${seasonNumber}/episode-${episode.episode_number}`}
-          />
+          >
+            <h6 className='text-lg font-bold'>
+              Episode {episode.episode_number}
+            </h6>
+            <div className='flex space-x-1 items-center py-1'>
+              <GenreBadge
+                color={
+                  episode.vote_average > 8
+                    ? 'success'
+                    : episode.vote_average > 5
+                    ? 'primary'
+                    : 'warning'
+                }
+              >
+                <Star fill='black' size={16} />
+                <b role='contentinfo'>{episode.vote_average.toFixed(1)}</b>
+              </GenreBadge>
+              <span>•</span>
+              <span className='text-sm'>{episode.runtime} min</span>
+            </div>
+            <p className='text-medium'>
+              <i>{episode.name}</i>
+            </p>
+          </EpisodeCardLink>
         ))}
       </div>
     </section>

@@ -78,19 +78,19 @@ async function MovieDetails({ params }: Props) {
             <ServerSimilar similars={movieDetails.similar} type='movies' />
           </Section>
         </div>
-      </div>
-      <div className='xl:col-span-4 px-4 py-10 flex flex-col space-y-10'>
-        <Suspense fallback={<p>Loading...</p>}>
-          <CommentsContainer id={id} />
-        </Suspense>
-        <CommentForm
-          mediaItem={{
-            id: info.id,
-            title: info.title,
-            overview: info.overview,
-            poster: info.poster
-          }}
-        />
+        <div className='xl:col-span-8 px-4 lg:px-20 container py-10 flex flex-col space-y-10'>
+          <Suspense fallback={<p>Loading...</p>}>
+            <CommentsContainer id={id} />
+          </Suspense>
+          <CommentForm
+            mediaItem={{
+              id: info.id,
+              title: info.title,
+              overview: info.overview,
+              poster: info.poster
+            }}
+          />
+        </div>
       </div>
     </section>
   );

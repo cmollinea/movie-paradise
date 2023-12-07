@@ -3,18 +3,12 @@ import { Card, CardBody, CardHeader, Image } from '@nextui-org/react';
 import Link from 'next/link';
 
 type Props = {
-  episodeNumber: number;
-  name: string;
   image: string;
   href: string;
+  children: React.ReactNode;
 };
 
-export const EpisodeCardLink = ({
-  episodeNumber,
-  name,
-  image,
-  href
-}: Props) => {
+export const EpisodeCardLink = ({ image, href, children }: Props) => {
   return (
     <Link
       href={href}
@@ -29,17 +23,12 @@ export const EpisodeCardLink = ({
             width={185}
             height={104}
             src={BASE_URL + 'w185' + image}
-            alt={name + 'poster'}
+            alt={'poster'}
           />
         </CardHeader>
         <div className='col-span-4 w-full h-full relative'>
           {' '}
-          <CardBody>
-            <h6 className='text-lg font-bold'>Episode {episodeNumber}</h6>
-            <p className='text-xs md:text-medium font-semibold'>
-              <i>{name}</i>
-            </p>
-          </CardBody>
+          <CardBody>{children}</CardBody>
         </div>
       </Card>
     </Link>

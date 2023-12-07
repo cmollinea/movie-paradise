@@ -13,6 +13,11 @@ import type {
   PeopleResponse,
   TvShowsResponse
 } from 'root/types';
+import { CardWrapper } from '../card-link-with-description/card-wrapper';
+import { CardInfoContainer } from '../card-link-with-description/card-info-container';
+import { CardPoster } from '../card-link-with-description/card-poster';
+import { CardInfo } from '../card-link-with-description/card-info';
+import { Star } from 'lucide-react';
 
 type Props = {
   data:
@@ -54,17 +59,36 @@ export const SearchResultsContainer = ({ data, type }: Props) => {
     ).results;
 
     node = results.map((item) => {
-      const media = {
-        backdrop: item.backdrop_path,
-        description: item.overview,
-        id: item.id,
-        mediaType: type,
-        poster: item.poster_path,
-        rating: 'vote_average' in item ? item.vote_average : 0,
-        title: 'name' in item ? item.name : item.title
-      };
+      const link = `${type}/${item.id}`;
+      const title = 'name' in item ? item.name : item.title;
+      const rating = 'vote_average' in item ? item.vote_average : 0;
 
-      return <CardLinkWithDescription media={media} key={item.id} />;
+      return (
+        <CardWrapper
+          key={item.id}
+          title={title}
+          link={link}
+          backdrop={item.backdrop_path || ''}
+        >
+          <CardInfoContainer>
+            <CardPoster title={title} poster={item.poster_path} />
+            <CardInfo>
+              <p className='text-xl lg:text-3xl truncate'>
+                <b>{title}</b>
+              </p>
+              {rating && (
+                <span className='flex space-x-0.5 items-center md:text-2xl font-extrabold'>
+                  <Star className=' fill-primary-400 stroke-primary-400 h-4 w-4 md:h-6 md:w-6' />
+                  {rating && <span>{rating.toFixed(1)}</span>}
+                </span>
+              )}
+              <p className='max-lg:text-xs'>
+                <i>{item.overview || 'No info Provided'}</i>
+              </p>
+            </CardInfo>
+          </CardInfoContainer>
+        </CardWrapper>
+      );
     });
   }
 

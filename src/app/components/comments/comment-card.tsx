@@ -25,17 +25,17 @@ export const CommentCard = ({
         <div className='flex gap-5'>
           <Avatar isBordered radius='full' size='md' src={avatar_url} />
           <div className='flex flex-col gap-1 items-start justify-center'>
-            <h4 className='text-small font-semibold leading-none text-default-600'>
+            <h4 className='text-small font-semibold leading-none text-primary-400'>
               {user_name}
             </h4>
           </div>
         </div>
       </CardHeader>
-      <CardBody className='px-3 py-0 text-small text-default-400'>
+      <CardBody className=''>
         <p>{comment}</p>
       </CardBody>
-      <CardFooter>
-        <small>{created_at.toLocaleString()}</small>
+      <CardFooter className='px-3 py-0 text-small text-default-400'>
+        <small>{new Date(created_at).toLocaleString()}</small>
       </CardFooter>
     </Card>
   );

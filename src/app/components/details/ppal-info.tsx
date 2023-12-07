@@ -11,18 +11,19 @@ export function Details() {
   } = useInfoContext();
 
   return (
-    <div className='z-20 xl:grid py-10 md:grid xl:grid-cols-12 xl:place-items-center xl:py-20 mx-h-fit relative'>
-      <Image
-        alt={info?.title}
-        height={450}
-        width={300}
-        src={BASE_URL + 'w300' + info?.poster}
-        classNames={{
-          wrapper:
-            'max-sm:w-[185px] max-xl:w-[200px] max-xl:h-[300px] max-sm:h-[250px] col-span-3 w-full h-full max-w-[300px] max-h-[450px]',
-          img: ' w-full h-full'
-        }}
-      />
+    <div className='z-20 py-10 grid xl:grid-cols-12 xl:place-items-center xl:py-20 mx-h-fit relative max-md:gap-4'>
+      <div className='xl:col-span-3 flex h-fit'>
+        <Image
+          alt={info?.title}
+          height={450}
+          width={300}
+          src={BASE_URL + 'w300' + info?.poster}
+          classNames={{
+            wrapper:
+              'max-sm:w-[185px] max-xl:w-[200px] max-xl:h-[300px] max-sm:h-[250px] max-w-[300px] max-h-[450px]'
+          }}
+        />
+      </div>
 
       <div className='xl:col-span-9 xl:col-start-4 max-md:mt-8'>
         <Progress value={info?.rating} />
@@ -32,7 +33,7 @@ export function Details() {
         <small>
           <em>{`"${info?.tagline}"`}</em>
         </small>
-        <div className='flex flex-wrap space-x-2'>
+        <div className='flex max-md:inline-flex space-x-2 mt-2 max-md:overflow-auto max-md:w-[95vw] scrollbar-hide'>
           {info.genres?.map((genre) => (
             <GenreBadge key={genre.id}>{genre.name}</GenreBadge>
           ))}
@@ -44,7 +45,7 @@ export function Details() {
             </span>
           ))}
         </div>
-        <p className='mt-6 w-full md:max-w-2xl'>{info?.overview} </p>
+        <p className='mt-4 w-full md:max-w-2xl'>{info?.overview} </p>
         <ActionButtons />
       </div>
     </div>
