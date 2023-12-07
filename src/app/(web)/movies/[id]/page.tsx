@@ -45,8 +45,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: [
           {
             url: `${BASE_URL + POSTER_SIZES.xxs + movieDetails.poster_path}`,
+            secureUrl: `${
+              BASE_URL + POSTER_SIZES.xxs + movieDetails.poster_path
+            }`,
             width: 92,
-            height: 138
+            height: 138,
+            type: 'jpg',
+            alt: movieDetails.title + 'poster'
           }
         ]
       },
