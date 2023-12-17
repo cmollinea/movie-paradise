@@ -3,21 +3,21 @@ import { createContext } from 'react';
 import { Info, MediaType, MediaItem } from 'root/types';
 
 type InfoContext = {
-  info: Info;
-  mediaItem: MediaItem;
+  info: Partial<Info>;
+  mediaItem: Partial<MediaItem>;
   mediaType: MediaType;
 };
 
 export const infoContext = createContext<InfoContext>({} as InfoContext);
 
 type Props = {
-  info: Info;
+  info: Partial<Info>;
   mediaType: MediaType;
   children: React.ReactNode;
 };
 
 export function InfoContextProvider({ children, info, mediaType }: Props) {
-  const mediaItem: MediaItem = {
+  const mediaItem: Partial<MediaItem> = {
     id: info.id,
     overview: info.overview,
     poster: info.poster,

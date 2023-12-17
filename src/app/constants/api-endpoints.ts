@@ -32,6 +32,10 @@ export const MOVIES_ENPOINTS = {
   //Get Movie Details
 };
 
+export const COLLECTIONS_ENDPOINTS = {
+  DETAILS: 'https://api.themoviedb.org/3/collection/'
+};
+
 export const MOVIE_DETAILS_SLUGS = {
   CAST: '/credits',
   IMAGES: '/images',

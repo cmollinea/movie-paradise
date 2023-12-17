@@ -16,7 +16,7 @@ export const EpisodeCardLink = ({ image, href, children }: Props) => {
     >
       <Card
         radius='md'
-        className='max-w-lg w-full grid grid-cols-6 bg-neutral-100/10 backdrop-blur-md'
+        className='max-w-lg w-full grid grid-cols-6 bg-neutral-100/10 backdrop-blur-md h-full'
       >
         <CardHeader className='col-span-2'>
           <Image

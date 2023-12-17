@@ -1,3 +1,5 @@
+import { COLLECTIONS_ENDPOINTS } from '../constants/api-endpoints';
+
 /**
  * Generates a URL for a specific endpoint of a media bassed in mediaType argument.
  *
@@ -8,11 +10,16 @@
  */
 export const getTMDBEndpoint = (
   id: string,
-  mediaType: 'tv' | 'movie' | 'season',
+  mediaType: 'tv' | 'movie' | 'season' | 'collection',
   seasonNumber?: string
 ) => {
-  if (mediaType === 'season' && seasonNumber) {
-    return `https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}`;
+  switch (mediaType) {
+    case 'season':
+      return `https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}`;
+    case 'collection':
+      return `${COLLECTIONS_ENDPOINTS.DETAILS + id}`;
+
+    default:
+      return `https://api.themoviedb.org/3/${mediaType}/${id}?append_to_response=credits,similar,images,videos&language=en-US&include_image_language=en,null`;
   }
-  return `https://api.themoviedb.org/3/${mediaType}/${id}?append_to_response=credits,similar,images,videos&language=en-US&include_image_language=en,null`;
 };

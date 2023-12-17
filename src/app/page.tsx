@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     siteName: 'Movie Paradise',
     images: [
       {
-        url: `/logo.png`,
+        url: `https://movie-paradise-seven.vercel.app/logo.png`,
         secureUrl: `https://movie-paradise-seven.vercel.app/logo.png`,
         width: 240,
         height: 240,
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description: `Discover the finest TV shows and movies, get a sneak peek into future blockbusters, and explore cinema's best all in one place.`,
     images: [
       {
-        url: `/logo.png`,
+        url: `https://movie-paradise-seven.vercel.app/logo.png`,
         width: 240,
         height: 240
       }

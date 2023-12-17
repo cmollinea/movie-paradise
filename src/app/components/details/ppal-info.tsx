@@ -4,11 +4,15 @@ import { GenreBadge, Progress } from '.';
 import { Image } from '@nextui-org/react';
 import { ActionButtons } from '../action-buttons';
 import { useInfoContext } from '@/app/hooks';
+import { usePathname } from 'next/navigation';
 
 export function Details() {
   const {
     info: { info }
   } = useInfoContext();
+
+  const pathame = usePathname();
+  console.log(pathame);
 
   return (
     <div className='z-20 py-10 grid xl:grid-cols-12 xl:place-items-center xl:py-20 mx-h-fit relative max-md:gap-4'>
@@ -26,13 +30,15 @@ export function Details() {
       </div>
 
       <div className='xl:col-span-9 xl:col-start-4 max-md:mt-8'>
-        <Progress value={info?.rating} />
+        {info?.rating && <Progress value={info?.rating} />}
         <h1 className='mt-2 text-3xl md:text-5xl font-black md:max-w-2xl'>
           {info?.title}
         </h1>
-        <small>
-          <em>{`"${info?.tagline}"`}</em>
-        </small>
+        {info?.tagline && (
+          <small>
+            <em>{`"${info?.tagline}"`}</em>
+          </small>
+        )}
         <div className='flex max-md:inline-flex space-x-2 mt-2 max-md:overflow-auto max-md:w-[95vw] scrollbar-hide'>
           {info.genres?.map((genre) => (
             <GenreBadge key={genre.id}>{genre.name}</GenreBadge>
@@ -46,7 +52,9 @@ export function Details() {
           ))}
         </div>
         <p className='mt-4 w-full md:max-w-2xl'>{info?.overview} </p>
-        <ActionButtons />
+        {!(pathame.includes('collections') || pathame.includes('actors')) && (
+          <ActionButtons />
+        )}
       </div>
     </div>
   );

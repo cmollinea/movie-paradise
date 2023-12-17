@@ -5,19 +5,19 @@ import {
   MediaTabs,
   ServerSimilar
 } from '@/app/components/details';
+import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
 import { CommentForm, CommentsContainer } from '@/app/components/comments';
 import { getTMDBEndpoint } from '@/app/helpers/get-tmdb-endpoint';
+import { Info } from 'root/types';
 import { InfoContextProvider } from '@/app/context';
+import { Metadata } from 'next';
 import { queryTMDB } from '@/app/services/queryTMDB';
+import { SeasonContainer } from '@/app/components/season-container/season-container-';
 import { Section } from '@/app/components/global-ui/section';
 import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
 import { Suspense } from 'react';
 import { Title } from '@/app/components/global-ui';
 import { TvShowFullDetails } from 'root/types/tvshows-response-full';
-import { Info } from 'root/types';
-import { SeasonContainer } from '@/app/components/season-container/season-container-';
-import { Metadata } from 'next';
-import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
 
 type Props = {
   params: {

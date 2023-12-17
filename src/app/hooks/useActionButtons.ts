@@ -11,6 +11,7 @@ type Tables = 'watch_list' | 'favs';
  *
  * @returns {Object} - An object containing the addMedia function.
  */
+
 export function useActionButtons() {
   const supabase = createClienSupabaseCli();
   const router = useRouter();
@@ -26,6 +27,7 @@ export function useActionButtons() {
    *
    * @throws Will throw an error if the user is not authenticated or if there's an error in the upsert operation.
    */
+
   const upsertToMedia = async () => {
     try {
       const {
@@ -60,11 +62,12 @@ export function useActionButtons() {
    * @param {string} user_id - The ID of the user.
    * @throws Will throw an error if there's an error in the insert operation.
    */
+
   const insertToTable = async (table: Tables, user_id: string) => {
     try {
       const mediaItem = {
         user_id: user_id,
-        movie_id: id.toString()
+        movie_id: (id as string).toString()
       };
 
       const { error: watchListError } = await supabase
@@ -89,6 +92,7 @@ export function useActionButtons() {
    * @param {Tables} table - The user table to add the media item to. Can be 'watch_list' or 'favs'.
    * @throws Will throw an error if the user is not authenticated or if there's an error in the upsert/insert operations.
    */
+
   const addMedia = async (table: Tables) => {
     try {
       const {
