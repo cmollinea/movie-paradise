@@ -9,6 +9,7 @@ import {
   DropdownTrigger,
   DropdownMenu
 } from '@nextui-org/react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 type Props = {
@@ -19,9 +20,14 @@ type Props = {
 export function ProfileButton({ user, userAvatar }: Props) {
   const router = useRouter();
   const supabase = createClienSupabaseCli();
+
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     router.refresh();
+  };
+
+  const handleNavToProfile = () => {
+    router.push('/profile');
   };
 
   return (
@@ -43,8 +49,13 @@ export function ProfileButton({ user, userAvatar }: Props) {
             <p className='font-semibold'>Signed in as</p>
             <p className='font-semibold'>{user}</p>
           </DropdownItem>
-          <DropdownItem key='settings'>Favourites</DropdownItem>
-          <DropdownItem key='team_settings'>Watch List</DropdownItem>
+          <DropdownItem
+            color='primary'
+            key='Profile'
+            onClick={handleNavToProfile}
+          >
+            Profile
+          </DropdownItem>
           <DropdownItem key='logout' color='danger' onClick={handleSignOut}>
             Log Out
           </DropdownItem>

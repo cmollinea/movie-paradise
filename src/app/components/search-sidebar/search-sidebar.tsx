@@ -8,25 +8,15 @@ const targets = Object.freeze({
 });
 
 type Props = {
-  totalResults: {
-    movies: number;
-    collections: number;
-
-    tv: number;
-    people: number;
-  };
+  query: string;
 };
 
-export const SideBar = ({ totalResults }: Props) => {
+export const SideBar = ({ query }: Props) => {
   return (
     <nav className='flex items-center place-content-center overflow-auto container'>
       <ul className='flex max-md:max-w-sm max-lg:px-4 py-6 scrollbar-hide max-lg:snap-x lg:flex-col max-lg:space-x-4 lg:space-y-4 overflow-x-auto'>
         {Object.entries(targets).map(([key, value]) => (
-          <TargetButtonLink
-            key={key}
-            resultsCount={totalResults[value]}
-            target={value}
-          >
+          <TargetButtonLink key={key} resultsCount={0} target={value}>
             {key}
           </TargetButtonLink>
         ))}

@@ -9,6 +9,7 @@ import {
 } from '@nextui-org/react';
 import { ApiError } from '@/app/services';
 import { EpisodeDetails } from 'root/types/episode-details';
+import OkButton from './ok-button';
 
 type Props = {
   promise: Promise<ApiError | EpisodeDetails | undefined>;
@@ -25,7 +26,7 @@ export const EpisodeModal = async ({ promise }: Props) => {
   }
   return (
     <Modal
-      backdrop='opaque'
+      backdrop='blur'
       isOpen
       radius='md'
       classNames={{
@@ -45,12 +46,7 @@ export const EpisodeModal = async ({ promise }: Props) => {
           <p>{episodeDetails.overview}</p>
         </ModalBody>
         <ModalFooter>
-          <Button color='secondary' variant='light'>
-            Close
-          </Button>
-          <Button className='bg-[#6f4ef2] shadow-lg shadow-indigo-500/20'>
-            Action
-          </Button>
+          <OkButton />
         </ModalFooter>
       </ModalContent>
     </Modal>
