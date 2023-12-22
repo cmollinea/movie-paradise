@@ -3,6 +3,7 @@ import { SearchContextProvider } from '@/app/context';
 import { SearchResultsContainer } from '@/app/components/search-results/search-results-container';
 import { SideBar } from '@/app/components/search-sidebar';
 import { Target } from '@/app/components/search-sidebar/target-button';
+import { QueryClientProvider } from '@/app/context/query-client-provider';
 
 type Props = {
   searchParams: {
@@ -23,7 +24,9 @@ async function SearchResults({ searchParams }: Props) {
     <section className='grid lg:grid-cols-12 w-full py-16 place-content-center min-[2400px]:w-fit'>
       <SearchContextProvider>
         <aside className='lg:col-span-3'>
-          <SideBar query={query} />
+          <QueryClientProvider>
+            <SideBar query={query} />
+          </QueryClientProvider>
         </aside>
         <main className='lg:col-span-9 flex flex-col items-center max-w-4xl space-y-4'>
           <SearchResultsContainer data={data} type={target} />

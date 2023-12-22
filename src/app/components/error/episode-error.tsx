@@ -1,13 +1,13 @@
 import {
-  Button,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader
 } from '@nextui-org/react';
+import OkButton from '../episode-modal/ok-button';
 
-export const EpisodeSkelleton = () => {
+export const EpisodeError = () => {
   return (
     <Modal
       closeButton={false}
@@ -25,14 +25,13 @@ export const EpisodeSkelleton = () => {
     >
       <ModalContent>
         <ModalHeader>
-          <div className='flex flex-col gap-1 ml-2 w-40 h-6 animate-pulse bg-gray-300/10 rounded-xl' />
+          <p>There was an unexpected error</p>{' '}
         </ModalHeader>
         <ModalBody>
-          <div className='h-60 w-full animate-pulse bg-gray-300/10 rounded-xl' />
+          <p>Please try again later.</p>
         </ModalBody>
         <ModalFooter>
-          <div className='h-10 w-20 animate-pulse bg-gray-300/10 rounded-xl' />
-          <div className='h-10 w-20 animate-pulse bg-gray-300/10 rounded-xl' />
+          <OkButton />
         </ModalFooter>
       </ModalContent>
     </Modal>

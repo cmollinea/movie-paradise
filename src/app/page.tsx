@@ -7,6 +7,7 @@ import { queryTMDB } from './services/queryTMDB';
 import { Title } from './components/global-ui';
 import { ServerFormWrapper } from './components/search-box';
 import { Metadata } from 'next';
+import { CardContainerSkelleton } from './components/skelletons/card-skelleton';
 
 //todo Cambiar on air por trending y ademas ponerlo de principal
 
@@ -84,20 +85,20 @@ export default async function Home() {
       </section>
       <section className='overflow-hidden container px-4 lg:px-20 py-10 relative'>
         <Title>Today&apos;s TV, right at your fingertips.</Title>
-        <Suspense fallback={<p>Loadig...</p>}>
+        <Suspense fallback={<CardContainerSkelleton />}>
           <TvShowsContainer promise={tvShowsOnAirResponse} />
         </Suspense>
       </section>
       <section className='overflow-hidden container px-4 lg:px-20 py-10 relative space-y-5'>
         <Title>Sneak peek into future blockbusters.</Title>
-        <Suspense fallback={<p>Loadig...</p>}>
+        <Suspense fallback={<CardContainerSkelleton />}>
           {' '}
           <MoviesContainer promise={upcomingMoviesResponse} />
         </Suspense>
       </section>
       <section className='overflow-hidden container px-4 lg:px-20 py-10 relative space-y-5'>
         <Title>Cinema&apos;s best in one place.</Title>
-        <Suspense fallback={<p>Loadig...</p>}>
+        <Suspense fallback={<CardContainerSkelleton />}>
           {' '}
           <MoviesContainer promise={topRatedMoviesResponse} />
         </Suspense>

@@ -1,4 +1,3 @@
-import { EpisodeSkelleton } from '../skelletons/episode-skelleton';
 import {
   Button,
   Modal,
@@ -10,6 +9,7 @@ import {
 import { ApiError } from '@/app/services';
 import { EpisodeDetails } from 'root/types/episode-details';
 import OkButton from './ok-button';
+import { EpisodeError } from '../error/episode-error';
 
 type Props = {
   promise: Promise<ApiError | EpisodeDetails | undefined>;
@@ -18,11 +18,11 @@ type Props = {
 export const EpisodeModal = async ({ promise }: Props) => {
   const episodeDetails = await promise;
   if (episodeDetails === undefined) {
-    return <EpisodeSkelleton />;
+    return <EpisodeError />;
   }
 
   if ('statusText' in episodeDetails) {
-    return <EpisodeSkelleton />;
+    return <EpisodeError />;
   }
   return (
     <Modal
