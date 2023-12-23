@@ -22,7 +22,6 @@ export const CommentForm = ({ mediaItem }: Props) => {
   const textAreaRef = useRef<null | HTMLTextAreaElement>(null);
   const [state, formAction] = useFormState(hanldeCreateReview, initialState);
   const router = useRouter();
-  console.log('form is rendering iam going to throw a toast');
 
   useEffect(() => {
     if (state?.type === 'success') {

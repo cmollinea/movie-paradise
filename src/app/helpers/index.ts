@@ -1,3 +1,4 @@
+export * from './checkButtonStatus';
 export * from './create-client-supabase-cli';
 export * from './create-route-supabse-cli';
 export * from './create-server-supabase-cli';

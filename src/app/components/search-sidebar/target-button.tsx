@@ -37,8 +37,8 @@ export const TargetButtonLink = ({ resultsCount, target, children }: Props) => {
       color={isSelected ? 'primary' : 'secondary'}
       className='w-56 max-lg:w-20 max-lg:h-8 max-lg:text-xs max-lg:snap-normal flex-none'
     >
-      <p className='flex items-center gap-1'>
-        {resultsCount} {children}
+      <p className={`flex items-center gap-1 ${resultsCount && 'font-bold'}`}>
+        {resultsCount > 0 && resultsCount} {children}
         <span className='flex items-center absolute right-2'>
           <ChevronRight
             size={24}

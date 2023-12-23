@@ -9,7 +9,7 @@ import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
 import { CommentForm, CommentsContainer } from '@/app/components/comments';
 import { getTMDBEndpoint } from '@/app/helpers/get-tmdb-endpoint';
 import { Info } from 'root/types';
-import { InfoContextProvider } from '@/app/context';
+import { ButtonStatusProvider, InfoContextProvider } from '@/app/context';
 import { Metadata } from 'next';
 import { queryTMDB } from '@/app/services/queryTMDB';
 import { SeasonContainer } from '@/app/components/season-container/season-container-';
@@ -18,6 +18,7 @@ import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
 import { Suspense } from 'react';
 import { Title } from '@/app/components/global-ui';
 import { TvShowFullDetails } from 'root/types/tvshows-response-full';
+import { checkButtonStatus, createServerSupabaseCli } from '@/app/helpers';
 
 type Props = {
   params: {
@@ -106,12 +107,26 @@ async function TvShowDetails({ params }: Props) {
     tagline: showDetails.tagline
   };
 
+  const supabase = createServerSupabaseCli();
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
+
+  const [isInFav, isInWatchList] = await Promise.all([
+    checkButtonStatus('favs', id, session, supabase),
+    checkButtonStatus('watch_list', id, session, supabase)
+  ]);
+
+  console.log(isInFav, isInWatchList);
+
   return (
     <section className='w-full'>
       <Backdrop src={showDetails.backdrop_path}>
-        <InfoContextProvider info={info} mediaType='tv'>
-          <Details />
-        </InfoContextProvider>
+        <ButtonStatusProvider buttonStatus={{ isInFav, isInWatchList }}>
+          <InfoContextProvider info={info} mediaType='tv' session={session}>
+            <Details />
+          </InfoContextProvider>
+        </ButtonStatusProvider>
       </Backdrop>
 
       <div className='grid xl:grid-cols-12'>

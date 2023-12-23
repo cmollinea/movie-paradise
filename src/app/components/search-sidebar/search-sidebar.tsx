@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { TargetButtonLink } from './target-button';
 import {
   QueryClient,
@@ -27,30 +28,44 @@ type Results = {
   people: number;
 };
 
-const getResults = async ({
-  queryKey
-}: QueryFunctionContext): Promise<Results> => {
-  //@ts-expect-error
-  const [_key, { query }] = queryKey;
-
-  console.log(`${window.location.origin}/api/search-results?query=${query}`);
-
-  const response = await fetch(
-    `${window.location.origin}/api/search-results?query=${query}`
-  );
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
+const initialResults: Results = {
+  movies: 0,
+  tv: 0,
+  collections: 0,
+  people: 0
 };
 
 export const SideBar = ({ query }: Props) => {
-  const data = useQuery({
-    queryKey: ['results', { query }],
-    queryFn: getResults
-  });
+  // I know that the best aproach is use useQuery but it need pollyfills for iOS<15 (iam using it) so
+  // I am going to use useEffect to fetch data with an abort controller for clean up async request
+  // The react-query aproach is commented in the end of the script
 
-  console.log(data.data);
+  const [results, setResults] = useState(initialResults);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    const getResults = async (query: string): Promise<void> => {
+      console.log(
+        `${window.location.origin}/api/search-results?query=${query}`
+      );
+
+      const response = await fetch(
+        `${window.location.origin}/api/search-results?query=${query}`,
+        { signal }
+      );
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const results = await response.json();
+      setResults(results);
+    };
+
+    getResults(query);
+
+    return () => controller.abort();
+  }, [query]);
 
   return (
     <nav className='flex items-center place-content-center overflow-auto container'>
@@ -58,7 +73,7 @@ export const SideBar = ({ query }: Props) => {
         {Object.entries(targets).map(([key, value]) => (
           <TargetButtonLink
             key={key}
-            resultsCount={data.data ? data.data[value] : 0}
+            resultsCount={results ? results[value] : 0}
             target={value}
           >
             {key}
@@ -68,3 +83,25 @@ export const SideBar = ({ query }: Props) => {
     </nav>
   );
 };
+
+// This is the getResults function implemented with react=query a a query-function
+
+// const getResults = async ({
+//   queryKey
+// }: QueryFunctionContext): Promise<Results> => {
+//   const [_key, { query }] = queryKey;
+
+//   const response = await fetch(
+//     `${window.location.origin}/api/search-results?query=${query}`
+//   );
+//   if (!response.ok) {
+//     throw new Error('Network response was not ok');
+//   }
+//   return response.json();
+// };
+
+// useQuery iplemented
+// const data = useQuery({
+//   queryKey: ['results', { query }],
+//   queryFn: getResults
+// });

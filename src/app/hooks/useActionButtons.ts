@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { createClienSupabaseCli } from '../helpers/create-client-supabase-cli';
 
-type Tables = 'watch_list' | 'favs';
+export type Tables = 'watch_list' | 'favs';
 
 /**
  * Custom hook to manage user actions on media items.
@@ -18,7 +18,8 @@ export function useActionButtons() {
   const {
     info: {
       mediaItem: { id, title, overview, poster },
-      mediaType
+      mediaType,
+      session
     }
   } = useInfoContext();
 
@@ -30,10 +31,6 @@ export function useActionButtons() {
 
   const upsertToMedia = async () => {
     try {
-      const {
-        data: { session }
-      } = await supabase.auth.getSession();
-
       if (!session) {
         router.push('/sign-in');
         return;
@@ -46,8 +43,6 @@ export function useActionButtons() {
         );
 
       if (mediaError) {
-        console.log(mediaError);
-
         throw new Error(mediaError.details);
       }
     } catch (err: any) {
@@ -75,8 +70,6 @@ export function useActionButtons() {
         .insert(mediaItem);
 
       if (watchListError) {
-        console.log(watchListError);
-
         throw new Error(watchListError.details);
       }
     } catch (err: any) {
@@ -95,10 +88,6 @@ export function useActionButtons() {
 
   const addMedia = async (table: Tables) => {
     try {
-      const {
-        data: { session }
-      } = await supabase.auth.getSession();
-
       if (!session) {
         router.push('/sign-in');
         return;
@@ -106,21 +95,36 @@ export function useActionButtons() {
 
       const upsertErr = await upsertToMedia();
       if (upsertErr !== undefined) {
-        console.log(upsertErr);
-
         throw new Error(upsertErr.error);
       }
       const insertError = await insertToTable(table, session.user.id);
       if (insertError !== undefined) {
-        console.log(insertError);
-
         throw new Error(insertError.error);
       }
       toast.success('Item was added');
+      router.refresh();
     } catch (err) {
       toast.error('There was an error while we were working');
     }
   };
 
-  return { addMedia };
+  const deleteFromTable = async (table: Tables) => {
+    try {
+      const { error: deleteFromListError } = await supabase
+        .from(table)
+        .delete()
+        .eq('user_id', session?.user.id)
+        .eq('movie_id', id);
+
+      if (deleteFromListError) {
+        throw new Error(deleteFromListError.details);
+      }
+      toast.success('Item was removed');
+      router.refresh();
+    } catch (err: any) {
+      toast.error('There was an error while we were working');
+    }
+  };
+
+  return { addMedia, deleteFromTable };
 }

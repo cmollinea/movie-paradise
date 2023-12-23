@@ -74,7 +74,6 @@ export default async function Home() {
   }
 
   const backdropIndex = Math.floor(Math.random() * (formBackground.length - 1));
-  console.log(backdropIndex, 'Backdrop Index');
 
   return (
     <>

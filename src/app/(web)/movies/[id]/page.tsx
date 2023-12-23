@@ -6,7 +6,7 @@ import {
   MediaTabs
 } from '@/app/components/details';
 import { CommentForm, CommentsContainer } from '@/app/components/comments';
-import { InfoContextProvider } from '@/app/context';
+import { ButtonStatusProvider, InfoContextProvider } from '@/app/context';
 import { MovieFullDetails } from 'root/types/movie-response-full';
 import { queryTMDB } from '@/app/services/queryTMDB';
 import { Section } from '@/app/components/global-ui/section';
@@ -16,6 +16,7 @@ import { Title } from '@/app/components/global-ui';
 import { getTMDBEndpoint } from '@/app/helpers/get-tmdb-endpoint';
 import { Metadata } from 'next';
 import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
+import { checkButtonStatus, createServerSupabaseCli } from '@/app/helpers';
 
 type Props = {
   params: {
@@ -104,12 +105,24 @@ async function MovieDetails({ params }: Props) {
     tagline: movieDetails.tagline
   };
 
+  const supabase = createServerSupabaseCli();
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
+
+  const [isInFav, isInWatchList] = await Promise.all([
+    checkButtonStatus('favs', id, session, supabase),
+    checkButtonStatus('watch_list', id, session, supabase)
+  ]);
+
   return (
     <section className='w-full'>
       <Backdrop src={movieDetails.backdrop_path}>
-        <InfoContextProvider info={info} mediaType='movies'>
-          <Details />
-        </InfoContextProvider>
+        <ButtonStatusProvider buttonStatus={{ isInFav, isInWatchList }}>
+          <InfoContextProvider info={info} mediaType='movies' session={session}>
+            <Details />
+          </InfoContextProvider>
+        </ButtonStatusProvider>
       </Backdrop>
       <div className=' grid gap-4 xl:grid-cols-12'>
         <div className='xl:col-span-12'>
