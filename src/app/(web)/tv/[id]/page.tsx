@@ -79,9 +79,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function TvShowDetails({ params }: Props) {
+  const supabase = createServerSupabaseCli();
   const id = params.id;
   const DETAILS_URL = getTMDBEndpoint(id, 'tv');
   const showDetails = await queryTMDB<TvShowFullDetails>(DETAILS_URL);
+
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
+
+  const [isInFav, isInWatchList] = await Promise.all([
+    checkButtonStatus('favs', id, session, supabase),
+    checkButtonStatus('watch_list', id, session, supabase)
+  ]);
 
   if (showDetails === undefined) {
     return <SomethingWentWrong />;
@@ -106,18 +116,6 @@ async function TvShowDetails({ params }: Props) {
     rating: showDetails.vote_average,
     tagline: showDetails.tagline
   };
-
-  const supabase = createServerSupabaseCli();
-  const {
-    data: { session }
-  } = await supabase.auth.getSession();
-
-  const [isInFav, isInWatchList] = await Promise.all([
-    checkButtonStatus('favs', id, session, supabase),
-    checkButtonStatus('watch_list', id, session, supabase)
-  ]);
-
-  console.log(isInFav, isInWatchList);
 
   return (
     <section className='w-full'>

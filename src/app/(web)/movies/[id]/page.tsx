@@ -81,6 +81,16 @@ async function MovieDetails({ params }: Props) {
   const DETAILS_URL = getTMDBEndpoint(id, 'movie');
   const movieDetails = await queryTMDB<MovieFullDetails>(DETAILS_URL);
 
+  const supabase = createServerSupabaseCli();
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
+
+  const [isInFav, isInWatchList] = await Promise.all([
+    checkButtonStatus('favs', id, session, supabase),
+    checkButtonStatus('watch_list', id, session, supabase)
+  ]);
+
   if (movieDetails === undefined) {
     return <SomethingWentWrong />;
   }
@@ -104,16 +114,6 @@ async function MovieDetails({ params }: Props) {
     rating: movieDetails.vote_average,
     tagline: movieDetails.tagline
   };
-
-  const supabase = createServerSupabaseCli();
-  const {
-    data: { session }
-  } = await supabase.auth.getSession();
-
-  const [isInFav, isInWatchList] = await Promise.all([
-    checkButtonStatus('favs', id, session, supabase),
-    checkButtonStatus('watch_list', id, session, supabase)
-  ]);
 
   return (
     <section className='w-full'>
