@@ -2,11 +2,14 @@
 import { BASE_URL } from '@/app/constants/image-url';
 import { GenreBadge, Progress } from '.';
 import { Image } from '@nextui-org/react';
-import { ActionButtons } from '../action-buttons';
 import { useInfoContext } from '@/app/hooks';
 import { usePathname } from 'next/navigation';
 
-export function Details() {
+type Props = {
+  children?: React.ReactNode;
+};
+
+export function Details({ children }: Props) {
   const {
     info: { info }
   } = useInfoContext();
@@ -53,7 +56,7 @@ export function Details() {
         </div>
         <p className='mt-4 w-full md:max-w-2xl'>{info?.overview} </p>
         {!(pathame.includes('collections') || pathame.includes('actors')) && (
-          <ActionButtons />
+          <>{children}</>
         )}
       </div>
     </div>

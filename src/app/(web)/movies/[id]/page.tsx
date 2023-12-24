@@ -16,7 +16,8 @@ import { Title } from '@/app/components/global-ui';
 import { getTMDBEndpoint } from '@/app/helpers/get-tmdb-endpoint';
 import { Metadata } from 'next';
 import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
-import { checkButtonStatus, createServerSupabaseCli } from '@/app/helpers';
+import { createServerSupabaseCli } from '@/app/helpers';
+import { ActionButtonServerWrapper } from '@/app/components/action-buttons/action-buttons-server-wrapper';
 
 type Props = {
   params: {
@@ -77,22 +78,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function MovieDetails({ params }: Props) {
+  const supabase = createServerSupabaseCli();
   const id = params.id;
   const DETAILS_URL = getTMDBEndpoint(id, 'movie');
-  const movieDetails = await queryTMDB<MovieFullDetails>(DETAILS_URL);
 
-  const supabase = createServerSupabaseCli();
-  const {
-    data: { session }
-  } = await supabase.auth.getSession();
-
-  const isInFav = await checkButtonStatus('favs', id, session, supabase);
-  const isInWatchList = await checkButtonStatus(
-    'watch_list',
-    id,
-    session,
-    supabase
-  );
+  const [
+    {
+      data: { session }
+    },
+    movieDetails
+  ] = await Promise.all([
+    supabase.auth.getSession(),
+    queryTMDB<MovieFullDetails>(DETAILS_URL)
+  ]);
 
   if (movieDetails === undefined) {
     return <SomethingWentWrong />;
@@ -121,11 +119,13 @@ async function MovieDetails({ params }: Props) {
   return (
     <section className='w-full'>
       <Backdrop src={movieDetails.backdrop_path}>
-        <ButtonStatusProvider buttonStatus={{ isInFav, isInWatchList }}>
-          <InfoContextProvider info={info} mediaType='movies' session={session}>
-            <Details />
-          </InfoContextProvider>
-        </ButtonStatusProvider>
+        <InfoContextProvider info={info} mediaType='movies' session={session}>
+          <Details>
+            <Suspense fallback={<p>Loading</p>}>
+              <ActionButtonServerWrapper session={session} id={id} />
+            </Suspense>
+          </Details>
+        </InfoContextProvider>
       </Backdrop>
       <div className=' grid gap-4 xl:grid-cols-12'>
         <div className='xl:col-span-12'>
