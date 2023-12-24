@@ -88,10 +88,13 @@ async function TvShowDetails({ params }: Props) {
     data: { session }
   } = await supabase.auth.getSession();
 
-  const [isInFav, isInWatchList] = await Promise.all([
-    checkButtonStatus('favs', id, session, supabase),
-    checkButtonStatus('watch_list', id, session, supabase)
-  ]);
+  const isInFav = await checkButtonStatus('favs', id, session, supabase);
+  const isInWatchList = await checkButtonStatus(
+    'watch_list',
+    id,
+    session,
+    supabase
+  );
 
   if (showDetails === undefined) {
     return <SomethingWentWrong />;
