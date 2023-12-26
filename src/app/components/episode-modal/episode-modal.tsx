@@ -25,7 +25,7 @@ export const EpisodeModal = async ({ promise }: Props) => {
   }
   return (
     <Modal
-      backdrop='opaque'
+      backdrop='blur'
       isOpen
       radius='md'
       classNames={{
