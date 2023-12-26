@@ -9,7 +9,7 @@ import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
 import { CommentForm, CommentsContainer } from '@/app/components/comments';
 import { getTMDBEndpoint } from '@/app/helpers/get-tmdb-endpoint';
 import { Info } from 'root/types';
-import { InfoContextProvider } from '@/app/context';
+import { ButtonStatusProvider, InfoContextProvider } from '@/app/context';
 import { Metadata } from 'next';
 import { queryTMDB } from '@/app/services/queryTMDB';
 import { SeasonContainer } from '@/app/components/season-container/season-container-';
@@ -18,6 +18,9 @@ import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
 import { Suspense } from 'react';
 import { Title } from '@/app/components/global-ui';
 import { TvShowFullDetails } from 'root/types/tvshows-response-full';
+import { checkButtonStatus, createServerSupabaseCli } from '@/app/helpers';
+import { ActionButtons } from '@/app/components/action-buttons';
+import { ActionButtonServerWrapper } from '@/app/components/action-buttons/action-buttons-server-wrapper';
 
 type Props = {
   params: {
@@ -78,9 +81,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function TvShowDetails({ params }: Props) {
+  const supabase = createServerSupabaseCli();
   const id = params.id;
   const DETAILS_URL = getTMDBEndpoint(id, 'tv');
-  const showDetails = await queryTMDB<TvShowFullDetails>(DETAILS_URL);
+
+  const [
+    {
+      data: { session }
+    },
+    showDetails
+  ] = await Promise.all([
+    supabase.auth.getSession(),
+    queryTMDB<TvShowFullDetails>(DETAILS_URL)
+  ]);
 
   if (showDetails === undefined) {
     return <SomethingWentWrong />;
@@ -109,8 +122,12 @@ async function TvShowDetails({ params }: Props) {
   return (
     <section className='w-full'>
       <Backdrop src={showDetails.backdrop_path}>
-        <InfoContextProvider info={info} mediaType='tv'>
-          <Details />
+        <InfoContextProvider info={info} mediaType='tv' session={session}>
+          <Details>
+            <Suspense fallback={<p>Loading</p>}>
+              <ActionButtonServerWrapper session={session} id={id} />
+            </Suspense>
+          </Details>
         </InfoContextProvider>
       </Backdrop>
 

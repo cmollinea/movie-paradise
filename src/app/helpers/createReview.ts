@@ -33,8 +33,6 @@ export const createReview = async (
       throw new Error('Something went wrong');
     }
 
-    console.log(upsertError);
-
     const review = {
       user_id: session?.user.id,
       media_id: mediaItem.id,
@@ -45,14 +43,11 @@ export const createReview = async (
       .from('reviews')
       .insert(review);
 
-    console.log(reviewError);
-
     if (reviewError) {
       throw new Error('Something went wrong');
     }
     return { message: 'Comment was added', type: 'success' };
   } catch (err) {
-    console.log(err);
     return { message: 'Failed to create', type: 'error' };
   }
 };

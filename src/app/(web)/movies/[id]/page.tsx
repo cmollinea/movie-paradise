@@ -6,7 +6,7 @@ import {
   MediaTabs
 } from '@/app/components/details';
 import { CommentForm, CommentsContainer } from '@/app/components/comments';
-import { InfoContextProvider } from '@/app/context';
+import { ButtonStatusProvider, InfoContextProvider } from '@/app/context';
 import { MovieFullDetails } from 'root/types/movie-response-full';
 import { queryTMDB } from '@/app/services/queryTMDB';
 import { Section } from '@/app/components/global-ui/section';
@@ -16,6 +16,8 @@ import { Title } from '@/app/components/global-ui';
 import { getTMDBEndpoint } from '@/app/helpers/get-tmdb-endpoint';
 import { Metadata } from 'next';
 import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
+import { createServerSupabaseCli } from '@/app/helpers';
+import { ActionButtonServerWrapper } from '@/app/components/action-buttons/action-buttons-server-wrapper';
 
 type Props = {
   params: {
@@ -76,9 +78,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 async function MovieDetails({ params }: Props) {
+  const supabase = createServerSupabaseCli();
   const id = params.id;
   const DETAILS_URL = getTMDBEndpoint(id, 'movie');
-  const movieDetails = await queryTMDB<MovieFullDetails>(DETAILS_URL);
+
+  const [
+    {
+      data: { session }
+    },
+    movieDetails
+  ] = await Promise.all([
+    supabase.auth.getSession(),
+    queryTMDB<MovieFullDetails>(DETAILS_URL)
+  ]);
 
   if (movieDetails === undefined) {
     return <SomethingWentWrong />;
@@ -107,8 +119,12 @@ async function MovieDetails({ params }: Props) {
   return (
     <section className='w-full'>
       <Backdrop src={movieDetails.backdrop_path}>
-        <InfoContextProvider info={info} mediaType='movies'>
-          <Details />
+        <InfoContextProvider info={info} mediaType='movies' session={session}>
+          <Details>
+            <Suspense fallback={<p>Loading</p>}>
+              <ActionButtonServerWrapper session={session} id={id} />
+            </Suspense>
+          </Details>
         </InfoContextProvider>
       </Backdrop>
       <div className=' grid gap-4 xl:grid-cols-12'>
