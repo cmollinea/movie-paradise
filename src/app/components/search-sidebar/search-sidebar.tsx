@@ -1,14 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { TargetButtonLink } from './target-button';
-import {
-  QueryClient,
-  QueryClientProvider as Provider,
-  useQuery,
-  QueryKey,
-  QueryFunctionContext
-} from '@tanstack/react-query';
-const queryClient = new QueryClient();
 
 const targets = Object.freeze({
   Movies: 'movies',

@@ -6,7 +6,7 @@ import {
   MediaTabs
 } from '@/app/components/details';
 import { CommentForm, CommentsContainer } from '@/app/components/comments';
-import { ButtonStatusProvider, InfoContextProvider } from '@/app/context';
+import { InfoContextProvider } from '@/app/context';
 import { MovieFullDetails } from 'root/types/movie-response-full';
 import { queryTMDB } from '@/app/services/queryTMDB';
 import { Section } from '@/app/components/global-ui/section';

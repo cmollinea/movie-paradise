@@ -51,7 +51,12 @@ export const SearchResultsContainer = ({ data, type }: Props) => {
     const people = (data as PeopleResponse).results;
 
     node = people.map((person) => (
-      <ActorCard name={person.name} src={person.profile_path} key={person.id} />
+      <ActorCard
+        name={person.name}
+        src={person.profile_path}
+        key={person.id}
+        id={person.id}
+      />
     ));
   } else {
     const results = (

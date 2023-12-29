@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from 'react';
 
 type Props = {
   children: React.ReactNode;
+  withButtons?: boolean;
 };
 
-export function CardContainer({ children }: Props) {
+export function CardContainer({ children, withButtons = true }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [hasOverflow, setHasOverflow] = useState(false);
 
@@ -35,22 +36,27 @@ export function CardContainer({ children }: Props) {
       className='w-full p-1 py-4 inline-flex gap-6 overflow-x-auto md:px-4 max-sm:snap-x scroll-smooth horizontal-scrollbar'
     >
       {children}
-      <button
-        className={`absolute active:scale-95 transition-all ease-in hover:bg-neutral-200/20 bg-neutral-200/10 rounded-full flex items-center place-content-center top-1/2 max-md:hidden p-1 left-4 ${
-          hasOverflow ? '' : 'hidden'
-        }`}
-        onClick={() => scrollTo('left')}
-      >
-        <ChevronLeftIcon size={24} />
-      </button>
-      <button
-        className={`absolute active:scale-95 transition-all ease-in hover:bg-neutral-200/20 bg-neutral-200/10 rounded-full flex items-center place-content-center top-1/2 max-md:hidden p-1 right-4 ${
-          hasOverflow ? '' : 'hidden'
-        }`}
-        onClick={() => scrollTo('right')}
-      >
-        <ChevronRightIcon size={24} />
-      </button>
+      {withButtons && (
+        <>
+          {' '}
+          <button
+            className={`absolute active:scale-95 transition-all ease-in hover:bg-neutral-200/20 bg-neutral-200/10 rounded-full flex items-center place-content-center top-1/2 max-md:hidden p-1 left-4 ${
+              hasOverflow ? '' : 'hidden'
+            }`}
+            onClick={() => scrollTo('left')}
+          >
+            <ChevronLeftIcon size={24} />
+          </button>
+          <button
+            className={`absolute active:scale-95 transition-all ease-in hover:bg-neutral-200/20 bg-neutral-200/10 rounded-full flex items-center place-content-center top-1/2 max-md:hidden p-1 right-4 ${
+              hasOverflow ? '' : 'hidden'
+            }`}
+            onClick={() => scrollTo('right')}
+          >
+            <ChevronRightIcon size={24} />
+          </button>
+        </>
+      )}
     </div>
   );
 }

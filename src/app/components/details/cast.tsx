@@ -22,6 +22,7 @@ export async function Cast({ credits }: Props) {
             return (
               <ActorCard
                 key={actor.id}
+                id={actor.id}
                 name={actor.name}
                 src={actor.profile_path}
               />
