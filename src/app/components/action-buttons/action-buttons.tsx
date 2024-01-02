@@ -4,52 +4,54 @@ import { Button } from '@nextui-org/react';
 import { HeartIcon, HeartOff, MinusCircle, PlusCircle } from 'lucide-react';
 import { useActionButtons } from '@/app/hooks';
 import { useButtonStatusContext } from '@/app/hooks';
+import { ActionButton } from './action-button';
+import { useOptimisticActionButtons } from '@/app/hooks/useOptimisticActionButtons';
 
 export function ActionButtons() {
-  const { addMedia, deleteFromTable } = useActionButtons();
-  const { isInFav, isInWatchList } = useButtonStatusContext();
-  console.log(isInFav, isInWatchList);
-
-  //todo Make 2 more buttons (destructive ones) and if is in database make them to remove from it
+  const { addMedia, deleteFromTable, optimisticFav, optimisticIsInWatchList } =
+    useActionButtons();
+  // const { isInFav, isInWatchList } = useButtonStatusContext();
+  console.log(optimisticFav, optimisticIsInWatchList);
 
   return (
     <div className='flex space-x-2 mt-6'>
-      {isInWatchList ? (
-        <Button
+      {optimisticIsInWatchList ? (
+        <ActionButton
           color='warning'
           variant='flat'
-          onClick={() => deleteFromTable('watch_list')}
-        >
-          <MinusCircle size={16} />
-          Remove from watch list
-        </Button>
+          table='watch_list'
+          action={deleteFromTable}
+          icon={<MinusCircle size={16} />}
+          label='Remove from watch list'
+        />
       ) : (
-        <Button
-          disabled={isInWatchList}
+        <ActionButton
           color='primary'
-          onClick={() => addMedia('watch_list')}
-        >
-          <PlusCircle size={16} />
-          Add to watch List
-        </Button>
+          variant='solid'
+          table='watch_list'
+          action={addMedia}
+          icon={<PlusCircle size={16} />}
+          label='Add to watch List'
+        />
       )}
-      {isInFav ? (
-        <Button
+      {optimisticFav ? (
+        <ActionButton
           color='warning'
           variant='flat'
-          onClick={() => deleteFromTable('favs')}
-        >
-          <HeartOff size={16} />
-          Remove from favorites
-        </Button>
+          table='favs'
+          action={deleteFromTable}
+          icon={<HeartOff size={16} />}
+          label='Remove from favorites'
+        />
       ) : (
-        <Button
-          disabled={isInFav}
+        <ActionButton
           color='secondary'
-          onClick={() => addMedia('favs')}
-        >
-          <HeartIcon size={16} /> Add to Favorites
-        </Button>
+          variant='solid'
+          table='favs'
+          action={addMedia}
+          icon={<HeartIcon size={16} />}
+          label='Add to Favorites'
+        />
       )}
     </div>
   );

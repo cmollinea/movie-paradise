@@ -2,8 +2,11 @@ import { useInfoContext } from './useInfoContext';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { createClienSupabaseCli } from '../helpers/create-client-supabase-cli';
+import { useState } from 'react';
+import { useOptimisticActionButtons } from './useOptimisticActionButtons';
 
 export type Tables = 'watch_list' | 'favs';
+export type ActionState = 'loading' | 'idle';
 
 /**
  * Custom hook to manage user actions on media items.
@@ -14,6 +17,14 @@ export type Tables = 'watch_list' | 'favs';
 
 export function useActionButtons() {
   const supabase = createClienSupabaseCli();
+  const [actionState, setActionState] = useState<ActionState>('idle');
+  //This was my first optimisitic implementation it need fixes
+  const {
+    addOptimisticFav,
+    addOptimisticIsInWatchList,
+    optimisticFav,
+    optimisticIsInWatchList
+  } = useOptimisticActionButtons();
   const router = useRouter();
   const {
     info: {
@@ -87,7 +98,10 @@ export function useActionButtons() {
    */
 
   const addMedia = async (table: Tables) => {
+    console.log(optimisticFav);
+
     try {
+      setActionState('loading');
       if (!session) {
         router.push('/sign-in');
         return;
@@ -102,14 +116,21 @@ export function useActionButtons() {
         throw new Error(insertError.error);
       }
       toast.success('Item was added');
-      router.refresh();
+      if (table === 'favs') {
+        addOptimisticFav(true);
+      } else {
+        addOptimisticIsInWatchList(true);
+      }
     } catch (err) {
       toast.error('There was an error while we were working');
+    } finally {
+      setActionState('idle');
     }
   };
 
   const deleteFromTable = async (table: Tables) => {
     try {
+      setActionState('loading');
       const { error: deleteFromListError } = await supabase
         .from(table)
         .delete()
@@ -120,11 +141,23 @@ export function useActionButtons() {
         throw new Error(deleteFromListError.details);
       }
       toast.success('Item was removed');
-      router.refresh();
+      if (table === 'favs') {
+        addOptimisticFav(false);
+      } else {
+        addOptimisticIsInWatchList(false);
+      }
     } catch (err: any) {
       toast.error('There was an error while we were working');
+    } finally {
+      setActionState('idle');
     }
   };
 
-  return { addMedia, deleteFromTable };
+  return {
+    addMedia,
+    deleteFromTable,
+    actionState,
+    optimisticFav,
+    optimisticIsInWatchList
+  };
 }
