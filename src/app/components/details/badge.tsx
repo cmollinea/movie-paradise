@@ -10,12 +10,24 @@ type Props = {
     | 'success'
     | 'warning'
     | 'danger';
+  variant?:
+    | 'shadow'
+    | 'dot'
+    | 'solid'
+    | 'bordered'
+    | 'light'
+    | 'flat'
+    | 'faded';
 };
 
-export function GenreBadge({ children, color = 'primary' }: Props) {
+export function GenreBadge({
+  children,
+  color = 'primary',
+  variant = 'shadow'
+}: Props) {
   return (
     <Chip
-      variant='shadow'
+      variant={variant}
       color={color}
       size='sm'
       className='text-black text-xs h-fit py-0.5 max-md:flex-none'

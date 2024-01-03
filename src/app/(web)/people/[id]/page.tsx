@@ -1,12 +1,13 @@
 import { ErrorWithStatus, SomethingWentWrong } from '@/app/components/error';
-import { Section } from '@/app/components/global-ui';
-import { CardContainer, CardLink } from '@/app/components/home';
+import { Title } from '@/app/components/global-ui';
+import { Label } from '@/app/components/global-ui/label';
+import { PeopleMedia } from '@/app/components/people-media/people-media';
+import { TimeLineContainer } from '@/app/components/timeline/timeline-container';
 import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
 import { getTMDBEndpoint } from '@/app/helpers';
 import { queryTMDB } from '@/app/services';
 import { Image } from '@nextui-org/react';
-import { MediaType } from 'root/types';
-import { Cast, PersonDetails } from 'root/types/person-details';
+import { PersonDetails } from 'root/types/person-details';
 
 type Props = {
   params: {
@@ -38,64 +39,41 @@ async function People({ params }: Props) {
     peopleDetails.biography.split(/\n/).filter((item) => item !== '').length
   );
 
-  const bestCast: Cast[] = [];
-
-  function customSort(a: Cast, b: Cast) {
-    // First condition: Sort based on the greater value of property1 and property2 combined
-    const sumA =
-      a.vote_average + a.vote_count + (a.episode_count ? a.episode_count : 0);
-    const sumB =
-      b.vote_average + b.vote_count + (b.episode_count ? b.episode_count : 0);
-
-    if (sumA < sumB) {
-      return 1; // Greater sum comes first
-    } else if (sumA > sumB) {
-      return -1; // Lesser sum comes first
-    } else {
-      return 0; // Sums are equal
-    }
-  }
-
-  peopleDetails.combined_credits.cast.sort(customSort).forEach((element) => {
-    if (bestCast.length === 8) {
-      return;
-    }
-    bestCast.push(element);
-  });
-
-  console.log(bestCast.map((item) => item.name || item.title));
-
   return (
-    <section className='py-16'>
-      <div className='flex max-md:flex-col container md:space-x-4'>
-        <div className='w-fit px-4'>
-          <div>
-            <Image
-              alt={`${peopleDetails.name} profile pic`}
-              src={BASE_URL + POSTER_SIZES.sm + peopleDetails.profile_path}
-              width={185}
-            />
-            <aside>
-              {peopleDetails.homepage && (
-                <a href={peopleDetails.homepage}>{peopleDetails.homepage}</a>
-              )}
+    <section className='py-6 md:py-16 px-6'>
+      <div className='flex max-md:flex-col container md:space-x-16 px-6 xl:px-20 max-md:space-y-4'>
+        <div className='w-fit text-sm md:text-lg italic'>
+          <div className='flex flex-col space-y-4'>
+            <div className='relative w-full h-full'>
+              <Image
+                alt={`${peopleDetails.name} profile pic`}
+                src={BASE_URL + POSTER_SIZES.sm + peopleDetails.profile_path}
+                width={185}
+                height={278}
+                className='min-w-[185px] min-h-[278px]'
+              />
+            </div>
+            {peopleDetails.homepage && (
+              <a href={peopleDetails.homepage}>{peopleDetails.homepage}</a>
+            )}
+            <aside className='grid max-md:grid-cols-2'>
               <p>
-                <span>Known for:</span>
+                <Label>Known for:</Label>
                 <br />
                 {peopleDetails.known_for_department}
               </p>
               <p>
-                <span>Known credits:</span>
+                <Label>Known credits:</Label>
                 <br />
                 {peopleDetails.combined_credits.cast.length}
               </p>
               <p>
-                <span>Gender:</span>
+                <Label>Gender:</Label>
                 <br />
-                {peopleDetails.gender}
+                {peopleDetails.gender === 1 ? 'Female' : 'Male'}
               </p>
               <p>
-                <span>Birthday:</span>
+                <Label>Birthday:</Label>
                 <br />
                 {new Date(peopleDetails.birthday).toLocaleDateString()} (
                 {new Date().getFullYear() -
@@ -106,46 +84,34 @@ async function People({ params }: Props) {
                 title={peopleDetails.place_of_birth}
                 className='max-w-[200px] truncate'
               >
-                <span>Place of birthday:</span>
+                <Label>Place of birthday:</Label>
                 <br />
                 {peopleDetails.place_of_birth}
               </p>
-              <p>Also known as:</p>
-              {peopleDetails.also_known_as.map((item) => (
-                <p key={item}>{item}</p>
-              ))}
+              <div className='max-md:hidden'>
+                <Label>Also known as:</Label>
+                {peopleDetails.also_known_as.map((item) => (
+                  <p key={item}>{item}</p>
+                ))}
+              </div>
             </aside>
           </div>
         </div>
-        <Section>
-          <h1>{peopleDetails.name}</h1>
+        <section className='space-y-4 md:space-y-16 relative'>
           <article>
+            <Title className='max-md:hidden'>{peopleDetails.name}</Title>
             <p
-              className=''
+              className='text-sm md:text-lg'
               dangerouslySetInnerHTML={{ __html: formattedString }}
             />
           </article>
-          <Section>
-            <CardContainer withButtons={false}>
-              {bestCast.map((item) => {
-                const element = {
-                  id: item.id,
-                  name: (item.name || item.title) as string,
-                  rating: item.vote_average,
-                  poster_path: item.poster_path || ''
-                };
-                return (
-                  <CardLink
-                    element={element}
-                    type={item.media_type as MediaType}
-                    imageSizes='poster'
-                    key={item.id}
-                  />
-                );
-              })}
-            </CardContainer>
-          </Section>
-        </Section>
+          <PeopleMedia
+            cast={peopleDetails.combined_credits.cast}
+            biography={peopleDetails.biography}
+            name={peopleDetails.name}
+          />
+          <TimeLineContainer cast={peopleDetails.combined_credits.cast} />
+        </section>
       </div>
     </section>
   );
