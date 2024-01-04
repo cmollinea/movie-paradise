@@ -31,10 +31,10 @@ export default async function RootLayout({
         {/* <NextTopLoader />  */}
         <Toaster />
         <Providers>
-          <nav className='sticky top-0 bg-default-900/80 backdrop-blur-md z-50'>
+          <div className='sticky top-0 z-50'>
             <NavBarUI session={session} />{' '}
-          </nav>
-          <main className='flex flex-col place-content-center items-center overflow-hidden h-fit'>
+          </div>
+          <main className='flex flex-col place-content-center items-center h-fit'>
             {children}
           </main>
         </Providers>

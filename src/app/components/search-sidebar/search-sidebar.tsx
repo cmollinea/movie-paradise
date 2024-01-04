@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { TargetButtonLink } from './target-button';
+import { useParams, useSearchParams } from 'next/navigation';
 
 const targets = Object.freeze({
   Movies: 'movies',
@@ -27,10 +28,13 @@ const initialResults: Results = {
   people: 0
 };
 
-export const SideBar = ({ query }: Props) => {
+export const SideBar = () => {
   // I know that the best aproach is use useQuery but it need pollyfills for iOS<15 (iam using it) so
   // I am going to use useEffect to fetch data with an abort controller for clean up async request
   // The react-query aproach is commented in the end of the script
+
+  const searchParams = useSearchParams();
+  const query = searchParams.get('query');
 
   const [results, setResults] = useState(initialResults);
 
@@ -54,14 +58,14 @@ export const SideBar = ({ query }: Props) => {
       setResults(results);
     };
 
-    getResults(query);
+    getResults(query || '');
 
     return () => controller.abort();
   }, [query]);
 
   return (
     <nav className='flex items-center place-content-center overflow-auto container'>
-      <ul className='flex max-md:max-w-sm max-lg:px-4 py-6 scrollbar-hide max-lg:snap-x lg:flex-col max-lg:space-x-4 lg:space-y-4 overflow-x-auto'>
+      <ul className='flex max-sm:max-w-sm max-lg:px-4 py-6 scrollbar-hide max-lg:snap-x lg:flex-col max-lg:space-x-4 lg:space-y-4 overflow-x-auto'>
         {Object.entries(targets).map(([key, value]) => (
           <TargetButtonLink
             key={key}

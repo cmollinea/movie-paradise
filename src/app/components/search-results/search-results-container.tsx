@@ -81,7 +81,7 @@ export const SearchResultsContainer = ({ data, type }: Props) => {
               <p className='text-xl lg:text-3xl truncate'>
                 <b>{title}</b>
               </p>
-              {rating && (
+              {rating > 0 && (
                 <span className='flex space-x-0.5 items-center md:text-2xl font-extrabold'>
                   <Star className=' fill-primary-400 stroke-primary-400 h-4 w-4 md:h-6 md:w-6' />
                   {rating && <span>{rating.toFixed(1)}</span>}

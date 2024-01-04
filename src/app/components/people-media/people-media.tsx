@@ -1,5 +1,6 @@
 import { Cast } from 'root/types/person-details';
 import { CardContainer, CardLink } from '../home';
+import { Title } from '../global-ui';
 
 type Props = {
   cast: Cast[];
@@ -48,9 +49,9 @@ export const PeopleMedia = ({ cast, name, biography }: Props) => {
   );
 
   return (
-    <>
-      <title>If you enjoy {name} maybe you want to look out for:</title>
-      <section className='overflow-hidden container relative max-sm:max-w-[90vw]'>
+    <section className=''>
+      <Title>If you like {name} maybe you want to look out for:</Title>
+      <section className='overflow-hidden relative max-md:max-w-[90vw]'>
         <CardContainer withButtons={false}>
           {knownMedia.length > 0
             ? knownMedia.map((item) => {
@@ -87,6 +88,6 @@ export const PeopleMedia = ({ cast, name, biography }: Props) => {
               })}
         </CardContainer>
       </section>
-    </>
+    </section>
   );
 };

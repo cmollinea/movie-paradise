@@ -31,7 +31,7 @@ export function ProfileButton({ user, userAvatar }: Props) {
   };
 
   return (
-    <NavbarContent as='div' justify='end'>
+    <>
       <Dropdown placement='bottom-end'>
         <DropdownTrigger>
           <Avatar
@@ -61,6 +61,6 @@ export function ProfileButton({ user, userAvatar }: Props) {
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
-    </NavbarContent>
+    </>
   );
 }

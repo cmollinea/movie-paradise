@@ -1,12 +1,14 @@
 import { ErrorWithStatus, SomethingWentWrong } from '@/app/components/error';
 import { Title } from '@/app/components/global-ui';
 import { Label } from '@/app/components/global-ui/label';
+import { PeopleBiography } from '@/app/components/people-biography/people-biography';
 import { PeopleMedia } from '@/app/components/people-media/people-media';
 import { TimeLineContainer } from '@/app/components/timeline/timeline-container';
 import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
 import { getTMDBEndpoint } from '@/app/helpers';
 import { queryTMDB } from '@/app/services';
 import { Image } from '@nextui-org/react';
+import { Metadata } from 'next';
 import { PersonDetails } from 'root/types/person-details';
 
 type Props = {
@@ -14,6 +16,58 @@ type Props = {
     id: string;
   };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const id = params.id;
+  const detailsUrl = getTMDBEndpoint(id, 'people');
+
+  // fetch data
+
+  const peopleDetails = await queryTMDB<PersonDetails>(detailsUrl);
+
+  if (peopleDetails && !('statusText' in peopleDetails)) {
+    return {
+      title: peopleDetails.name + ' • Movie Paradise',
+      description: peopleDetails.biography.replace(/\n/g, ''),
+      openGraph: {
+        type: 'website',
+        url: `https://movie-paradise-seven.vercel.app/people/${id}`,
+        title: peopleDetails.name + ' • Movie Paradise',
+        description: peopleDetails.biography.replace(/\n/g, ''),
+        siteName: 'Movie Paradise',
+        images: [
+          {
+            url: `${BASE_URL + POSTER_SIZES.xxs + peopleDetails.profile_path}`,
+            secureUrl: `${
+              BASE_URL + POSTER_SIZES.xxs + peopleDetails.profile_path
+            }`,
+            width: 92,
+            height: 138,
+            type: 'jpg',
+            alt: peopleDetails.name + 'poster'
+          }
+        ]
+      },
+      twitter: {
+        site: `https://movie-paradise-seven.vercel.app/people/${id}`,
+        title: peopleDetails.name + ' • Movie Paradise',
+        description: peopleDetails.biography.replace(/\n/g, ''),
+        images: [
+          {
+            url: `${BASE_URL + POSTER_SIZES.xxs + peopleDetails.profile_path}`,
+            width: 92,
+            height: 138
+          }
+        ]
+      }
+    };
+  }
+  return {
+    title: 'Error geting metadata • Movie Paradise',
+    description: 'No description'
+  };
+}
 
 async function People({ params }: Props) {
   const id = params.id;
@@ -33,24 +87,21 @@ async function People({ params }: Props) {
     );
   }
 
-  const formattedString = peopleDetails.biography.replace(/\n/g, '<br />');
-
-  console.log(
-    peopleDetails.biography.split(/\n/).filter((item) => item !== '').length
-  );
-
   return (
-    <section className='py-6 md:py-16 px-6'>
-      <div className='flex max-md:flex-col container md:space-x-16 px-6 xl:px-20 max-md:space-y-4'>
+    <section>
+      <div className='flex max-md:flex-col md:space-x-16 px-8 xl:px-20 max-md:space-y-4'>
         <div className='w-fit text-sm md:text-lg italic'>
           <div className='flex flex-col space-y-4'>
             <div className='relative w-full h-full'>
+              <Title className='md:hidden w-full mb-4'>
+                {peopleDetails.name}
+              </Title>
               <Image
                 alt={`${peopleDetails.name} profile pic`}
                 src={BASE_URL + POSTER_SIZES.sm + peopleDetails.profile_path}
                 width={185}
                 height={278}
-                className='min-w-[185px] min-h-[278px]'
+                className='min-w-[185px] min-h-[278px] max-md:max-w-[120px] max-md:max-h-[200px] w-full'
               />
             </div>
             {peopleDetails.homepage && (
@@ -97,14 +148,11 @@ async function People({ params }: Props) {
             </aside>
           </div>
         </div>
-        <section className='space-y-4 md:space-y-16 relative'>
-          <article>
+        <section className='space-y-4 md:space-y-16 relative md:max-w-[60vw]'>
+          <div>
             <Title className='max-md:hidden'>{peopleDetails.name}</Title>
-            <p
-              className='text-sm md:text-lg'
-              dangerouslySetInnerHTML={{ __html: formattedString }}
-            />
-          </article>
+            <PeopleBiography biography={peopleDetails.biography} />
+          </div>
           <PeopleMedia
             cast={peopleDetails.combined_credits.cast}
             biography={peopleDetails.biography}

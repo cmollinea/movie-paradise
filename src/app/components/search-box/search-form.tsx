@@ -4,7 +4,12 @@ import { Input, Button } from '@nextui-org/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FormEvent } from 'react';
 
-export function SearchForm() {
+type Props = {
+  className: string;
+  submitButton?: boolean;
+};
+
+export function SearchForm({ className, submitButton = true }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams()!;
   const handleSubmit = (e: FormEvent) => {
@@ -21,7 +26,7 @@ export function SearchForm() {
   return (
     <form
       onSubmit={(e) => handleSubmit(e)}
-      className='flex z-10 max-w-md w-full space-x-4'
+      className={`flex z-10 ${className} w-full space-x-4`}
     >
       <Input
         type='text'
@@ -31,9 +36,11 @@ export function SearchForm() {
         placeholder='Search movies, tv-shows, and people'
         className='text-background'
       />
-      <Button type='submit' variant='bordered' color='primary'>
-        Search
-      </Button>
+      {submitButton && (
+        <Button type='submit' variant='bordered' color='primary'>
+          Search
+        </Button>
+      )}
     </form>
   );
 }

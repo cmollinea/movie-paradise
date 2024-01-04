@@ -36,7 +36,7 @@ export const TimeLineStep = ({
         </GenreBadge>{' '}
         <Link
           href={`/${mediaType === 'tv' ? mediaType : 'movies'}/${id}`}
-          className='max-xl:max-w-[300px] max-xl:truncate underline hover:text-secondary-400 transition-colors ease-in-out peer'
+          className='max-sm:max-w-[250px] max-xl:max-w-[300px] max-xl:truncate underline hover:text-secondary-400 transition-colors ease-in-out peer visited:text-primary-600'
         >
           {mediaTitle}
         </Link>

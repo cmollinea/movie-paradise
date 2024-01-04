@@ -17,7 +17,7 @@ export function ServerFormWrapper({ backgroundPath }: Props) {
       <h1 className='text-center text-5xl bg-gradient-to-br from-primary-400 to-secondary-400 py-2 bg-clip-text text-transparent font-bold max-sm:text-4xl z-10'>
         Finding something to watch never had been so easy and cool!
       </h1>
-      <SearchForm />
+      <SearchForm className='max-w-md' />
     </section>
   );
 }

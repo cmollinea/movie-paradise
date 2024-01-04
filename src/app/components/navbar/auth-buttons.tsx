@@ -5,9 +5,12 @@ import Link from 'next/link';
 
 export function AuthenticationButtons() {
   return (
-    <NavbarContent justify='end'>
+    <>
       <NavbarItem>
-        <Link href='/sign-in' className='hover:text-secondary-400'>
+        <Link
+          href='/sign-in'
+          className='hover:text-secondary-400 max-md:hidden'
+        >
           Login
         </Link>
       </NavbarItem>
@@ -16,6 +19,6 @@ export function AuthenticationButtons() {
           Sign Up
         </Button>
       </NavbarItem>
-    </NavbarContent>
+    </>
   );
 }
