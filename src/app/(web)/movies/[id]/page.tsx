@@ -18,6 +18,7 @@ import { Metadata } from 'next';
 import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
 import { createServerSupabaseCli } from '@/app/helpers';
 import { ActionButtonServerWrapper } from '@/app/components/action-buttons/action-buttons-server-wrapper';
+import { MEDIA_TYPES } from '@/app/constants';
 
 type Props = {
   params: {
@@ -119,7 +120,11 @@ async function MovieDetails({ params }: Props) {
   return (
     <section className='w-full'>
       <Backdrop src={movieDetails.backdrop_path}>
-        <InfoContextProvider info={info} mediaType='movies' session={session}>
+        <InfoContextProvider
+          info={info}
+          mediaType={MEDIA_TYPES.movies}
+          session={session}
+        >
           <Details>
             <Suspense fallback={<p>Loading</p>}>
               <ActionButtonServerWrapper session={session} id={id} />
