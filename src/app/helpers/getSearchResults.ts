@@ -8,8 +8,6 @@ import { SEARCH_ENDPOINTS } from '../constants/api-endpoints';
 import { queryTMDB } from '../services';
 
 export const getSearchResults = async (query: string) => {
-  console.log('Iam goint to make a fetch');
-
   const searchParams = `?query=${query}`;
 
   const [movie, tv, collection, people] = await Promise.all([

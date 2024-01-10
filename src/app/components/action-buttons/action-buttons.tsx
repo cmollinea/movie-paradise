@@ -11,7 +11,6 @@ export function ActionButtons() {
   const { addMedia, deleteFromTable, optimisticFav, optimisticIsInWatchList } =
     useActionButtons();
   // const { isInFav, isInWatchList } = useButtonStatusContext();
-  console.log(optimisticFav, optimisticIsInWatchList);
 
   return (
     <div className='flex space-x-2 mt-6'>

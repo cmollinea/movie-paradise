@@ -20,9 +20,7 @@ export const SortSelectProvider = ({ children }: Props) => {
   const searchParams = useSearchParams();
   const sortedBy = searchParams.get(filters.sort_by);
 
-  const [sortFilter, setSortFilter] = useState(sortedBy);
-
-  console.log(sortFilter);
+  const [sortFilter, setSortFilter] = useState(sortedBy || '');
 
   const handleSelectSortFilter = (filter: string) => {
     setSortFilter(filter);

@@ -5,7 +5,7 @@ import { useSortByContext } from '@/app/hooks/useSortByContext';
 import { Select, SelectItem } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
 
-const sortStrings = [
+export const sortStrings = [
   { value: 'popularity.asc', label: 'Popularity Asc' },
   { value: 'popularity.desc', label: 'Popularity Desc' },
   { value: 'revenue.asc', label: 'Revenue Asc' },

@@ -98,8 +98,6 @@ export function useActionButtons() {
    */
 
   const addMedia = async (table: Tables) => {
-    console.log(optimisticFav);
-
     try {
       setActionState('loading');
       if (!session) {

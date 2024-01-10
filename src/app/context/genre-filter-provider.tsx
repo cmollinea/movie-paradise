@@ -21,8 +21,6 @@ export const GenreFilterProvider = ({ children }: Props) => {
     searchParams.get(filters.genre)?.split(',') || []
   );
 
-  console.log(genres);
-
   const checkIfGenreIsFiltered = (genreId: string) => {
     return genres?.includes(genreId);
   };

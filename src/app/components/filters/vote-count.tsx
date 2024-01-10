@@ -4,7 +4,6 @@ import { Slider } from '@nextui-org/react';
 
 export const VoteCountSlider = () => {
   const { voteCount, setVoteCount } = useVoteCountContext();
-  console.log(voteCount);
 
   return (
     <Slider

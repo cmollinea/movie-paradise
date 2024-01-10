@@ -19,9 +19,7 @@ export const getTMDBEndpoint = (
       return `https://api.themoviedb.org/3/collection/${id}`;
     case 'people':
       return `https://api.themoviedb.org/3/person/${id}?append_to_response=combined_credits&language=en-US`;
-    case 'movie' || 'tv':
-      return `https://api.themoviedb.org/3/${target}/${id}?append_to_response=credits,similar,images,videos&language=en-US&include_image_language=en,null`;
     default:
-      throw new Error('Target must be valid');
+      return `https://api.themoviedb.org/3/${target}/${id}?append_to_response=credits,similar,images,videos&language=en-US&include_image_language=en,null`;
   }
 };

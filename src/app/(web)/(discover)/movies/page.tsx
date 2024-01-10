@@ -8,7 +8,6 @@ type Props = {
 const Movies = ({ searchParams }: Props) => {
   const url = getDiscoverUrlWithQueryParams('movie', searchParams);
   console.log(url);
-
   return <div>Movies</div>;
 };
 export default Movies;
