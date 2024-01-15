@@ -9,7 +9,7 @@ export const filters = {
   vote_average_gte: 'vote_average.gte',
   vote_count_gte: 'vote_count.gte',
   vote_count_lte: 'vote_count.lte',
-  with_genres: 'with_genres ',
+  with_genres: 'with_genres',
   sort_by: 'sort_by',
   year: 'year',
   page: 'page',

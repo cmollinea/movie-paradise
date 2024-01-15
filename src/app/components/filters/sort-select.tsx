@@ -6,8 +6,8 @@ import { Select, SelectItem } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
 
 export const sortStrings = [
-  { value: 'popularity.asc', label: 'Popularity Asc' },
   { value: 'popularity.desc', label: 'Popularity Desc' },
+  { value: 'popularity.asc', label: 'Popularity Asc' },
   { value: 'revenue.asc', label: 'Revenue Asc' },
   { value: 'revenue.desc', label: 'Revenue Desc' },
   { value: 'primary_release_date.asc', label: 'Primary Release Date Asc' },

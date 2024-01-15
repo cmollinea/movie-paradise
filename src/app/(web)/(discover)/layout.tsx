@@ -1,4 +1,5 @@
 import { RemoveAside } from '@/app/components/Test/remove-aside';
+import { RemoveStyles } from '@/app/components/Test/remove-styles';
 import { FilterAccordion } from '@/app/components/filters/filter-accordion';
 import { FilterButton } from '@/app/components/filters/filter-button';
 import { GenresWrapper } from '@/app/components/filters/genres-wrapper';
@@ -14,9 +15,9 @@ type Props = {
 
 const MovieLayout = ({ children }: Props) => {
   return (
-    <section className='w-full p-4 flex items-center flex-col py-16'>
+    <RemoveStyles>
       <RemoveAside>
-        <aside className='w-full max-w-sm'>
+        <aside className='w-full max-w-xs lg:sticky lg:top-20 h-fit'>
           <SortSelectProvider>
             <GenreFilterProvider>
               <VoteAverageSliderProvider>
@@ -33,8 +34,8 @@ const MovieLayout = ({ children }: Props) => {
           </SortSelectProvider>
         </aside>
       </RemoveAside>
-      <div>{children}</div>
-    </section>
+      <div className='w-full'>{children}</div>
+    </RemoveStyles>
   );
 };
 export default MovieLayout;

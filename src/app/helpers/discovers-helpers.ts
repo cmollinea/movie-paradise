@@ -16,7 +16,7 @@ export function getDiscoverUrlWithQueryParams(media: Media, filters: Filters) {
   );
   const searchParams = new URLSearchParams(BASE_URL.searchParams);
   Object.entries(filters).forEach(([key, value]) => {
-    searchParams.set(key, value);
+    searchParams.set(key, value.toString());
   });
 
   return (

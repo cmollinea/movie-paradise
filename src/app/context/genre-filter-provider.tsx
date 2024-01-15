@@ -18,7 +18,7 @@ type Props = {
 export const GenreFilterProvider = ({ children }: Props) => {
   const searchParams = useSearchParams();
   const [genres, setGenres] = useState<string[]>(
-    searchParams.get(filters.genre)?.split(',') || []
+    searchParams.get(filters.with_genres)?.toString().split(',') || []
   );
 
   const checkIfGenreIsFiltered = (genreId: string) => {

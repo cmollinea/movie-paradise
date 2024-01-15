@@ -21,7 +21,7 @@ export function CardLink({ element, type, imageSizes }: Props) {
     <Link
       prefetch={false}
       href={`/${type}/${id}`}
-      className='flex-none transition-colors ease-in-out group w-fit h-fit'
+      className='flex-none transition-colors ease-in-out group w-fit h-fit border border-foreground-100/30 rounded-xl'
     >
       <ImageContainer image={poster_path || ''} imageSizes={imageSizes}>
         <CardFooter className='absolute bg-gradient-to-t from-black to-transparent rounded-none bottom-0 p-0 z-10 md:opacity-0 group-hover:opacity-100 transition-opacity ease-in-out'>
