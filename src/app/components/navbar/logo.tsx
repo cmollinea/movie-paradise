@@ -22,11 +22,20 @@ export function Logo({ isMenuOpen }: Props) {
       <Link href={'/'}>
         <NavbarBrand>
           <Image
-            className=''
+            className='hidden md:block'
             alt='logo'
             src={`/brand.png`}
             width={150}
             height={150}
+          />
+        </NavbarBrand>
+        <NavbarBrand>
+          <Image
+            className='md:hidden'
+            alt='logo'
+            src={`/logo.png`}
+            width={50}
+            height={50}
           />
         </NavbarBrand>
       </Link>

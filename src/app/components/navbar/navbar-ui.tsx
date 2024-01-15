@@ -34,12 +34,14 @@ export function NavBarUI({ session }: Props) {
       <NavbarContent as={'div'} className='w-full' justify='end'>
         {openSearchBox ? (
           <>
-            <X
-              className='cursor-pointer'
-              onClick={() => setOpenSearchBox((prev) => !prev)}
-              size={16}
-            />
-            <SearchForm className='max-w-fit' submitButton={false} />
+            <div className='flex items-center gap-2'>
+              <X
+                className='cursor-pointer min-h-[10px] min-w-[10px]'
+                onClick={() => setOpenSearchBox((prev) => !prev)}
+                size={16}
+              />
+              <SearchForm className='max-w-fit' submitButton={false} />
+            </div>
           </>
         ) : (
           <Search

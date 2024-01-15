@@ -37,7 +37,7 @@ export function ProfileButton({ user, userAvatar }: Props) {
           <Avatar
             isBordered
             as='button'
-            className='transition-transform'
+            className='transition-transform min-w-[32px]'
             color='secondary'
             name='Jason Hughes'
             size='sm'
