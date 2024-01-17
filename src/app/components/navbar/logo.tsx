@@ -26,7 +26,7 @@ export function Logo({ isMenuOpen }: Props) {
             alt='logo'
             src={`/brand.png`}
             width={150}
-            height={150}
+            height={25}
           />
         </NavbarBrand>
         <NavbarBrand>
@@ -34,8 +34,8 @@ export function Logo({ isMenuOpen }: Props) {
             className='md:hidden'
             alt='logo'
             src={`/logo.png`}
-            width={50}
-            height={50}
+            width={30}
+            height={30}
           />
         </NavbarBrand>
       </Link>
