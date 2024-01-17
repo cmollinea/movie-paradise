@@ -1,12 +1,12 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import {
   useGenreFiltersContext,
   useVoteCountContext,
   useVoteAverageContext,
   useSortByContext
 } from './';
-import { Filters } from 'root/types/discover-types';
 import { sortStrings } from '../components/filters/sort-select';
+import { useRouter } from 'next-nprogress-bar';
 
 export const useFilters = () => {
   const { sortFilter } = useSortByContext();

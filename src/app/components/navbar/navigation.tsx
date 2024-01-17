@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-
 import {
   Button,
   Dropdown,
@@ -13,7 +11,7 @@ import {
 } from '@nextui-org/react';
 
 import { ChevronDown, Clock, TrendingUp, Sparkles } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
 
 const icons = {
   chevron: <ChevronDown fill='currentColor' size={16} />,
