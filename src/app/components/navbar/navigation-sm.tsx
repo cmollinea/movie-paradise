@@ -5,7 +5,6 @@ import { NavbarMenu, NavbarMenuItem, Link } from '@nextui-org/react';
 const menuItems = [
   { label: 'Movies', href: '/movies' },
   { label: 'Tv', href: '/tv' },
-  { label: 'Collections', href: '/collections' },
   { label: 'People', href: '/people' },
   { label: 'Profile', href: '/profile' },
   { label: 'LogOut', href: '/logout' }

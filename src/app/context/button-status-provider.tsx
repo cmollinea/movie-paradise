@@ -1,5 +1,5 @@
 'use client';
-import { createContext } from 'react';
+import { createContext, useEffect } from 'react';
 
 type ButtonStatus = {
   isInFav: boolean;
@@ -12,16 +12,24 @@ type ButtonStatusContext = {
 
 type Props = {
   children: React.ReactNode;
-  buttonStatus: ButtonStatus;
+  isInFav: boolean;
+  isInWatchList: boolean;
 };
 
 export const buttonStatusContext = createContext<ButtonStatusContext | null>(
   null
 );
 
-export const ButtonStatusProvider = ({ children, buttonStatus }: Props) => {
+export const ButtonStatusProvider = ({
+  children,
+  isInFav,
+  isInWatchList
+}: Props) => {
+  useEffect(() => console.log(isInFav, isInWatchList));
   return (
-    <buttonStatusContext.Provider value={{ buttonStatus }}>
+    <buttonStatusContext.Provider
+      value={{ buttonStatus: { isInFav, isInWatchList } }}
+    >
       {children}
     </buttonStatusContext.Provider>
   );

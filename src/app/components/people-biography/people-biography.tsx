@@ -12,7 +12,6 @@ export const PeopleBiography = ({ biography }: Props) => {
   const [showFullBiography, setShowFullBiography] = useState(false);
   const formattedString = biography.replace(/\n/g, '<br />');
   const splitedText = formattedString.split('<br />');
-  console.log(splitedText);
 
   return (
     <div

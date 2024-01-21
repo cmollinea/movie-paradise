@@ -5,11 +5,12 @@ import { CardWrapper } from '@/app/components/card-link-with-description/card-wr
 import { Backdrop, Details } from '@/app/components/details';
 import { ErrorWithStatus, SomethingWentWrong } from '@/app/components/error';
 import { Section } from '@/app/components/global-ui';
+import { MEDIA_TYPES } from '@/app/constants';
 import { InfoContextProvider } from '@/app/context';
 import { getTMDBEndpoint } from '@/app/helpers';
 import { queryTMDB } from '@/app/services';
 import { Star } from 'lucide-react';
-import { Info, MediaType } from 'root/types';
+import { Info } from 'root/types';
 import { CollectionDetails } from 'root/types/collection-details';
 
 type Props = {
@@ -46,7 +47,7 @@ const Collection = async ({ params }: Props) => {
   return (
     <section className='w-full'>
       <Backdrop src={collectionDetails.backdrop_path}>
-        <InfoContextProvider info={info} mediaType='movies'>
+        <InfoContextProvider info={info} mediaType={MEDIA_TYPES.movies}>
           <Details />
         </InfoContextProvider>
       </Backdrop>

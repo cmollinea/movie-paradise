@@ -15,10 +15,9 @@ export function Details({ children }: Props) {
   } = useInfoContext();
 
   const pathame = usePathname();
-  console.log(pathame);
 
   return (
-    <div className='z-20 py-10 grid xl:grid-cols-12 xl:place-items-center xl:py-20 mx-h-fit relative max-md:gap-4'>
+    <div className='z-20 py-10 grid xl:grid-cols-12 xl:place-items-center xl:py-20 relative max-md:gap-4'>
       <div className='xl:col-span-3 flex h-fit'>
         <Image
           alt={info?.title}

@@ -26,7 +26,5 @@ export const checkButtonStatus = async (
     .eq('user_id', session.user.id)
     .eq('movie_id', id);
 
-  console.log(data.data);
-
   return Boolean(data.data?.length);
 };

@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@nextui-org/react": "^2.1.13",
+    "@nextui-org/react": "^2.2.9",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
@@ -29,6 +29,7 @@
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.287.0",
     "next": "14.0.3",
+    "next-nprogress-bar": "^2.1.2",
     "nextjs-toploader": "^1.6.4",
     "react": "^18.2.0",
     "react-day-picker": "^8.9.0",
@@ -45,7 +46,7 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10",
     "eslint": "^8",
-    "eslint-config-next": "14.0.3",
+    "eslint-config-next": "14.1.0",
     "postcss": "^8",
     "supabase": "^1.115.4",
     "tailwindcss": "^3",

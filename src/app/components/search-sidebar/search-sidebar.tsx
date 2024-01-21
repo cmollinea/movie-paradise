@@ -43,10 +43,6 @@ export const SideBar = () => {
     const { signal } = controller;
 
     const getResults = async (query: string): Promise<void> => {
-      console.log(
-        `${window.location.origin}/api/search-results?query=${query}`
-      );
-
       const response = await fetch(
         `${window.location.origin}/api/search-results?query=${query}`,
         { signal }

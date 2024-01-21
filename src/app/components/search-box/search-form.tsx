@@ -26,7 +26,7 @@ export function SearchForm({ className, submitButton = true }: Props) {
   return (
     <form
       onSubmit={(e) => handleSubmit(e)}
-      className={`flex z-10 ${className} w-full space-x-4`}
+      className={`flex z-10 space-x-4 ${className} w-full`}
     >
       <Input
         type='text'

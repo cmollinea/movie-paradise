@@ -6,34 +6,29 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  Link,
   NavbarContent,
   NavbarItem
 } from '@nextui-org/react';
 
-import {
-  Activity,
-  ChevronDown,
-  Flashlight,
-  Lock,
-  Scale,
-  Server,
-  User
-} from 'lucide-react';
+import { ChevronDown, Clock, TrendingUp, Sparkles } from 'lucide-react';
+import { useRouter } from 'next-nprogress-bar';
 
 const icons = {
   chevron: <ChevronDown fill='currentColor' size={16} />,
-  scale: <Scale className='text-warning' fill='currentColor' size={30} />,
-  lock: <Lock className='text-success' fill='currentColor' size={30} />,
-  activity: (
-    <Activity className='text-secondary' fill='currentColor' size={30} />
+  timer: <Clock className='text-warning' size={30} />,
+  trending: (
+    <TrendingUp className='text-secondary' fill='currentColor' size={30} />
   ),
-  flash: <Flashlight className='text-primary' fill='currentColor' size={30} />,
-  server: <Server className='text-success' fill='currentColor' size={30} />,
-  user: <User className='text-danger' fill='currentColor' size={30} />
+  popular: <Sparkles className='text-primary' fill='currentColor' size={30} />
 };
 
 export function Navigation() {
+  const router = useRouter();
+
+  const goTo = (href: string) => {
+    router.push(href);
+  };
+
   return (
     <NavbarContent className='hidden sm:flex gap-4' justify='center'>
       <Dropdown>
@@ -51,39 +46,43 @@ export function Navigation() {
           </DropdownTrigger>
         </NavbarItem>
         <DropdownMenu
-          aria-label='ACME features'
+          aria-label='Movies'
           className='w-[340px]'
           itemClasses={{
             base: 'gap-4'
           }}
         >
           <DropdownItem
-            key='autoscaling'
-            description='ACME scales apps to meet user demand, automagically, based on load.'
-            startContent={icons.scale}
+            onClick={() =>
+              goTo(
+                '/movies?sort_by=primary_release_date.desc&vote_count.gte=0&vote_average.gte=0&vote_average.lte=10'
+              )
+            }
+            key='last_realases'
+            description='Generate here a description'
+            startContent={icons.timer}
           >
             Last Realases
           </DropdownItem>
           <DropdownItem
-            key='usage_metrics'
-            description='Real-time metrics to debug issues. Slow query added? We’ll show you exactly where.'
-            startContent={icons.activity}
+            onClick={() =>
+              goTo(
+                '/movies?sort_by=vote_average.desc&vote_count.gte=1000&vote_average.gte=0&vote_average.lte=10'
+              )
+            }
+            key='trending'
+            description='Generate here a description'
+            startContent={icons.trending}
           >
-            Trending
+            Top Rated
           </DropdownItem>
           <DropdownItem
-            key='production_ready'
-            description='ACME runs on ACME, join us and others serving requests at web scale.'
-            startContent={icons.flash}
+            onClick={() => goTo('/movies')}
+            key='most_popular'
+            description='Generate here a description'
+            startContent={icons.popular}
           >
             Most Popular
-          </DropdownItem>
-          <DropdownItem
-            key='99_uptime'
-            description='Applications stay on the grid with high availability and high uptime guarantees.'
-            startContent={icons.server}
-          >
-            Explore
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
@@ -109,32 +108,36 @@ export function Navigation() {
           }}
         >
           <DropdownItem
-            key='autoscaling'
-            description='ACME scales apps to meet user demand, automagically, based on load.'
-            startContent={icons.scale}
+            onClick={() =>
+              goTo(
+                '/tv?sort_by=primary_release_date.desc&vote_count.gte=0&vote_average.gte=0&vote_average.lte=10'
+              )
+            }
+            key='last_realases'
+            description='Generate here a description'
+            startContent={icons.timer}
           >
             Last Realases
           </DropdownItem>
           <DropdownItem
-            key='usage_metrics'
-            description='Real-time metrics to debug issues. Slow query added? We’ll show you exactly where.'
-            startContent={icons.activity}
+            onClick={() =>
+              goTo(
+                '/movies?sort_by=vote_average.desc&vote_count.gte=1000&vote_average.gte=0&vote_average.lte=10'
+              )
+            }
+            key='trending'
+            description='Generate here a description'
+            startContent={icons.trending}
           >
-            Trending
+            Top Rated
           </DropdownItem>
           <DropdownItem
-            key='production_ready'
-            description='ACME runs on ACME, join us and others serving requests at web scale.'
-            startContent={icons.flash}
+            onClick={() => goTo('/tv')}
+            key='most_popular'
+            description='Generate here a description'
+            startContent={icons.popular}
           >
             Most Popular
-          </DropdownItem>
-          <DropdownItem
-            key='99_uptime'
-            description='Applications stay on the grid with high availability and high uptime guarantees.'
-            startContent={icons.server}
-          >
-            Explore
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>

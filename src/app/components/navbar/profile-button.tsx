@@ -9,8 +9,7 @@ import {
   DropdownTrigger,
   DropdownMenu
 } from '@nextui-org/react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next-nprogress-bar';
 
 type Props = {
   user: string;
@@ -37,7 +36,7 @@ export function ProfileButton({ user, userAvatar }: Props) {
           <Avatar
             isBordered
             as='button'
-            className='transition-transform'
+            className='transition-transform min-w-[32px]'
             color='secondary'
             name='Jason Hughes'
             size='sm'
