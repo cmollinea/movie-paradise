@@ -1,4 +1,4 @@
-import { getSearchResults } from '@/app/helpers';
+import { getSearchResults } from '@/helpers';
 import { NextResponse } from 'next/server';
 
 const param = 'query';

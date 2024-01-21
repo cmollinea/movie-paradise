@@ -1,17 +1,19 @@
-import { CardInfo } from '@/app/components/card-link-with-description/card-info';
-import { CardInfoContainer } from '@/app/components/card-link-with-description/card-info-container';
-import { CardPoster } from '@/app/components/card-link-with-description/card-poster';
-import { CardWrapper } from '@/app/components/card-link-with-description/card-wrapper';
-import { Backdrop, Details } from '@/app/components/details';
-import { ErrorWithStatus, SomethingWentWrong } from '@/app/components/error';
-import { Section } from '@/app/components/global-ui';
-import { MEDIA_TYPES } from '@/app/constants';
-import { InfoContextProvider } from '@/app/context';
-import { getTMDBEndpoint } from '@/app/helpers';
-import { queryTMDB } from '@/app/services';
-import { Star } from 'lucide-react';
-import { Info } from 'root/types';
+import { Backdrop, Details } from '@/components/details';
+import { CardInfo } from '@/components/card-link-with-description/card-info';
+import {
+  CardInfoContainer,
+  CardWrapper,
+  CardPoster
+} from '@/components/card-link-with-description';
 import { CollectionDetails } from 'root/types/collection-details';
+import { ErrorWithStatus, SomethingWentWrong } from '@/components/error';
+import { getTMDBEndpoint } from '@/helpers';
+import { Info } from 'root/types';
+import { InfoContextProvider } from '@/context';
+import { MEDIA_TYPES } from '@/constants';
+import { queryTMDB } from '@/services';
+import { Section } from '@/components/global-ui';
+import { Star } from 'lucide-react';
 
 type Props = {
   params: {

@@ -1,8 +1,8 @@
 //todo hacer fetch al capitulo y mostrar el modal
 
-import { EpisodeModal } from '@/app/components/episode-modal/episode-modal';
-import { EpisodeSkelleton } from '@/app/components/skelletons/episode-skelleton';
-import { queryTMDB } from '@/app/services';
+import { EpisodeModal } from '@/components/episode-modal/episode-modal';
+import { EpisodeSkelleton } from '@/components/skelletons/episode-skelleton';
+import { queryTMDB } from '@/services';
 import { Suspense } from 'react';
 import { EpisodeDetails } from 'root/types/episode-details';
 

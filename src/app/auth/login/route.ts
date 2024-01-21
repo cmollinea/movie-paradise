@@ -1,4 +1,4 @@
-import { createRouteSupabaseCli } from '@/app/helpers/create-route-supabse-cli';
+import { createRouteSupabaseCli } from '@/helpers/create-route-supabse-cli';
 import { type EmailOtpType } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 

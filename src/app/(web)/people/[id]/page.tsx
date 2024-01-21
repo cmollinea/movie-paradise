@@ -1,15 +1,14 @@
-import { ErrorWithStatus, SomethingWentWrong } from '@/app/components/error';
-import { Title } from '@/app/components/global-ui';
-import { Label } from '@/app/components/global-ui/label';
-import { PeopleBiography } from '@/app/components/people-biography/people-biography';
-import { PeopleMedia } from '@/app/components/people-media/people-media';
-import { TimeLineContainer } from '@/app/components/timeline/timeline-container';
-import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
-import { getTMDBEndpoint } from '@/app/helpers';
-import { queryTMDB } from '@/app/services';
+import { BASE_URL, POSTER_SIZES } from '@/constants/image-url';
+import { ErrorWithStatus, SomethingWentWrong } from '@/components/error';
+import { getTMDBEndpoint } from '@/helpers';
 import { Image } from '@nextui-org/react';
 import { Metadata } from 'next';
+import { PeopleBiography } from '@/components/people-biography/people-biography';
+import { PeopleMedia } from '@/components/people-media/people-media';
 import { PersonDetails } from 'root/types/person-details';
+import { queryTMDB } from '@/services';
+import { TimeLineContainer } from '@/components/timeline/timeline-container';
+import { Title, Label } from '@/components/global-ui';
 
 type Props = {
   params: {
@@ -32,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: peopleDetails.biography.replace(/\n/g, ''),
       openGraph: {
         type: 'website',
-        url: `https://movie-paradise-seven.vercel.app/people/${id}`,
+        url: `https://movie-paradise-seven.vercel/people/${id}`,
         title: peopleDetails.name + ' • Movie Paradise',
         description: peopleDetails.biography.replace(/\n/g, ''),
         siteName: 'Movie Paradise',
@@ -50,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ]
       },
       twitter: {
-        site: `https://movie-paradise-seven.vercel.app/people/${id}`,
+        site: `https://movie-paradise-seven.vercel/people/${id}`,
         title: peopleDetails.name + ' • Movie Paradise',
         description: peopleDetails.biography.replace(/\n/g, ''),
         images: [

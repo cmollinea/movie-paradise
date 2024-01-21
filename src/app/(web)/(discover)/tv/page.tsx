@@ -1,7 +1,7 @@
-import { NotSuspendedPagination } from '@/app/components/discover/not-suspended-pagination';
-import { Discover } from '@/app/components/discover/discover';
-import { DiscoverSkelleton } from '@/app/components/skelletons/discover-skelleton';
-import { PaginationProvider } from '@/app/context/pagination-provider';
+import { NotSuspendedPagination } from '@/components/discover/not-suspended-pagination';
+import { Discover } from '@/components/discover/discover';
+import { DiscoverSkelleton } from '@/components/skelletons/discover-skelleton';
+import { PaginationProvider } from '@/context/pagination-provider';
 import { Suspense } from 'react';
 import { Filters } from 'root/types/discover-types';
 

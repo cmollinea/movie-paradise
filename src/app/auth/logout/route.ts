@@ -1,5 +1,4 @@
-import { createRouteSupabaseCli } from '@/app/helpers/create-route-supabse-cli';
-import { cookies } from 'next/headers';
+import { createRouteSupabaseCli } from '@/helpers/create-route-supabse-cli';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {

@@ -1,12 +1,17 @@
-import { RemoveAside } from '@/app/components/Test/remove-aside';
-import { RemoveStyles } from '@/app/components/Test/remove-styles';
-import { FilterAccordion } from '@/app/components/filters/filter-accordion';
-import { FilterButton } from '@/app/components/filters/filter-button';
-import { GenresWrapper } from '@/app/components/filters/genres-wrapper';
-import { GenreFilterProvider } from '@/app/context/genre-filter-provider';
-import { SortSelectProvider } from '@/app/context/sort-select-provider';
-import { VoteAverageSliderProvider } from '@/app/context/vote-average-slider-provider';
-import { VoteCountSliderProvider } from '@/app/context/vote-count-provider';
+import { RemoveAside } from '@/components/Test/remove-aside';
+import { RemoveStyles } from '@/components/Test/remove-styles';
+import {
+  FilterAccordion,
+  FilterButton,
+  GenresWrapper
+} from '@/components/filters';
+import {
+  GenreFilterProvider,
+  SortSelectProvider,
+  VoteAverageSliderProvider,
+  VoteCountSliderProvider
+} from '@/context';
+
 import { Suspense } from 'react';
 
 type Props = {

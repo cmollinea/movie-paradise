@@ -1,6 +1,6 @@
-import { getSearchPromises } from '../../helpers/get-search-promises';
-import { SearchResultsContainer } from '@/app/components/search-results/search-results-container';
-import { Target } from '@/app/components/search-sidebar/target-button';
+import { getSearchPromises } from '@/helpers/get-search-promises';
+import { SearchResultsContainer } from '@/components/search-results/search-results-container';
+import { Target } from '@/components/search-sidebar/target-button';
 
 type Props = {
   searchParams: {

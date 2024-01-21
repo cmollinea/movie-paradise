@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createRouteSupabaseCli } from '@/app/helpers/create-route-supabse-cli';
+import { createRouteSupabaseCli } from '@/helpers/create-route-supabse-cli';
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);

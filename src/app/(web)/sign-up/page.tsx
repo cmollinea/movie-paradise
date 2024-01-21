@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { GitHubSignButton } from '@/app/components/navbar';
-import AuthenticationButton from '@/app/components/auth/auth-btn';
+import { GitHubSignButton } from '@/components/navbar';
+import AuthenticationButton from '@/components/auth/auth-btn';
 
 function SignUp() {
   return (

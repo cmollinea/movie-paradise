@@ -1,10 +1,10 @@
-import { ErrorWithStatus, SomethingWentWrong } from '@/app/components/error';
-import { getTMDBEndpoint } from '@/app/helpers/get-tmdb-endpoint';
-import { queryTMDB } from '@/app/services';
+import { ErrorWithStatus, SomethingWentWrong } from '@/components/error';
+import { getTMDBEndpoint } from '@/helpers/get-tmdb-endpoint';
+import { queryTMDB } from '@/services';
 import { SeasonResponse } from 'root/types/season-response';
-import { Title } from '@/app/components/global-ui';
-import { EpisodeCardLink } from '@/app/components/episode-card-link/episode-card-link';
-import { GenreBadge } from '@/app/components/details';
+import { Title } from '@/components/global-ui';
+import { EpisodeCardLink } from '@/components/episode-card-link/episode-card-link';
+import { GenreBadge } from '@/components/details';
 import { Star } from 'lucide-react';
 
 type Props = {

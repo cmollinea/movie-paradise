@@ -1,10 +1,10 @@
-import './globals.css';
-import { NavBarUI } from './components/navbar/navbar-ui';
+import { createServerSupabaseCli } from '@/helpers/create-server-supabase-cli';
+import { NavBarUI } from '@/components/navbar/navbar-ui';
 import { Providers } from './providers';
 import { Toaster } from 'react-hot-toast';
-import NextTopLoader from 'nextjs-toploader';
 import type { Metadata } from 'next';
-import { createServerSupabaseCli } from './helpers/create-server-supabase-cli';
+
+import './globals.css';
 
 // import { Inter } from 'next/font/google'
 // const inter = Inter({ subsets: ['latin'] })

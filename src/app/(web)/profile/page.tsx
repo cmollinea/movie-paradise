@@ -1,8 +1,7 @@
-import { SomethingWentWrong } from '@/app/components/error';
-import { ProfileTabsContainer } from '@/app/components/profile/tabs-container';
-import { UserInfo } from '@/app/components/profile/user-info';
-import { createServerSupabaseCli } from '@/app/helpers';
+import { createServerSupabaseCli } from '@/helpers';
+import { ProfileTabsContainer, UserInfo } from '@/components/profile';
 import { redirect } from 'next/navigation';
+import { SomethingWentWrong } from '@/components/error';
 
 const Profile = async () => {
   const supabase = createServerSupabaseCli();

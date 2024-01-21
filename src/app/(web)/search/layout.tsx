@@ -1,6 +1,5 @@
-import { SearchForm } from '@/app/components/search-box';
-import { SideBar } from '@/app/components/search-sidebar';
-import { SearchContextProvider } from '@/app/context';
+import { SideBar } from '@/components/search-sidebar';
+import { SearchContextProvider } from '@/context';
 
 type Props = {
   children: React.ReactNode;

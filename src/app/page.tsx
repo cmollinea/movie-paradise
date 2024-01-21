@@ -1,13 +1,12 @@
 import { Suspense } from 'react';
-import { MovieResponse } from '../../types/movie-response-interface';
-import { TvShowsResponse } from '../../types/tvshows-response-interface';
-import { MoviesContainer, TvShowsContainer } from './components/home';
-import { MOVIES_ENPOINTS, TV_SHOWS_ENDPOINTS } from './constants/api-endpoints';
-import { queryTMDB } from './services/queryTMDB';
-import { Title } from './components/global-ui';
-import { ServerFormWrapper } from './components/search-box';
+import { MovieResponse, TvShowsResponse } from 'root/types';
+import { MoviesContainer, TvShowsContainer } from '@/components/home';
+import { MOVIES_ENPOINTS, TV_SHOWS_ENDPOINTS } from '@/constants/api-endpoints';
+import { queryTMDB } from '@/services/queryTMDB';
+import { Title } from '@/components/global-ui';
+import { ServerFormWrapper } from '@/components/search-box';
 import { Metadata } from 'next';
-import { CardContainerSkelleton } from './components/skelletons/card-skelleton';
+import { CardContainerSkelleton } from '@/components/skelletons/card-skelleton';
 
 //todo Cambiar on air por trending y ademas ponerlo de principal
 

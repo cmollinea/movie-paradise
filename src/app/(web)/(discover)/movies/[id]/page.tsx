@@ -4,21 +4,19 @@ import {
   Cast,
   ServerSimilar,
   MediaTabs
-} from '@/app/components/details';
-import { CommentForm, CommentsContainer } from '@/app/components/comments';
-import { InfoContextProvider } from '@/app/context';
-import { MovieFullDetails } from 'root/types/movie-response-full';
-import { queryTMDB } from '@/app/services/queryTMDB';
-import { Section } from '@/app/components/global-ui/section';
-import { SomethingWentWrong, ErrorWithStatus } from '@/app/components/error';
-import { Suspense } from 'react';
-import { Title } from '@/app/components/global-ui';
-import { getTMDBEndpoint } from '@/app/helpers/get-tmdb-endpoint';
+} from '@/components/details';
+import { ActionButtonServerWrapper } from '@/components/action-buttons/action-buttons-server-wrapper';
+import { BASE_URL, POSTER_SIZES, MEDIA_TYPES } from '@/constants';
+import { CommentForm, CommentsContainer } from '@/components/comments';
+import { createServerSupabaseCli, getTMDBEndpoint } from '@/helpers';
+import { InfoContextProvider } from '@/context';
 import { Metadata } from 'next';
-import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
-import { createServerSupabaseCli } from '@/app/helpers';
-import { ActionButtonServerWrapper } from '@/app/components/action-buttons/action-buttons-server-wrapper';
-import { MEDIA_TYPES } from '@/app/constants';
+import { MovieFullDetails } from 'root/types';
+import { queryTMDB } from '@/services/queryTMDB';
+import { Section } from '@/components/global-ui/section';
+import { SomethingWentWrong, ErrorWithStatus } from '@/components/error';
+import { Suspense } from 'react';
+import { Title } from '@/components/global-ui';
 
 type Props = {
   params: {
