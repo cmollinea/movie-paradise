@@ -7,5 +7,4 @@ export * from './discovers-helpers';
 export * from './get-search-promises';
 export * from './get-tmdb-endpoint';
 export * from './getSearchResults';
-export * from './markAsComplete';
 export * from './supabaseUpsertToMedia';
