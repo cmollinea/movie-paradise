@@ -1,5 +1,6 @@
 import { SomethingWentWrong } from '@/app/components/error';
 import { ProfileTabsContainer } from '@/app/components/profile/tabs-container';
+import { UserInfo } from '@/app/components/profile/user-info';
 import { createServerSupabaseCli } from '@/app/helpers';
 import { redirect } from 'next/navigation';
 
@@ -52,7 +53,8 @@ const Profile = async () => {
   console.log(session.user.user_metadata);
 
   return (
-    <div className='grid justify-center'>
+    <div className='grid justify-center place-items-center py-8'>
+      <UserInfo user={session.user.user_metadata} />
       {favorites.data && watchListPending && watchListCompleted ? (
         <ProfileTabsContainer
           favorites={favorites.data}
