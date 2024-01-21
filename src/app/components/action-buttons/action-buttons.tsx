@@ -1,11 +1,8 @@
 'use client';
 
-import { Button } from '@nextui-org/react';
 import { HeartIcon, HeartOff, MinusCircle, PlusCircle } from 'lucide-react';
 import { useActionButtons } from '@/app/hooks';
-import { useButtonStatusContext } from '@/app/hooks';
 import { ActionButton } from './action-button';
-import { useOptimisticActionButtons } from '@/app/hooks/useOptimisticActionButtons';
 
 export function ActionButtons() {
   const { addMedia, deleteFromTable, optimisticFav, optimisticIsInWatchList } =

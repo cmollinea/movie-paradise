@@ -1,3 +1,4 @@
+'use client';
 import { useInfoContext } from './useInfoContext';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -33,6 +34,8 @@ export function useActionButtons() {
       session
     }
   } = useInfoContext();
+
+  console.log('useActionButtons', optimisticFav, optimisticIsInWatchList);
 
   /**
    * Function to create a record of the element in the media table.

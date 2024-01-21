@@ -15,8 +15,10 @@ export const ActionButtonServerWrapper = async ({ session, id }: Props) => {
     await checkButtonStatus('watch_list', id, session, supabase)
   ]);
 
+  console.log('Entra', isInFav, isInWatchList);
+
   return (
-    <ButtonStatusProvider buttonStatus={{ isInFav, isInWatchList }}>
+    <ButtonStatusProvider isInFav={isInFav} isInWatchList={isInWatchList}>
       <ActionButtons />
     </ButtonStatusProvider>
   );
