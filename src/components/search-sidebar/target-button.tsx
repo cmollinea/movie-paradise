@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchContext } from '@/app/hooks/useSearchContext';
+import { useSearchContext } from '@/hooks/useSearchContext';
 import { Button } from '@nextui-org/react';
 import { ChevronRight } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';

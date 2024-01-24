@@ -21,7 +21,7 @@ export function CardLink({ element, type, imageSizes, children }: Props) {
   return (
     <div className='relative flex-none w-fit h-fit group'>
       <Link prefetch={false} href={`/${type}/${id}`} className=''>
-        <ImageContainer image={poster_path || ''} imageSizes={imageSizes}>
+        <ImageContainer image={poster_path} imageSizes={imageSizes}>
           <CardFooter className='absolute bg-gradient-to-t from-black to-transparent rounded-none bottom-0 p-0 z-10 md:opacity-0 group-hover:opacity-100 transition-opacity ease-in-out'>
             <div
               className={`selection🎟 bg-gradient-to-t from-black to-transparent w-full max-md:py-4 ${

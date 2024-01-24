@@ -1,5 +1,5 @@
 'use client';
-import { BASE_URL } from '@/app/constants/image-url';
+import { BASE_URL } from '@/constants/image-url';
 import { Image, Card } from '@nextui-org/react';
 
 type Props = {

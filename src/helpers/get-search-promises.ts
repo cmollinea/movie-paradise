@@ -1,5 +1,5 @@
-import { SEARCH_ENDPOINTS } from '@/app/constants/api-endpoints';
-import { ApiError, queryTMDB } from '@/app/services';
+import { SEARCH_ENDPOINTS } from '@/constants/api-endpoints';
+import { ApiError, queryTMDB } from '@/services';
 import {
   CollectionResponse,
   PeopleResponse,

@@ -1,8 +1,8 @@
 'use client';
-import { BASE_URL } from '@/app/constants/image-url';
+import { BASE_URL } from '@/constants/image-url';
 import { GenreBadge, Progress } from '.';
 import { Image } from '@nextui-org/react';
-import { useInfoContext } from '@/app/hooks';
+import { useInfoContext } from '@/hooks';
 import { usePathname } from 'next/navigation';
 
 type Props = {

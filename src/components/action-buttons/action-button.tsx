@@ -1,5 +1,5 @@
 'use client';
-import { Tables } from '@/app/hooks';
+import { Tables } from '@/hooks';
 import { Button } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

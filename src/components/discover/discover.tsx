@@ -1,5 +1,5 @@
-import { getDiscoverUrlWithQueryParams } from '@/app/helpers';
-import { queryTMDB } from '@/app/services';
+import { getDiscoverUrlWithQueryParams } from '@/helpers';
+import { queryTMDB } from '@/services';
 import { MovieResponse, TvShowsResponse } from 'root/types';
 import { Filters } from 'root/types/discover-types';
 import { ErrorWithStatus, SomethingWentWrong } from '../error';

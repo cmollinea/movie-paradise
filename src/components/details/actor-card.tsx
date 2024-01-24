@@ -1,5 +1,5 @@
 'use client';
-import { BASE_URL } from '@/app/constants/image-url';
+import { BASE_URL } from '@/constants/image-url';
 import { Card, CardFooter, Image } from '@nextui-org/react';
 import Link from 'next/link';
 

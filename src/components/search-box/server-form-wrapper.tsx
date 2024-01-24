@@ -1,4 +1,4 @@
-import { BASE_URL } from '@/app/constants/image-url';
+import { BASE_URL } from '@/constants/image-url';
 import { SearchForm } from '.';
 
 type Props = {

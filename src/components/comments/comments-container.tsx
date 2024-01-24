@@ -1,5 +1,5 @@
 import { CommentCard } from './comment-card';
-import { createServerSupabaseCli } from '@/app/helpers/create-server-supabase-cli';
+import { createServerSupabaseCli } from '@/helpers/create-server-supabase-cli';
 import { MessageSquare } from 'lucide-react';
 import { SomethingWentWrong } from '../error';
 

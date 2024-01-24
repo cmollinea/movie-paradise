@@ -1,6 +1,6 @@
 'use client';
 import { ActorCard } from '../details';
-import { ApiError } from '@/app/services';
+import { ApiError } from '@/services';
 import { ErrorWithStatus, SomethingWentWrong } from '../error';
 import { Pagination } from '../global-ui/pagination';
 import { Target } from '../search-sidebar/target-button';

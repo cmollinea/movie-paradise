@@ -1,5 +1,5 @@
 'use client';
-import { useVoteAverageContext } from '@/app/hooks/useVoteAverageContext';
+import { useVoteAverageContext } from '@/hooks/useVoteAverageContext';
 import { Slider } from '@nextui-org/react';
 
 export const VoteAverageSlider = () => {

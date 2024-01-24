@@ -1,4 +1,4 @@
-import { BASE_URL } from '@/app/constants/image-url';
+import { BASE_URL } from '@/constants/image-url';
 import { Card, CardBody, CardHeader, Image } from '@nextui-org/react';
 import Link from 'next/link';
 
@@ -12,7 +12,7 @@ export const EpisodeCardLink = ({ image, href, children }: Props) => {
   return (
     <Link
       href={href}
-      className='border border-transparent hover:border-primary-400 transition-colors ease-soft-spring rounded-xl overflow-hidden'
+      className='border border-transparent hover:border-primary-400 transition-colors ease-soft-spring w-fit rounded-xl overflow-hidden'
     >
       <Card
         radius='md'

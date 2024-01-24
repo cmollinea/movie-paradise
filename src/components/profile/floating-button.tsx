@@ -1,6 +1,6 @@
 'use client';
 
-import { useFloatingButton } from '@/app/hooks/useFloatingButton';
+import { useFloatingButton } from '@/hooks/useFloatingButton';
 import { Button, Spinner } from '@nextui-org/react';
 import { Check, Circle } from 'lucide-react';
 

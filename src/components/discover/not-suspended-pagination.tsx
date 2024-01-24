@@ -1,6 +1,6 @@
 'use client';
 
-import { usePaginationContext } from '@/app/hooks/usePaginationContext';
+import { usePaginationContext } from '@/hooks/usePaginationContext';
 import { Pagination } from '../global-ui';
 
 export const NotSuspendedPagination = () => {

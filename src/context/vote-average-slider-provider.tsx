@@ -1,6 +1,6 @@
 'use client';
 
-import { filters } from '@/app/constants';
+import { filters } from '@/constants';
 import { useSearchParams } from 'next/navigation';
 import { Dispatch, SetStateAction, createContext, useState } from 'react';
 

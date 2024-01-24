@@ -1,6 +1,6 @@
 'use client';
 
-import { useGenreFiltersContext } from '@/app/hooks/useGenreFilters';
+import { useGenreFiltersContext } from '@/hooks/useGenreFilters';
 import { Button } from '@nextui-org/react';
 
 type Props = {

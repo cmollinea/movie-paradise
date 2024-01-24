@@ -30,3 +30,6 @@ export const POSTER_SIZES = {
   lg: 'w500',
   xl: 'w780'
 };
+
+export const NOT_FOUND =
+  'https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7968.jpg?size=626&ext=jpg';

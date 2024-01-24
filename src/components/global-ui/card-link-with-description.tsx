@@ -1,4 +1,4 @@
-import { BASE_URL } from '@/app/constants/image-url';
+import { BASE_URL } from '@/constants/image-url';
 import { Image } from '@nextui-org/react';
 import { Star } from 'lucide-react';
 import Link from 'next/link';

@@ -1,15 +1,22 @@
+'use client';
+
 import Link from 'next/link';
 import { GitHubSignButton } from '@/components/navbar';
 import AuthenticationButton from '@/components/auth/auth-btn';
+import { useSignIn } from '@/hooks';
 
 function SignIn() {
+  const { hanldeSubmit, form } = useSignIn();
+
   return (
     <>
       <div className='grid w-full gap-4 max-w-xs'>
         <form
-          action='/auth/login'
-          method='post'
+          ref={form}
+          // action='/auth/login'
+          // method='post'
           className='flex flex-col space-y-2 place'
+          onSubmit={(e) => hanldeSubmit(e)}
         >
           <label htmlFor='email'>Email</label>
           <input
@@ -25,7 +32,7 @@ function SignIn() {
             name='password'
           />
           <div className='grid gap-2 mt-2'>
-            <AuthenticationButton />
+            <AuthenticationButton label='Sign In' />
           </div>
         </form>
         <GitHubSignButton />

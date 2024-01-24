@@ -1,4 +1,4 @@
-import { BACKDROP_SIZES, BASE_URL } from '@/app/constants/image-url';
+import { BACKDROP_SIZES, BASE_URL } from '@/constants/image-url';
 import Link from 'next/link';
 
 type Props = {

@@ -34,7 +34,7 @@ async function Season({ params }: Props) {
   }
 
   return (
-    <section className='px-4 ld:px-20 py-10'>
+    <section className='px-4 lg:px-20 py-10 flex flex-col place-content-center items-center'>
       <div className='grid gap-1 font-bold mb-10'>
         <Title>
           Season {seasonData.season_number}
@@ -52,7 +52,7 @@ async function Season({ params }: Props) {
           {seasonData.episodes.length}
         </p>
       </div>
-      <div className='grid lg:grid-cols-2 gap-4 w-full'>
+      <div className='grid lg:grid-cols-2 gap-4 w-fit place-items-center'>
         {seasonData.episodes.map((episode) => (
           <EpisodeCardLink
             key={episode.id}

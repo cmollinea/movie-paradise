@@ -1,4 +1,4 @@
-import { ApiError } from '@/app/services/queryTMDB';
+import { ApiError } from '@/services/queryTMDB';
 import { MovieResponse } from '../../../../types/movie-response-interface';
 import { CardContainer, CardLink } from '.';
 import { SomethingWentWrong, ErrorWithStatus } from '../error';

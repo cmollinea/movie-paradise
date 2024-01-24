@@ -1,6 +1,6 @@
 'use client';
 
-import { createClienSupabaseCli } from '@/app/helpers/create-client-supabase-cli';
+import { createClienSupabaseCli } from '@/helpers/create-client-supabase-cli';
 import { Button } from '@nextui-org/react';
 import { Github } from 'lucide-react';
 

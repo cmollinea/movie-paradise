@@ -1,5 +1,5 @@
-import { getGenresEndpoint } from '@/app/helpers';
-import { queryTMDB } from '@/app/services';
+import { getGenresEndpoint } from '@/helpers';
+import { queryTMDB } from '@/services';
 import { Genre } from 'root/types';
 import { ErrorWithStatus, SomethingWentWrong } from '../error';
 import { GenreButton } from './genre-button';

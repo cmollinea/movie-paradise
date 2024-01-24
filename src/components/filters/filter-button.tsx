@@ -1,6 +1,6 @@
 'use client';
 
-import { useFilters } from '@/app/hooks';
+import { useFilters } from '@/hooks';
 import { Button } from '@nextui-org/react';
 
 export const FilterButton = () => {

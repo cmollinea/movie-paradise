@@ -1,5 +1,5 @@
-import { ButtonStatusProvider } from '@/app/context';
-import { checkButtonStatus, createServerSupabaseCli } from '@/app/helpers';
+import { ButtonStatusProvider } from '@/context';
+import { checkButtonStatus, createServerSupabaseCli } from '@/helpers';
 import { Session } from '@supabase/supabase-js';
 import { ActionButtons } from '.';
 

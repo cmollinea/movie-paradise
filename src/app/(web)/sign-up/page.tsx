@@ -10,6 +10,18 @@ function SignUp() {
         method='post'
         className='flex flex-col space-y-2 place'
       >
+        <label htmlFor='email'>UserName</label>
+        <input
+          className='p-2 rounded-md w-full text-black'
+          required
+          name='user_name'
+        />
+        <label htmlFor='email'>FullName</label>
+        <input
+          className='p-2 rounded-md w-full text-black'
+          required
+          name='full_name'
+        />
         <label htmlFor='email'>Email</label>
         <input
           className='p-2 rounded-md w-full text-black'
@@ -24,7 +36,7 @@ function SignUp() {
           name='password'
         />
         <div className='grid gap-2 mt-2'>
-          <AuthenticationButton />
+          <AuthenticationButton label='Sign Up' />
         </div>
       </form>
       <GitHubSignButton />

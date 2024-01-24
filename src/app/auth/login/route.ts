@@ -23,3 +23,22 @@ export async function GET(request: Request) {
   // return the user to an error page with some instructions
   return NextResponse.redirect('/auth/auth-code-error');
 }
+
+// export async function POST(request: Request) {
+//   const requestUrl = new URL(request.url);
+//   const formData = await request.formData();
+//   const email = String(formData.get('email'));
+//   const password = String(formData.get('password'));
+//   const supabase = createRouteSupabaseCli();
+
+//   const { error } = await supabase.auth.signInWithPassword({
+//     email,
+//     password
+//   });
+
+//   if (!error) {
+//     return NextResponse.redirect(requestUrl.origin);
+//   }
+
+//   return NextResponse.redirect(requestUrl.origin + '/login?error=true');
+// }

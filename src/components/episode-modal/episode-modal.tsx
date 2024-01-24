@@ -6,7 +6,7 @@ import {
   ModalFooter,
   ModalHeader
 } from '@nextui-org/react';
-import { ApiError } from '@/app/services';
+import { ApiError } from '@/services';
 import { EpisodeDetails } from 'root/types/episode-details';
 import OkButton from './ok-button';
 import { EpisodeError } from '../error/episode-error';

@@ -1,7 +1,7 @@
 'use client';
 
-import { filters } from '@/app/constants';
-import { useSortByContext } from '@/app/hooks/useSortByContext';
+import { filters } from '@/constants';
+import { useSortByContext } from '@/hooks/useSortByContext';
 import { Select, SelectItem } from '@nextui-org/react';
 import { useSearchParams } from 'next/navigation';
 

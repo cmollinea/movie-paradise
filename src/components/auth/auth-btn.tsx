@@ -1,10 +1,10 @@
 'use client';
 import { Button } from '@nextui-org/react';
 
-function AuthenticationButton() {
+function AuthenticationButton({ label }: { label: string }) {
   return (
-    <Button variant='solid' color='primary'>
-      Sign In
+    <Button variant='solid' color='primary' type='submit'>
+      {label}
     </Button>
   );
 }

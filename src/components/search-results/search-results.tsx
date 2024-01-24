@@ -1,5 +1,5 @@
-// import { useSearchContext } from '@/app/hooks/useSearchContext';
-// import { pickSearchResultsType } from '@/app/helpers';
+// import { useSearchContext } from '@/hooks/useSearchContext';
+// import { pickSearchResultsType } from '@/helpers';
 
 // import type {
 //   CollectionResponse,

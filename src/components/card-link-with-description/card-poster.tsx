@@ -1,4 +1,4 @@
-import { BASE_URL, POSTER_SIZES } from '@/app/constants/image-url';
+import { BASE_URL, POSTER_SIZES } from '@/constants/image-url';
 import { Image } from '@nextui-org/react';
 
 type Props = {

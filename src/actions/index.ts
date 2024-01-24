@@ -2,7 +2,7 @@
 
 import { MediaItem } from 'root/types';
 import { redirect } from 'next/navigation';
-import { supabaseUpsertToMedia, createServerSupabaseCli } from '@/app/helpers';
+import { supabaseUpsertToMedia, createServerSupabaseCli } from '@/helpers';
 
 type FormState = {
   message: string | null;

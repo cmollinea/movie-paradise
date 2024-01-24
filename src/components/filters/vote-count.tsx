@@ -1,5 +1,5 @@
 'use client';
-import { useVoteCountContext } from '@/app/hooks/useVoteCountContext';
+import { useVoteCountContext } from '@/hooks/useVoteCountContext';
 import { Slider } from '@nextui-org/react';
 
 export const VoteCountSlider = () => {

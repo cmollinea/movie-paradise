@@ -6,9 +6,10 @@ import { useRouter } from 'next/navigation';
 
 function OkButton() {
   const router = useRouter();
+  console.log(document.referrer);
 
   const handlePressOkButton = () => {
-    if (document.referrer.includes(window.location.origin)) {
+    if (!document.referrer.includes(window.location.origin)) {
       router.back();
       return;
     }

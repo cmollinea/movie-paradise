@@ -1,7 +1,7 @@
 'use client';
 
 import { HeartIcon, HeartOff, MinusCircle, PlusCircle } from 'lucide-react';
-import { useActionButtons } from '@/app/hooks';
+import { useActionButtons } from '@/hooks';
 import { ActionButton } from './action-button';
 
 export function ActionButtons() {

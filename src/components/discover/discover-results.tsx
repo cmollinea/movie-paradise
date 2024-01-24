@@ -2,7 +2,7 @@
 
 import { Movie, TvShow } from 'root/types';
 import { CardLink } from '../home';
-import { usePaginationContext } from '@/app/hooks/usePaginationContext';
+import { usePaginationContext } from '@/hooks/usePaginationContext';
 import { useEffect } from 'react';
 
 type Props = {

@@ -2,6 +2,13 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
+  const reqUrl = new URL(request.url);
+  if (reqUrl.searchParams.has('confirmation_url')) {
+    return NextResponse.redirect(
+      String(reqUrl.searchParams.get('confirmation_url'))
+    );
+  }
+
   let response = NextResponse.next({
     request: {
       headers: request.headers

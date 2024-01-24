@@ -1,4 +1,4 @@
-import { ApiError } from '@/app/services/queryTMDB';
+import { ApiError } from '@/services/queryTMDB';
 import { TvShowsResponse } from 'root/types';
 import { SomethingWentWrong, ErrorWithStatus } from '../error';
 import { CardContainer, CardLink } from '.';
